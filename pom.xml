@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.6</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.worldadvancedtechnology</groupId>
+    <artifactId>app-wat</artifactId>
+    <version>3.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>WORLD ADVANCED TECHNOLOGY Website</name>
+    <description>Premium company web app for World Advanced Technology — IT Consultancy, DevOps and VoIP Solutions, Yaoundé, Cameroon</description>
+    <url>https://worldadvancedtechnology.cm</url>
+
+    <organization>
+        <name>World Advanced Technology</name>
+        <url>https://worldadvancedtechnology.cm</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>ngwaclovis</id>
+            <name>NGWA CLOVIS OCHANG</name>
+            <email>ngwaco23@gmail.com</email>
+            <roles>
+                <role>CEO</role>
+                <role>Lead Architect</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Plugin versions -->
+        <sonar.maven.plugin.version>4.0.0.4121</sonar.maven.plugin.version>
+        <jacoco.version>0.8.12</jacoco.version>
+
+        <!-- SonarQube analysis settings.
+             Override on the command line as needed, e.g.:
+             mvn clean verify sonar:sonar \
+               -Dsonar.host.url=http://your-sonarqube:9000 \
+               -Dsonar.token=YOUR_TOKEN
+             Keep the token OUT of this file; pass it via -Dsonar.token or the
+             SONAR_TOKEN environment variable. -->
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.projectKey>com.worldadvancedtechnology:app-wat</sonar.projectKey>
+        <sonar.projectName>WORLD ADVANCED TECHNOLOGY Website</sonar.projectName>
+        <sonar.java.source>${java.version}</sonar.java.source>
+        <!-- Where Sonar reads the JaCoCo coverage report produced below -->
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.build.directory}/site/jacoco/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
+
+    <!--
+      Nexus Repository Manager targets for `mvn deploy`.
+      Maven picks the repository automatically by version: a version ending in
+      -SNAPSHOT (e.g. 3.0.1-SNAPSHOT) goes to <snapshotRepository>, a release
+      version (e.g. 3.0.0) goes to <repository>.
+
+      TODO: replace NEXUS_HOST with your server's host[:port], and make sure the
+      <id> values match a <server> entry (with credentials) in your ~/.m2/settings.xml.
+    -->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://NEXUS_HOST:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://NEXUS_HOST:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencies>
+        <!-- Web layer: embedded Tomcat + Spring MVC + static resource serving -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Bean validation for form submissions -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Health / metrics endpoints -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Email delivery for contact & job forms (optional at runtime) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <!-- Tests -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>app-wat</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- SonarQube scanner: enables `mvn sonar:sonar` for static analysis. -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.maven.plugin.version}</version>
+            </plugin>
+
+            <!-- JaCoCo: measures test coverage and writes the report that
+                 SonarQube reads (target/site/jacoco/jacoco.xml). -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <!-- Attach the coverage agent before tests run -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- Generate the XML/HTML report after tests, during `verify` -->
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

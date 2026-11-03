@@ -1,0 +1,15 @@
+target/
+.git/
+.github/
+*.md
+*.docx
+*.jpg
+*.JPG
+*.png
+index.html
+_redirects
+netlify.toml
+cloudformation.yml
+deployment.yml
+Jenkinsfile
+.DS_Store

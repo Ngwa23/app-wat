@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: wat-website
+
+  # Serve static assets efficiently; the response cache headers are tuned in WebConfig.
+  web:
+    resources:
+      chain:
+        cache: true
+
+  # SMTP is optional. Configure these (preferably via environment variables) to
+  # enable email delivery of contact / careers submissions. Left unset, the app
+  # still runs and records every submission to the log.
+  mail:
+    host: ${MAIL_HOST:}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: ${PORT:8081}
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,image/svg+xml,application/json
+    min-response-size: 1024
+  http2:
+    enabled: true
+  error:
+    whitelabel:
+      enabled: true
+
+wat:
+  mail:
+    enabled: ${WAT_MAIL_ENABLED:false}
+    to: ${WAT_MAIL_TO:worldadvancedtechnology23@gmail.com}
+    from: ${WAT_MAIL_FROM:no-reply@worldadvancedtechnology.cm}
+
+# Expose only a lightweight health endpoint.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    # SMTP is optional; don't let an unconfigured mail server mark the app DOWN.
+    mail:
+      enabled: false
