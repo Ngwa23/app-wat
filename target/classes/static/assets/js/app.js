@@ -489,6 +489,8 @@
 
     wireForm("contactForm", "/api/contact", "contactStatus");
     wireForm("careerForm", "/api/careers", "careerStatus");
+
+    initChatbot();
   });
 
   /* ---------------- forms ---------------- */
@@ -553,6 +555,291 @@
         .finally(function () {
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = original; }
         });
+    });
+  }
+
+  /* ---------------- Chatbot: instant discussion ----------------
+     A self-contained assistant. Conversation is retained in the browser
+     (localStorage) ONLY after the visitor taps "Accept" — nothing is sent
+     to a server. Bilingual EN/FR; ES/DE fall back to EN.                  */
+  function initChatbot() {
+    if (document.getElementById("watChatLaunch")) return;
+
+    var WA = "https://wa.me/237651798173";
+    var EMAIL = "worldadvancedtechnology23@gmail.com";
+    var KEY_HISTORY = "wat-chat-history";
+    var KEY_CONSENT = "wat-chat-consent";
+
+    function waLink(text, label) {
+      return "<a href='" + WA + "?text=" + encodeURIComponent(text) +
+             "' target='_blank' rel='noopener'>" + (label || "WhatsApp") + "</a>";
+    }
+    function mail() { return "<a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>"; }
+
+    var ICON_BOT  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V4M8 3h8M8.5 13v1M15.5 13v1"/></svg>';
+    var ICON_OPEN = '<svg class="wc-ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    var ICON_CLOSE= '<svg class="wc-ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    var ICON_X    = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    var ICON_TRASH= '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>';
+    var ICON_SEND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>';
+
+    var UI = {
+      en: { title: "WAT Assistant", status: "Online · replies instantly",
+            open: "Open chat", close: "Close chat", clear: "Clear chat",
+            placeholder: "Type your message…", send: "Send",
+            consent: "To keep this chat when you return, we save it on <b>this device only</b> — nothing is sent to a server. Save our conversation?",
+            accept: "Accept", decline: "Not now",
+            chips: ["Services", "VoIP", "Pricing", "Careers", "Contact", "Talk to a human"] },
+      fr: { title: "Assistant WAT", status: "En ligne · réponse immédiate",
+            open: "Ouvrir le chat", close: "Fermer le chat", clear: "Effacer",
+            placeholder: "Écrivez votre message…", send: "Envoyer",
+            consent: "Pour conserver cette discussion à votre retour, nous l'enregistrons <b>uniquement sur cet appareil</b> — rien n'est envoyé à un serveur. Enregistrer la conversation ?",
+            accept: "Accepter", decline: "Plus tard",
+            chips: ["Services", "VoIP", "Tarifs", "Carrières", "Contact", "Parler à un humain"] }
+    };
+    UI.es = UI.en; UI.de = UI.en;
+    function lang() { return UI[current] ? current : "en"; }
+    function ui() { return UI[lang()]; }
+
+    var KB = {
+      en: {
+        greeting: "Hi! 👋 I'm the WAT assistant. Ask me about our <b>IT services, VoIP, pricing, careers</b> or how to reach us. What would you like to know?",
+        services: "We deliver end-to-end IT solutions:<br>• <b>IT Consultancy</b><br>• <b>DevOps</b> (Docker, Kubernetes, AWS, CI/CD)<br>• <b>VoIP</b> private phone systems<br>• <b>Network &amp; Security</b> (CCTV, access control)<br>• <b>Web &amp; Mobile</b> development<br>• <b>Starlink</b> install &amp; <b>WiFi Zones</b><br>Which one interests you?",
+        devops: "Our <b>DevOps</b> team builds and automates your infrastructure: Docker, Kubernetes, AWS, CI/CD pipelines, Ansible, Terraform, plus monitoring with Prometheus, Grafana &amp; ELK. Want a quote? " + waLink("I'd like a DevOps quote"),
+        voip: "Our <b>VoIP</b> solutions give you a private telephone network — connect all your branches in Cameroon and abroad, cut inter-branch call costs by up to 70%, with IVR, call queues and recording. " + waLink("I need a VoIP solution"),
+        web: "We build <b>websites, web apps and mobile apps</b> (Android &amp; iOS) — from landing pages to enterprise platforms. " + waLink("I need a website / app"),
+        network: "<b>Network &amp; Security</b>: structured cabling, CCTV, access control, time-attendance and anti-intrusion alarms — installed and maintained. " + waLink("I need network / security"),
+        starlink: "We supply, configure and install <b>Starlink</b> kits — dish mounting, alignment and router setup for homes, offices and remote sites. " + waLink("I'm interested in Starlink"),
+        wifi: "We set up professional <b>WiFi Zones</b> for hotels, offices and campuses — captive portal, bandwidth management, VLAN and guest access. " + waLink("I need a WiFi Zone"),
+        consultancy: "Our <b>IT Consultancy</b> covers infrastructure assessment, technology planning and strategic guidance tailored to your business. " + waLink("I'd like IT consultancy"),
+        pricing: "Pricing depends on your needs, and paying is easy:<br>• <b>MTN MoMo</b>: +237 651 798 173<br>• <b>Orange Money</b>: +237 693 638 404<br>• Invoice by email: " + mail() + "<br>For a tailored quote, " + waLink("I'd like a quote") + ".",
+        careers: "We're always looking for talent! Browse open roles in the <a href='#careers'>Careers</a> section and apply right there, or email your CV to " + mail() + ".",
+        contact: "Here's how to reach <b>WAT</b>:<br>• 📞 Phone / WhatsApp: <b>+237 651 798 173</b><br>• ✉️ " + mail() + "<br>• 📍 Nkolbisson, L'Caramba, Yaoundé<br>• 🕗 Mon–Fri, 08:00–17:00",
+        hours: "We're open <b>Monday to Friday, 08:00–17:00</b> (Yaoundé time). Message us anytime and we'll reply as soon as we're back.",
+        location: "We're based in <b>Nkolbisson, L'Caramba, Yaoundé, Cameroon</b>. Want directions or a site visit? " + waLink("I'd like a site visit"),
+        human: "Of course — chat with our team directly on WhatsApp: " + waLink("Hello WAT, I'd like to talk to someone") + ", or call <b>+237 651 798 173</b>.",
+        thanks: "You're welcome! 😊 Anything else I can help you with?",
+        fallback: "I'm not fully sure about that one, but our team can help directly. Reach us on WhatsApp " + waLink("Hello WAT, I have a question") + " or email " + mail() + ". You can also tap a topic below."
+      },
+      fr: {
+        greeting: "Bonjour ! 👋 Je suis l'assistant WAT. Posez-moi vos questions sur nos <b>services IT, la VoIP, les tarifs, les carrières</b> ou comment nous joindre. Que souhaitez-vous savoir ?",
+        services: "Nous offrons des solutions IT complètes :<br>• <b>Conseil IT</b><br>• <b>DevOps</b> (Docker, Kubernetes, AWS, CI/CD)<br>• <b>VoIP</b> — téléphonie privée<br>• <b>Réseau &amp; Sécurité</b> (vidéosurveillance, contrôle d'accès)<br>• <b>Web &amp; Mobile</b><br>• <b>Starlink</b> &amp; <b>Zones WiFi</b><br>Lequel vous intéresse ?",
+        devops: "Notre équipe <b>DevOps</b> construit et automatise votre infrastructure : Docker, Kubernetes, AWS, pipelines CI/CD, Ansible, Terraform, et supervision Prometheus, Grafana &amp; ELK. Un devis ? " + waLink("Je voudrais un devis DevOps"),
+        voip: "Nos solutions <b>VoIP</b> vous offrent un réseau téléphonique privé — reliez toutes vos agences au Cameroun et à l'étranger, réduisez les coûts inter-agences jusqu'à 70 %, avec SVI, files d'attente et enregistrement d'appels. " + waLink("J'ai besoin d'une solution VoIP"),
+        web: "Nous créons des <b>sites web, applications web et mobiles</b> (Android &amp; iOS) — de la landing page à la plateforme d'entreprise. " + waLink("J'ai besoin d'un site / d'une app"),
+        network: "<b>Réseau &amp; Sécurité</b> : câblage, vidéosurveillance, contrôle d'accès, pointage et alarmes anti-intrusion — installés et maintenus. " + waLink("J'ai besoin de réseau / sécurité"),
+        starlink: "Nous fournissons, configurons et installons les kits <b>Starlink</b> — montage de l'antenne, alignement et configuration du routeur pour maisons, bureaux et sites isolés. " + waLink("Je suis intéressé par Starlink"),
+        wifi: "Nous installons des <b>Zones WiFi</b> professionnelles pour hôtels, bureaux et campus — portail captif, gestion de bande passante, VLAN et accès invité. " + waLink("J'ai besoin d'une Zone WiFi"),
+        consultancy: "Notre <b>Conseil IT</b> couvre l'audit d'infrastructure, la planification technologique et l'accompagnement stratégique adaptés à votre activité. " + waLink("Je voudrais un conseil IT"),
+        pricing: "Les tarifs dépendent de vos besoins, et le paiement est simple :<br>• <b>MTN MoMo</b> : +237 651 798 173<br>• <b>Orange Money</b> : +237 693 638 404<br>• Facture par e-mail : " + mail() + "<br>Pour un devis personnalisé, " + waLink("Je voudrais un devis") + ".",
+        careers: "Nous recherchons toujours des talents ! Consultez les postes ouverts dans la section <a href='#careers'>Carrières</a> et postulez directement, ou envoyez votre CV à " + mail() + ".",
+        contact: "Pour joindre <b>WAT</b> :<br>• 📞 Téléphone / WhatsApp : <b>+237 651 798 173</b><br>• ✉️ " + mail() + "<br>• 📍 Nkolbisson, L'Caramba, Yaoundé<br>• 🕗 Lun–Ven, 08:00–17:00",
+        hours: "Nous sommes ouverts du <b>lundi au vendredi, 08:00–17:00</b> (heure de Yaoundé). Écrivez-nous à tout moment, nous répondrons dès notre retour.",
+        location: "Nous sommes à <b>Nkolbisson, L'Caramba, Yaoundé, Cameroun</b>. Besoin d'un itinéraire ou d'une visite ? " + waLink("Je voudrais une visite sur site"),
+        human: "Bien sûr — discutez avec notre équipe sur WhatsApp : " + waLink("Bonjour WAT, je souhaite parler à quelqu'un") + ", ou appelez le <b>+237 651 798 173</b>.",
+        thanks: "Avec plaisir ! 😊 Puis-je vous aider pour autre chose ?",
+        fallback: "Je ne suis pas tout à fait sûr pour cela, mais notre équipe peut vous aider directement. Écrivez-nous sur WhatsApp " + waLink("Bonjour WAT, j'ai une question") + " ou par e-mail " + mail() + ". Vous pouvez aussi choisir un sujet ci-dessous."
+      }
+    };
+    function kb(key) {
+      var d = KB[lang()] || KB.en;
+      return d[key] || KB.en[key] || KB.en.fallback;
+    }
+
+    // Keyword → intent (specific first; greeting/thanks use word boundaries)
+    var INTENTS = [
+      ["voip|voice|t[ée]l[ée]phon|phone system|pbx|\\bsip\\b", "voip"],
+      ["devops|docker|kubernet|ci/?cd|\\baws\\b|cloud|terraform|ansible|pipeline", "devops"],
+      ["website|site web|web app|\\bweb\\b|mobile|android|\\bios\\b|application|\\bapp\\b", "web"],
+      ["network|r[ée]seau|cctv|cam[ée]ra|surveillance|security|s[ée]curit|alarm|access control|contr[ôo]le d'acc", "network"],
+      ["starlink|satellite", "starlink"],
+      ["wifi|wi-fi|hotspot|hot spot|captif|captive|hotel|h[ôo]tel", "wifi"],
+      ["consult|conseil", "consultancy"],
+      ["price|pricing|cost|how much|quote|devis|tarif|\\bprix\\b|co[ûu]t|payment|\\bpay\\b|momo|orange money|invoice|facture|combien", "pricing"],
+      ["career|\\bjob\\b|hiring|recrut|emploi|\\bcv\\b|vacanc|carri", "careers"],
+      ["hour|schedule|horaire|ouvert|open(ing)?", "hours"],
+      ["where|location|address|adresse|located|situ|office|bureau|o[ùu] [êe]tes", "location"],
+      ["human|agent|\\bperson\\b|someone|parler|humain|real person|staff|\\bteam\\b|[ée]quipe", "human"],
+      ["contact|reach|e-?mail|\\bmail\\b|call|appeler|joindre|num[ée]ro|\\bnumber\\b", "contact"],
+      ["service|\\boffer\\b|what do you|que faites|prestation", "services"],
+      ["\\b(thanks|thank you|thx|merci|great|cool|ok|okay|super|nice|parfait)\\b", "thanks"],
+      ["\\b(hi|hey|hello|salut|bonjour|bonsoir|coucou|good morning|good evening)\\b", "greeting"]
+    ];
+    function detect(text) {
+      var s = (text || "").toLowerCase();
+      for (var i = 0; i < INTENTS.length; i++) {
+        if (new RegExp(INTENTS[i][0]).test(s)) return INTENTS[i][1];
+      }
+      return "fallback";
+    }
+
+    var CHIP_INTENTS = ["services", "voip", "pricing", "careers", "contact", "human"];
+
+    // ---- state ----
+    var history = [];
+    var consent = store.get(KEY_CONSENT, "") === "yes";
+    var greeted = false;
+
+    // ---- build DOM ----
+    var launch = document.createElement("button");
+    launch.id = "watChatLaunch";
+    launch.className = "wc-launch";
+    launch.type = "button";
+    launch.innerHTML = '<span class="wc-unread">1</span>' + ICON_OPEN + ICON_CLOSE;
+
+    var panel = document.createElement("div");
+    panel.id = "watChatPanel";
+    panel.className = "wc-panel";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-label", ui().title);
+    panel.innerHTML =
+      '<div class="wc-head">' +
+        '<div class="wc-ava">' + ICON_BOT + '</div>' +
+        '<div><h4 class="wc-title"></h4><div class="wc-status"><span class="wc-status-txt"></span></div></div>' +
+        '<div class="wc-head-actions">' +
+          '<button type="button" class="wc-clear">' + ICON_TRASH + '</button>' +
+          '<button type="button" class="wc-close">' + ICON_X + '</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="wc-body"></div>' +
+      '<div class="wc-chips"></div>' +
+      '<div class="wc-input"><input type="text" maxlength="500" autocomplete="off"><button type="button" class="wc-send">' + ICON_SEND + '</button></div>';
+
+    document.body.appendChild(launch);
+    document.body.appendChild(panel);
+
+    var body = panel.querySelector(".wc-body");
+    var chips = panel.querySelector(".wc-chips");
+    var input = panel.querySelector(".wc-input input");
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+    function persist() { if (consent) store.set(KEY_HISTORY, JSON.stringify(history)); }
+    function addMsg(role, html, save) {
+      var m = document.createElement("div");
+      m.className = "wc-msg " + role;
+      m.innerHTML = html;
+      body.appendChild(m);
+      body.scrollTop = body.scrollHeight;
+      if (save) { history.push({ role: role, html: html }); persist(); }
+    }
+    function showTyping() {
+      hideTyping();
+      var tp = document.createElement("div");
+      tp.className = "wc-typing"; tp.id = "wcTyping";
+      tp.innerHTML = "<span></span><span></span><span></span>";
+      body.appendChild(tp); body.scrollTop = body.scrollHeight;
+    }
+    function hideTyping() { var tp = document.getElementById("wcTyping"); if (tp) tp.remove(); }
+
+    function renderChips() {
+      chips.innerHTML = "";
+      ui().chips.forEach(function (label, i) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = label;
+        b.addEventListener("click", function () { sendUser(label, CHIP_INTENTS[i]); });
+        chips.appendChild(b);
+      });
+    }
+    function showConsent() {
+      if (consent || panel.querySelector(".wc-consent")) return;
+      var c = document.createElement("div");
+      c.className = "wc-consent";
+      c.innerHTML = ui().consent +
+        '<div class="wc-consent-acts"><button type="button" class="wc-accept"></button>' +
+        '<button type="button" class="wc-decline"></button></div>';
+      c.querySelector(".wc-accept").textContent = ui().accept;
+      c.querySelector(".wc-decline").textContent = ui().decline;
+      c.querySelector(".wc-accept").addEventListener("click", function () {
+        consent = true; store.set(KEY_CONSENT, "yes"); persist(); c.remove();
+      });
+      c.querySelector(".wc-decline").addEventListener("click", function () { c.remove(); });
+      panel.insertBefore(c, chips);
+    }
+    function sendUser(text, forced) {
+      text = (text || "").trim();
+      if (!text) return;
+      addMsg("user", escapeHtml(text), true);
+      var intent = forced || detect(text);
+      showTyping();
+      setTimeout(function () {
+        hideTyping();
+        addMsg("bot", kb(intent), true);
+      }, 480 + Math.random() * 350);
+    }
+    function greet() {
+      if (greeted) return;
+      greeted = true;
+      addMsg("bot", kb("greeting"), true);
+      showConsent();
+    }
+    function openPanel() {
+      panel.classList.add("open");
+      launch.classList.add("open");
+      launch.classList.remove("has-unread");
+      launch.setAttribute("aria-label", ui().close);
+      greet();
+      setTimeout(function () { input.focus(); }, 300);
+    }
+    function closePanel() {
+      panel.classList.remove("open");
+      launch.classList.remove("open");
+      launch.setAttribute("aria-label", ui().open);
+    }
+    function applyChatLang() {
+      panel.setAttribute("aria-label", ui().title);
+      panel.querySelector(".wc-title").textContent = ui().title;
+      panel.querySelector(".wc-status-txt").textContent = ui().status;
+      input.placeholder = ui().placeholder;
+      panel.querySelector(".wc-clear").setAttribute("aria-label", ui().clear);
+      panel.querySelector(".wc-close").setAttribute("aria-label", ui().close);
+      panel.querySelector(".wc-send").setAttribute("aria-label", ui().send);
+      launch.setAttribute("aria-label", panel.classList.contains("open") ? ui().close : ui().open);
+      renderChips();
+      var c = panel.querySelector(".wc-consent");
+      if (c) { c.remove(); showConsent(); }
+    }
+
+    // ---- restore retained conversation ----
+    if (consent) {
+      try {
+        var saved = JSON.parse(store.get(KEY_HISTORY, "[]"));
+        if (Array.isArray(saved)) history = saved;
+      } catch (e) { history = []; }
+      history.forEach(function (m) { addMsg(m.role, m.html, false); });
+      greeted = history.length > 0;
+    }
+    if (!greeted) launch.classList.add("has-unread");
+
+    applyChatLang();
+
+    // ---- events ----
+    launch.addEventListener("click", function () {
+      if (panel.classList.contains("open")) closePanel(); else openPanel();
+    });
+    panel.querySelector(".wc-close").addEventListener("click", closePanel);
+    panel.querySelector(".wc-send").addEventListener("click", function () {
+      sendUser(input.value); input.value = "";
+    });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); sendUser(input.value); input.value = ""; }
+    });
+    panel.querySelector(".wc-clear").addEventListener("click", function () {
+      history = []; store.set(KEY_HISTORY, "[]");
+      body.innerHTML = ""; greeted = false;
+      var c = panel.querySelector(".wc-consent"); if (c) c.remove();
+      greet();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && panel.classList.contains("open")) closePanel();
+    });
+    // keep chatbot labels in sync when the site language changes
+    document.querySelectorAll(".lang-toggle button").forEach(function (b) {
+      b.addEventListener("click", function () { setTimeout(applyChatLang, 0); });
     });
   }
 })();
