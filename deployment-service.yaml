@@ -23,6 +23,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: watapp-svc
+  namespace: watapps
 spec:
   type: NodePort
   selector:
