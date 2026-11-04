@@ -53,7 +53,7 @@
                -Dsonar.token=YOUR_TOKEN
              Keep the token OUT of this file; pass it via -Dsonar.token or the
              SONAR_TOKEN environment variable. -->
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.host.url>http://192.168.100.11:9000</sonar.host.url>
         <sonar.projectKey>com.worldadvancedtechnology:app-wat</sonar.projectKey>
         <sonar.projectName>WORLD ADVANCED TECHNOLOGY Website</sonar.projectName>
         <sonar.java.source>${java.version}</sonar.java.source>
