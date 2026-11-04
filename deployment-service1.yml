@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-wat
+  labels:
+    app: app-wat
+    app.kubernetes.io/name: app-wat
+    app.kubernetes.io/version: "3.0.0"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-wat
+  template:
+    metadata:
+      labels:
+        app: app-wat
+        app.kubernetes.io/name: app-wat
+        app.kubernetes.io/version: "3.0.0"
+    spec:
+      containers:
+      - name: app-wat
+        # Replace with your registry/image:tag, e.g. ghcr.io/you/app-wat:3.0.0
+        image: ngwa23/watapp:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+        # Make the app listen on 8080 (matches Dockerfile EXPOSE / HEALTHCHECK).
+        - name: PORT
+          value: "8080"
+        - name: JAVA_OPTS
+          value: "-XX:MaxRAMPercentage=75 -XX:+UseG1GC"
+        # Optional SMTP config. Create a Secret named "app-wat-mail" with keys
+        # MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, WAT_MAIL_ENABLED, etc.
+        # It is marked optional so the Deployment still runs if the Secret is absent.
+        envFrom:
+        - secretRef:
+            name: app-wat-mail
+            optional: true
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+        startupProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: http
+          failureThreshold: 30
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 15
+          timeoutSeconds: 3
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-wat-nodeport
+  labels:
+    app: app-wat
+    service-type: nodeport
+spec:
+  type: NodePort
+  selector:
+    app: app-wat
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http # container port 8080
+    nodePort: 30080 # must be in the 30000-32767 range
