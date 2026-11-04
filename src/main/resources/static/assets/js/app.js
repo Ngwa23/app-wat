@@ -9,6 +9,27 @@
     en: {
       "nav.about": "About", "nav.services": "Services", "nav.voip": "VoIP", "nav.team": "Team",
       "nav.careers": "Careers", "nav.payment": "Payment", "nav.contact": "Contact",
+      "nav.work": "Work", "em.label": "Emergency",
+      "work.label": "Our Work", "work.title": "Projects We've Delivered",
+      "work.sub": "Real installations and systems we've built for clients across Cameroon.",
+      "work.1.t": "CCTV Camera Installation", "work.1.c": "Security & Surveillance",
+      "work.2.t": "Network Rack Configuration", "work.2.c": "Network Infrastructure",
+      "work.3.t": "Enterprise Data Center", "work.3.c": "Data Center",
+      "work.4.t": "Structured Cabling", "work.4.c": "Cat6 / Fibre",
+      "work.5.t": "24/7 CCTV Monitoring", "work.5.c": "Surveillance",
+      "work.6.t": "Biometric Access Control", "work.6.c": "Access Control",
+      "work.7.t": "VoIP Phone System", "work.7.c": "VoIP",
+      "work.8.t": "Starlink Installation", "work.8.c": "Connectivity",
+      "work.9.t": "Server Rack & UPS", "work.9.c": "Power & Racks",
+      "work.10.t": "Rack Cleanup — Before", "work.10.c": "Structured Cabling",
+      "work.11.t": "Rack Cleanup — After", "work.11.c": "Structured Cabling",
+      "work.12.t": "On-Site Project Team", "work.12.c": "Our Team",
+      "work.13.t": "On-Site Equipment Installation", "work.13.c": "Field Installation",
+      "work.14.t": "Point-to-Point Wireless Link", "work.14.c": "Wireless Networks",
+      "work.15.t": "Rooftop Network Survey", "work.15.c": "Connectivity",
+      "work.16.t": "Walk-Through Security Gate", "work.16.c": "Access & Security",
+      "work.17.t": "Network Cabling Supply", "work.17.c": "Structured Cabling",
+      "work.18.t": "Field Deployment", "work.18.c": "On-Site Delivery",
       "hero.badge": "Cameroon's Premier IT Company",
       "hero.sub": "IT Consultancy • DevOps • VoIP Solutions • Networks • Web & Mobile. Enterprise-grade technology built for African businesses.",
       "hero.cta1": "Our Services", "hero.cta2": "Get in Touch",
@@ -22,8 +43,8 @@
       "ceo.contact": "Contact the CEO",
       "why.label": "The WAT Difference", "why.title": "Why businesses choose us",
       "why.1.t": "Cisco & AWS Certified", "why.1.d": "Certified network and cloud engineers you can rely on.",
-      "why.2.t": "8+ Years Experience", "why.2.d": "A proven track record delivering across Cameroon since 2016.",
-      "why.3.t": "150+ Happy Clients", "why.3.d": "Banks, schools and enterprises trust us with their infrastructure.",
+      "why.2.t": "7+ Years Experience", "why.2.d": "A proven track record delivering across Cameroon since 2019.",
+      "why.3.t": "38+ Happy Clients", "why.3.d": "Banks, schools and enterprises trust us with their infrastructure.",
       "why.4.t": "24/7 Support", "why.4.d": "Round-the-clock technical support whenever you need it.",
       "svc.label": "What We Do", "svc.title": "Our Services", "svc.sub": "End-to-end IT solutions for modern businesses.", "svc.learn": "Learn More",
       "svc1.title": "IT Consultancy", "svc1.desc": "Expert IT consultation, infrastructure assessment, technology planning and strategic guidance.",
@@ -62,7 +83,7 @@
       "contact.label": "Get In Touch", "contact.title": "Contact Us", "contact.sub": "We respond within 2 hours — 24/7 support available.",
       "f.name": "Full Name *", "f.email": "Email *", "f.phone": "Phone", "f.service": "Service Needed", "f.subject": "Subject *", "f.message": "Message *", "f.send": "Send Message",
       "ci.phone": "Phone / WhatsApp", "ci.email": "Email", "ci.addr": "Address", "ci.hours": "Opening Hours", "ci.weekend": "Sat–Sun: Closed",
-      "foot.tag": "Enterprise-grade IT, DevOps and private VoIP for African businesses. Based in Yaoundé, serving Cameroon & beyond since 2016.",
+      "foot.tag": "Enterprise-grade IT, DevOps and private VoIP for African businesses. Based in Yaoundé, serving Cameroon & beyond since 2019.",
       "foot.quick": "Quick Links", "foot.services": "Services", "foot.contact": "Contact", "foot.rights": "All rights reserved.",
       "det.title": "What we deliver", "det.quote": "Get a Quote on WhatsApp", "det.contact": "Contact Us",
       "det1": "IT infrastructure audit & assessment|Technology roadmap & strategic planning|Cloud readiness & migration strategy|Vendor selection & cost optimization|Security, backup & compliance review",
@@ -76,6 +97,27 @@
     fr: {
       "nav.about": "À Propos", "nav.services": "Services", "nav.voip": "VoIP", "nav.team": "Équipe",
       "nav.careers": "Carrières", "nav.payment": "Paiement", "nav.contact": "Contact",
+      "nav.work": "Réalisations", "em.label": "Urgence",
+      "work.label": "Nos Réalisations", "work.title": "Des projets que nous avons livrés",
+      "work.sub": "Installations et systèmes réels déployés pour nos clients au Cameroun.",
+      "work.1.t": "Installation de caméra CCTV", "work.1.c": "Sécurité & vidéosurveillance",
+      "work.2.t": "Configuration de baie réseau", "work.2.c": "Infrastructure réseau",
+      "work.3.t": "Centre de données", "work.3.c": "Data center",
+      "work.4.t": "Câblage structuré", "work.4.c": "Cat6 / Fibre",
+      "work.5.t": "Supervision CCTV 24/7", "work.5.c": "Vidéosurveillance",
+      "work.6.t": "Contrôle d'accès biométrique", "work.6.c": "Contrôle d'accès",
+      "work.7.t": "Système téléphonique VoIP", "work.7.c": "VoIP",
+      "work.8.t": "Installation Starlink", "work.8.c": "Connectivité",
+      "work.9.t": "Baie serveur & onduleur", "work.9.c": "Énergie & baies",
+      "work.10.t": "Nettoyage de baie — Avant", "work.10.c": "Câblage structuré",
+      "work.11.t": "Nettoyage de baie — Après", "work.11.c": "Câblage structuré",
+      "work.12.t": "Équipe sur site", "work.12.c": "Notre équipe",
+      "work.13.t": "Installation d'équipement sur site", "work.13.c": "Installation terrain",
+      "work.14.t": "Liaison sans fil point à point", "work.14.c": "Réseaux sans fil",
+      "work.15.t": "Étude réseau en toiture", "work.15.c": "Connectivité",
+      "work.16.t": "Portique de sécurité", "work.16.c": "Accès & sécurité",
+      "work.17.t": "Fourniture de câblage réseau", "work.17.c": "Câblage structuré",
+      "work.18.t": "Matériel de déploiement", "work.18.c": "Livraison sur site",
       "hero.badge": "Première Entreprise IT du Cameroun",
       "hero.sub": "Conseil IT • DevOps • Solutions VoIP • Réseaux • Web & Mobile. Une technologie d'entreprise conçue pour les sociétés africaines.",
       "hero.cta1": "Nos Services", "hero.cta2": "Nous Contacter",
@@ -89,8 +131,8 @@
       "ceo.contact": "Contacter le PDG",
       "why.label": "La Différence WAT", "why.title": "Pourquoi les entreprises nous choisissent",
       "why.1.t": "Certifié Cisco & AWS", "why.1.d": "Des ingénieurs réseau et cloud certifiés sur qui compter.",
-      "why.2.t": "8+ Ans d'Expérience", "why.2.d": "Un parcours prouvé au Cameroun depuis 2016.",
-      "why.3.t": "150+ Clients Satisfaits", "why.3.d": "Banques, écoles et entreprises nous confient leur infrastructure.",
+      "why.2.t": "7+ Ans d'Expérience", "why.2.d": "Un parcours prouvé au Cameroun depuis 2019.",
+      "why.3.t": "38+ Clients Satisfaits", "why.3.d": "Banques, écoles et entreprises nous confient leur infrastructure.",
       "why.4.t": "Support 24/7", "why.4.d": "Un support technique disponible à tout moment.",
       "svc.label": "Ce Que Nous Faisons", "svc.title": "Nos Services", "svc.sub": "Des solutions IT de bout en bout pour les entreprises modernes.", "svc.learn": "En Savoir Plus",
       "svc1.title": "Conseil IT", "svc1.desc": "Consultation IT experte, évaluation d'infrastructure, planification technologique et conseil stratégique.",
@@ -129,7 +171,7 @@
       "contact.label": "Contactez-Nous", "contact.title": "Contact", "contact.sub": "Nous répondons en moins de 2 heures — support 24/7 disponible.",
       "f.name": "Nom Complet *", "f.email": "Email *", "f.phone": "Téléphone", "f.service": "Service Souhaité", "f.subject": "Sujet *", "f.message": "Message *", "f.send": "Envoyer le Message",
       "ci.phone": "Téléphone / WhatsApp", "ci.email": "Email", "ci.addr": "Adresse", "ci.hours": "Heures d'Ouverture", "ci.weekend": "Sam–Dim : Fermé",
-      "foot.tag": "IT, DevOps et VoIP privé de niveau entreprise pour les sociétés africaines. Basés à Yaoundé, au service du Cameroun et au-delà depuis 2016.",
+      "foot.tag": "IT, DevOps et VoIP privé de niveau entreprise pour les sociétés africaines. Basés à Yaoundé, au service du Cameroun et au-delà depuis 2019.",
       "foot.quick": "Liens Rapides", "foot.services": "Services", "foot.contact": "Contact", "foot.rights": "Tous droits réservés.",
       "det.title": "Ce que nous livrons", "det.quote": "Demander un devis sur WhatsApp", "det.contact": "Nous contacter",
       "det1": "Audit et évaluation de l'infrastructure IT|Feuille de route technologique et planification stratégique|Stratégie de migration et d'adoption du cloud|Sélection des fournisseurs et optimisation des coûts|Revue sécurité, sauvegarde et conformité",
@@ -143,6 +185,27 @@
     es: {
       "nav.about": "Sobre Nosotros", "nav.services": "Servicios", "nav.voip": "VoIP", "nav.team": "Equipo",
       "nav.careers": "Carreras", "nav.payment": "Pago", "nav.contact": "Contacto",
+      "nav.work": "Proyectos", "em.label": "Emergencia",
+      "work.label": "Nuestro Trabajo", "work.title": "Proyectos que hemos realizado",
+      "work.sub": "Instalaciones y sistemas reales que hemos desplegado para clientes en Camerún.",
+      "work.1.t": "Instalación de cámaras CCTV", "work.1.c": "Seguridad y videovigilancia",
+      "work.2.t": "Configuración de rack de red", "work.2.c": "Infraestructura de red",
+      "work.3.t": "Centro de datos empresarial", "work.3.c": "Centro de datos",
+      "work.4.t": "Cableado estructurado", "work.4.c": "Cat6 / Fibra",
+      "work.5.t": "Monitoreo CCTV 24/7", "work.5.c": "Videovigilancia",
+      "work.6.t": "Control de acceso biométrico", "work.6.c": "Control de acceso",
+      "work.7.t": "Sistema telefónico VoIP", "work.7.c": "VoIP",
+      "work.8.t": "Instalación de Starlink", "work.8.c": "Conectividad",
+      "work.9.t": "Rack de servidores y SAI", "work.9.c": "Energía y racks",
+      "work.10.t": "Limpieza de rack — Antes", "work.10.c": "Cableado estructurado",
+      "work.11.t": "Limpieza de rack — Después", "work.11.c": "Cableado estructurado",
+      "work.12.t": "Equipo de proyecto en sitio", "work.12.c": "Nuestro equipo",
+      "work.13.t": "Instalación de equipos en sitio", "work.13.c": "Instalación en campo",
+      "work.14.t": "Enlace inalámbrico punto a punto", "work.14.c": "Redes inalámbricas",
+      "work.15.t": "Estudio de red en azotea", "work.15.c": "Conectividad",
+      "work.16.t": "Arco de seguridad peatonal", "work.16.c": "Acceso y seguridad",
+      "work.17.t": "Suministro de cableado de red", "work.17.c": "Cableado estructurado",
+      "work.18.t": "Despliegue en campo", "work.18.c": "Entrega en sitio",
       "hero.badge": "Primera Empresa IT de Camerún",
       "hero.sub": "Consultoría IT • DevOps • Soluciones VoIP • Redes • Web & Móvil. Tecnología empresarial creada para las empresas africanas.",
       "hero.cta1": "Nuestros Servicios", "hero.cta2": "Contáctenos",
@@ -156,8 +219,8 @@
       "ceo.contact": "Contactar al CEO",
       "why.label": "La Diferencia WAT", "why.title": "Por qué las empresas nos eligen",
       "why.1.t": "Certificado Cisco & AWS", "why.1.d": "Ingenieros de red y nube certificados en quien confiar.",
-      "why.2.t": "8+ Años de Experiencia", "why.2.d": "Una trayectoria probada en Camerún desde 2016.",
-      "why.3.t": "150+ Clientes Satisfechos", "why.3.d": "Bancos, escuelas y empresas confían su infraestructura en nosotros.",
+      "why.2.t": "7+ Años de Experiencia", "why.2.d": "Una trayectoria probada en Camerún desde 2019.",
+      "why.3.t": "38+ Clientes Satisfechos", "why.3.d": "Bancos, escuelas y empresas confían su infraestructura en nosotros.",
       "why.4.t": "Soporte 24/7", "why.4.d": "Soporte técnico ininterrumpido cuando lo necesite.",
       "svc.label": "Lo Que Hacemos", "svc.title": "Nuestros Servicios", "svc.sub": "Soluciones IT integrales para empresas modernas.", "svc.learn": "Saber Más",
       "svc1.title": "Consultoría IT", "svc1.desc": "Consultoría IT experta, evaluación de infraestructura, planificación tecnológica y asesoramiento estratégico.",
@@ -196,7 +259,7 @@
       "contact.label": "Contáctenos", "contact.title": "Contáctenos", "contact.sub": "Respondemos en menos de 2 horas — soporte 24/7 disponible.",
       "f.name": "Nombre Completo *", "f.email": "Email *", "f.phone": "Teléfono", "f.service": "Servicio Deseado", "f.subject": "Asunto *", "f.message": "Mensaje *", "f.send": "Enviar Mensaje",
       "ci.phone": "Teléfono / WhatsApp", "ci.email": "Email", "ci.addr": "Dirección", "ci.hours": "Horario de Atención", "ci.weekend": "Sáb–Dom: Cerrado",
-      "foot.tag": "IT, DevOps y VoIP privado de nivel empresarial para empresas africanas. Con sede en Yaundé, al servicio de Camerún y más allá desde 2016.",
+      "foot.tag": "IT, DevOps y VoIP privado de nivel empresarial para empresas africanas. Con sede en Yaundé, al servicio de Camerún y más allá desde 2019.",
       "foot.quick": "Accesos Rápidos", "foot.services": "Servicios", "foot.contact": "Contacto", "foot.rights": "Todos los derechos reservados.",
       "det.title": "Lo que entregamos", "det.quote": "Pedir presupuesto por WhatsApp", "det.contact": "Contáctenos",
       "det1": "Auditoría y evaluación de la infraestructura IT|Hoja de ruta tecnológica y planificación estratégica|Estrategia de migración y adopción cloud|Selección de proveedores y optimización de costes|Revisión de seguridad, copias y cumplimiento",
@@ -210,6 +273,27 @@
     de: {
       "nav.about": "Über Uns", "nav.services": "Leistungen", "nav.voip": "VoIP", "nav.team": "Team",
       "nav.careers": "Karriere", "nav.payment": "Zahlung", "nav.contact": "Kontakt",
+      "nav.work": "Projekte", "em.label": "Notruf",
+      "work.label": "Unsere Arbeit", "work.title": "Projekte, die wir umgesetzt haben",
+      "work.sub": "Echte Installationen und Systeme, die wir für Kunden in Kamerun umgesetzt haben.",
+      "work.1.t": "CCTV-Kamerainstallation", "work.1.c": "Sicherheit & Videoüberwachung",
+      "work.2.t": "Netzwerk-Rack-Konfiguration", "work.2.c": "Netzwerkinfrastruktur",
+      "work.3.t": "Unternehmens-Rechenzentrum", "work.3.c": "Rechenzentrum",
+      "work.4.t": "Strukturierte Verkabelung", "work.4.c": "Cat6 / Glasfaser",
+      "work.5.t": "24/7 CCTV-Überwachung", "work.5.c": "Videoüberwachung",
+      "work.6.t": "Biometrische Zutrittskontrolle", "work.6.c": "Zutrittskontrolle",
+      "work.7.t": "VoIP-Telefonsystem", "work.7.c": "VoIP",
+      "work.8.t": "Starlink-Installation", "work.8.c": "Konnektivität",
+      "work.9.t": "Serverschrank & USV", "work.9.c": "Strom & Racks",
+      "work.10.t": "Rack-Aufräumen — Vorher", "work.10.c": "Strukturierte Verkabelung",
+      "work.11.t": "Rack-Aufräumen — Nachher", "work.11.c": "Strukturierte Verkabelung",
+      "work.12.t": "Projektteam vor Ort", "work.12.c": "Unser Team",
+      "work.13.t": "Geräteinstallation vor Ort", "work.13.c": "Feldinstallation",
+      "work.14.t": "Punkt-zu-Punkt-Funkverbindung", "work.14.c": "Funknetzwerke",
+      "work.15.t": "Netzwerk-Begehung auf dem Dach", "work.15.c": "Konnektivität",
+      "work.16.t": "Personenschleuse / Sicherheitstor", "work.16.c": "Zutritt & Sicherheit",
+      "work.17.t": "Lieferung von Netzwerkverkabelung", "work.17.c": "Strukturierte Verkabelung",
+      "work.18.t": "Einsatz vor Ort", "work.18.c": "Lieferung vor Ort",
       "hero.badge": "Kameruns führendes IT-Unternehmen",
       "hero.sub": "IT-Beratung • DevOps • VoIP-Lösungen • Netzwerke • Web & Mobil. Unternehmenstechnologie für afrikanische Unternehmen.",
       "hero.cta1": "Unsere Leistungen", "hero.cta2": "Kontakt aufnehmen",
@@ -223,8 +307,8 @@
       "ceo.contact": "CEO kontaktieren",
       "why.label": "Der WAT-Unterschied", "why.title": "Warum Unternehmen uns wählen",
       "why.1.t": "Cisco & AWS zertifiziert", "why.1.d": "Zertifizierte Netzwerk- und Cloud-Ingenieure, auf die Sie sich verlassen können.",
-      "why.2.t": "8+ Jahre Erfahrung", "why.2.d": "Eine bewährte Erfolgsbilanz in Kamerun seit 2016.",
-      "why.3.t": "150+ zufriedene Kunden", "why.3.d": "Banken, Schulen und Unternehmen vertrauen uns ihre Infrastruktur an.",
+      "why.2.t": "7+ Jahre Erfahrung", "why.2.d": "Eine bewährte Erfolgsbilanz in Kamerun seit 2019.",
+      "why.3.t": "38+ zufriedene Kunden", "why.3.d": "Banken, Schulen und Unternehmen vertrauen uns ihre Infrastruktur an.",
       "why.4.t": "24/7-Support", "why.4.d": "Rund-um-die-Uhr technischer Support, wann immer Sie ihn brauchen.",
       "svc.label": "Was Wir Tun", "svc.title": "Unsere Leistungen", "svc.sub": "End-to-End IT-Lösungen für moderne Unternehmen.", "svc.learn": "Mehr Erfahren",
       "svc1.title": "IT-Beratung", "svc1.desc": "Experten-IT-Beratung, Infrastrukturbewertung, Technologieplanung und strategische Begleitung.",
@@ -263,7 +347,7 @@
       "contact.label": "Kontakt", "contact.title": "Kontaktieren Sie Uns", "contact.sub": "Wir antworten innerhalb von 2 Stunden — 24/7-Support verfügbar.",
       "f.name": "Vollständiger Name *", "f.email": "E-Mail *", "f.phone": "Telefon", "f.service": "Gewünschter Dienst", "f.subject": "Betreff *", "f.message": "Nachricht *", "f.send": "Nachricht Senden",
       "ci.phone": "Telefon / WhatsApp", "ci.email": "E-Mail", "ci.addr": "Adresse", "ci.hours": "Öffnungszeiten", "ci.weekend": "Sa–So: Geschlossen",
-      "foot.tag": "Unternehmens-IT, DevOps und privates VoIP für afrikanische Unternehmen. Ansässig in Yaoundé, im Dienst Kameruns und darüber hinaus seit 2016.",
+      "foot.tag": "Unternehmens-IT, DevOps und privates VoIP für afrikanische Unternehmen. Ansässig in Yaoundé, im Dienst Kameruns und darüber hinaus seit 2019.",
       "foot.quick": "Schnelllinks", "foot.services": "Leistungen", "foot.contact": "Kontakt", "foot.rights": "Alle Rechte vorbehalten.",
       "det.title": "Was wir liefern", "det.quote": "Angebot per WhatsApp anfordern", "det.contact": "Kontakt",
       "det1": "Audit und Bewertung der IT-Infrastruktur|Technologie-Roadmap und strategische Planung|Cloud-Migrations- und Einführungsstrategie|Anbieterauswahl und Kostenoptimierung|Sicherheits-, Backup- und Compliance-Prüfung",
@@ -487,8 +571,85 @@
       }
     }
 
+    /* ---------- work gallery lightbox ---------- */
+    (function () {
+      var opens = Array.prototype.slice.call(document.querySelectorAll(".work-open"));
+      if (!opens.length) return;
+      var X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+      var PREV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>';
+      var NEXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+      var lb = document.createElement("div");
+      lb.className = "wk-lb";
+      lb.setAttribute("role", "dialog");
+      lb.setAttribute("aria-hidden", "true");
+      lb.innerHTML =
+        '<button type="button" class="wk-lb-btn wk-lb-close" aria-label="Close">' + X + '</button>' +
+        '<button type="button" class="wk-lb-btn wk-lb-prev" aria-label="Previous">' + PREV + '</button>' +
+        '<img alt="">' +
+        '<button type="button" class="wk-lb-btn wk-lb-next" aria-label="Next">' + NEXT + '</button>' +
+        '<div class="wk-lb-cap"></div>';
+      document.body.appendChild(lb);
+      var lbImg = lb.querySelector("img");
+      var lbCap = lb.querySelector(".wk-lb-cap");
+      var cur = 0;
+      function show(i) {
+        cur = (i + opens.length) % opens.length;
+        var btn = opens[cur];
+        lbImg.src = btn.getAttribute("data-full");
+        var fc = btn.querySelector(".work-cap");
+        var label = fc ? fc.textContent : "";
+        lbImg.alt = label; lbCap.textContent = label;
+      }
+      function openLb(i) { show(i); lb.classList.add("open"); lb.setAttribute("aria-hidden", "false"); document.body.classList.add("modal-open"); }
+      function closeLb() { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); document.body.classList.remove("modal-open"); }
+      opens.forEach(function (b, i) { b.addEventListener("click", function () { openLb(i); }); });
+      lb.querySelector(".wk-lb-close").addEventListener("click", closeLb);
+      lb.querySelector(".wk-lb-prev").addEventListener("click", function (e) { e.stopPropagation(); show(cur - 1); });
+      lb.querySelector(".wk-lb-next").addEventListener("click", function (e) { e.stopPropagation(); show(cur + 1); });
+      lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+      document.addEventListener("keydown", function (e) {
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") closeLb();
+        else if (e.key === "ArrowLeft") show(cur - 1);
+        else if (e.key === "ArrowRight") show(cur + 1);
+      });
+    })();
+
+    /* ---------- work carousel arrows ---------- */
+    (function () {
+      var track = document.getElementById("workTrack");
+      if (!track) return;
+      var prev = document.querySelector(".work-prev");
+      var next = document.querySelector(".work-next");
+      function step(dir) { track.scrollBy({ left: dir * Math.max(track.clientWidth * 0.8, 260), behavior: "smooth" }); }
+      if (prev) prev.addEventListener("click", function () { step(-1); });
+      if (next) next.addEventListener("click", function () { step(1); });
+    })();
+
+    /* ---------- cinematic 3D tilt + glare on work tiles ---------- */
+    if (canTilt) {
+      document.querySelectorAll(".work-open").forEach(function (tile) {
+        tile.addEventListener("pointermove", function (e) {
+          var r = tile.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          tile.style.transition = "transform .08s linear, box-shadow .4s, border-color .35s";
+          tile.style.transform = "perspective(820px) rotateY(" + (px * 16).toFixed(2) +
+            "deg) rotateX(" + (-py * 16).toFixed(2) + "deg) translateY(-6px) scale(1.05)";
+          tile.style.setProperty("--mx", ((px + 0.5) * 100).toFixed(1) + "%");
+          tile.style.setProperty("--my", ((py + 0.5) * 100).toFixed(1) + "%");
+        });
+        tile.addEventListener("pointerleave", function () {
+          tile.style.transition = "transform .6s cubic-bezier(.22,1,.36,1), box-shadow .4s, border-color .35s";
+          tile.style.transform = "";
+        });
+      });
+    }
+
     wireForm("contactForm", "/api/contact", "contactStatus");
     wireForm("careerForm", "/api/careers", "careerStatus");
+
+    initChatbot();
   });
 
   /* ---------------- forms ---------------- */
@@ -553,6 +714,291 @@
         .finally(function () {
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = original; }
         });
+    });
+  }
+
+  /* ---------------- Chatbot: instant discussion ----------------
+     A self-contained assistant. Conversation is retained in the browser
+     (localStorage) ONLY after the visitor taps "Accept" — nothing is sent
+     to a server. Bilingual EN/FR; ES/DE fall back to EN.                  */
+  function initChatbot() {
+    if (document.getElementById("watChatLaunch")) return;
+
+    var WA = "https://wa.me/237651798173";
+    var EMAIL = "worldadvancedtechnology23@gmail.com";
+    var KEY_HISTORY = "wat-chat-history";
+    var KEY_CONSENT = "wat-chat-consent";
+
+    function waLink(text, label) {
+      return "<a href='" + WA + "?text=" + encodeURIComponent(text) +
+             "' target='_blank' rel='noopener'>" + (label || "WhatsApp") + "</a>";
+    }
+    function mail() { return "<a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>"; }
+
+    var ICON_BOT  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V4M8 3h8M8.5 13v1M15.5 13v1"/></svg>';
+    var ICON_OPEN = '<svg class="wc-ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    var ICON_CLOSE= '<svg class="wc-ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    var ICON_X    = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    var ICON_TRASH= '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>';
+    var ICON_SEND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>';
+
+    var UI = {
+      en: { title: "WAT Assistant", status: "Online · replies instantly",
+            open: "Open chat", close: "Close chat", clear: "Clear chat",
+            placeholder: "Type your message…", send: "Send",
+            consent: "To keep this chat when you return, we save it on <b>this device only</b> — nothing is sent to a server. Save our conversation?",
+            accept: "Accept", decline: "Not now",
+            chips: ["Services", "VoIP", "Pricing", "Careers", "Contact", "Talk to a human"] },
+      fr: { title: "Assistant WAT", status: "En ligne · réponse immédiate",
+            open: "Ouvrir le chat", close: "Fermer le chat", clear: "Effacer",
+            placeholder: "Écrivez votre message…", send: "Envoyer",
+            consent: "Pour conserver cette discussion à votre retour, nous l'enregistrons <b>uniquement sur cet appareil</b> — rien n'est envoyé à un serveur. Enregistrer la conversation ?",
+            accept: "Accepter", decline: "Plus tard",
+            chips: ["Services", "VoIP", "Tarifs", "Carrières", "Contact", "Parler à un humain"] }
+    };
+    UI.es = UI.en; UI.de = UI.en;
+    function lang() { return UI[current] ? current : "en"; }
+    function ui() { return UI[lang()]; }
+
+    var KB = {
+      en: {
+        greeting: "Hi! 👋 I'm the WAT assistant. Ask me about our <b>IT services, VoIP, pricing, careers</b> or how to reach us. What would you like to know?",
+        services: "We deliver end-to-end IT solutions:<br>• <b>IT Consultancy</b><br>• <b>DevOps</b> (Docker, Kubernetes, AWS, CI/CD)<br>• <b>VoIP</b> private phone systems<br>• <b>Network &amp; Security</b> (CCTV, access control)<br>• <b>Web &amp; Mobile</b> development<br>• <b>Starlink</b> install &amp; <b>WiFi Zones</b><br>Which one interests you?",
+        devops: "Our <b>DevOps</b> team builds and automates your infrastructure: Docker, Kubernetes, AWS, CI/CD pipelines, Ansible, Terraform, plus monitoring with Prometheus, Grafana &amp; ELK. Want a quote? " + waLink("I'd like a DevOps quote"),
+        voip: "Our <b>VoIP</b> solutions give you a private telephone network — connect all your branches in Cameroon and abroad, cut inter-branch call costs by up to 70%, with IVR, call queues and recording. " + waLink("I need a VoIP solution"),
+        web: "We build <b>websites, web apps and mobile apps</b> (Android &amp; iOS) — from landing pages to enterprise platforms. " + waLink("I need a website / app"),
+        network: "<b>Network &amp; Security</b>: structured cabling, CCTV, access control, time-attendance and anti-intrusion alarms — installed and maintained. " + waLink("I need network / security"),
+        starlink: "We supply, configure and install <b>Starlink</b> kits — dish mounting, alignment and router setup for homes, offices and remote sites. " + waLink("I'm interested in Starlink"),
+        wifi: "We set up professional <b>WiFi Zones</b> for hotels, offices and campuses — captive portal, bandwidth management, VLAN and guest access. " + waLink("I need a WiFi Zone"),
+        consultancy: "Our <b>IT Consultancy</b> covers infrastructure assessment, technology planning and strategic guidance tailored to your business. " + waLink("I'd like IT consultancy"),
+        pricing: "Pricing depends on your needs, and paying is easy:<br>• <b>MTN MoMo</b>: +237 651 798 173<br>• <b>Orange Money</b>: +237 693 638 404<br>• Invoice by email: " + mail() + "<br>For a tailored quote, " + waLink("I'd like a quote") + ".",
+        careers: "We're always looking for talent! Browse open roles in the <a href='#careers'>Careers</a> section and apply right there, or email your CV to " + mail() + ".",
+        contact: "Here's how to reach <b>WAT</b>:<br>• 📞 Phone / WhatsApp: <b>+237 651 798 173</b><br>• ✉️ " + mail() + "<br>• 📍 Nkolbisson, L'Caramba, Yaoundé<br>• 🕗 Mon–Fri, 08:00–17:00",
+        hours: "We're open <b>Monday to Friday, 08:00–17:00</b> (Yaoundé time). Message us anytime and we'll reply as soon as we're back.",
+        location: "We're based in <b>Nkolbisson, L'Caramba, Yaoundé, Cameroon</b>. Want directions or a site visit? " + waLink("I'd like a site visit"),
+        human: "Of course — chat with our team directly on WhatsApp: " + waLink("Hello WAT, I'd like to talk to someone") + ", or call <b>+237 651 798 173</b>.",
+        thanks: "You're welcome! 😊 Anything else I can help you with?",
+        fallback: "I'm not fully sure about that one, but our team can help directly. Reach us on WhatsApp " + waLink("Hello WAT, I have a question") + " or email " + mail() + ". You can also tap a topic below."
+      },
+      fr: {
+        greeting: "Bonjour ! 👋 Je suis l'assistant WAT. Posez-moi vos questions sur nos <b>services IT, la VoIP, les tarifs, les carrières</b> ou comment nous joindre. Que souhaitez-vous savoir ?",
+        services: "Nous offrons des solutions IT complètes :<br>• <b>Conseil IT</b><br>• <b>DevOps</b> (Docker, Kubernetes, AWS, CI/CD)<br>• <b>VoIP</b> — téléphonie privée<br>• <b>Réseau &amp; Sécurité</b> (vidéosurveillance, contrôle d'accès)<br>• <b>Web &amp; Mobile</b><br>• <b>Starlink</b> &amp; <b>Zones WiFi</b><br>Lequel vous intéresse ?",
+        devops: "Notre équipe <b>DevOps</b> construit et automatise votre infrastructure : Docker, Kubernetes, AWS, pipelines CI/CD, Ansible, Terraform, et supervision Prometheus, Grafana &amp; ELK. Un devis ? " + waLink("Je voudrais un devis DevOps"),
+        voip: "Nos solutions <b>VoIP</b> vous offrent un réseau téléphonique privé — reliez toutes vos agences au Cameroun et à l'étranger, réduisez les coûts inter-agences jusqu'à 70 %, avec SVI, files d'attente et enregistrement d'appels. " + waLink("J'ai besoin d'une solution VoIP"),
+        web: "Nous créons des <b>sites web, applications web et mobiles</b> (Android &amp; iOS) — de la landing page à la plateforme d'entreprise. " + waLink("J'ai besoin d'un site / d'une app"),
+        network: "<b>Réseau &amp; Sécurité</b> : câblage, vidéosurveillance, contrôle d'accès, pointage et alarmes anti-intrusion — installés et maintenus. " + waLink("J'ai besoin de réseau / sécurité"),
+        starlink: "Nous fournissons, configurons et installons les kits <b>Starlink</b> — montage de l'antenne, alignement et configuration du routeur pour maisons, bureaux et sites isolés. " + waLink("Je suis intéressé par Starlink"),
+        wifi: "Nous installons des <b>Zones WiFi</b> professionnelles pour hôtels, bureaux et campus — portail captif, gestion de bande passante, VLAN et accès invité. " + waLink("J'ai besoin d'une Zone WiFi"),
+        consultancy: "Notre <b>Conseil IT</b> couvre l'audit d'infrastructure, la planification technologique et l'accompagnement stratégique adaptés à votre activité. " + waLink("Je voudrais un conseil IT"),
+        pricing: "Les tarifs dépendent de vos besoins, et le paiement est simple :<br>• <b>MTN MoMo</b> : +237 651 798 173<br>• <b>Orange Money</b> : +237 693 638 404<br>• Facture par e-mail : " + mail() + "<br>Pour un devis personnalisé, " + waLink("Je voudrais un devis") + ".",
+        careers: "Nous recherchons toujours des talents ! Consultez les postes ouverts dans la section <a href='#careers'>Carrières</a> et postulez directement, ou envoyez votre CV à " + mail() + ".",
+        contact: "Pour joindre <b>WAT</b> :<br>• 📞 Téléphone / WhatsApp : <b>+237 651 798 173</b><br>• ✉️ " + mail() + "<br>• 📍 Nkolbisson, L'Caramba, Yaoundé<br>• 🕗 Lun–Ven, 08:00–17:00",
+        hours: "Nous sommes ouverts du <b>lundi au vendredi, 08:00–17:00</b> (heure de Yaoundé). Écrivez-nous à tout moment, nous répondrons dès notre retour.",
+        location: "Nous sommes à <b>Nkolbisson, L'Caramba, Yaoundé, Cameroun</b>. Besoin d'un itinéraire ou d'une visite ? " + waLink("Je voudrais une visite sur site"),
+        human: "Bien sûr — discutez avec notre équipe sur WhatsApp : " + waLink("Bonjour WAT, je souhaite parler à quelqu'un") + ", ou appelez le <b>+237 651 798 173</b>.",
+        thanks: "Avec plaisir ! 😊 Puis-je vous aider pour autre chose ?",
+        fallback: "Je ne suis pas tout à fait sûr pour cela, mais notre équipe peut vous aider directement. Écrivez-nous sur WhatsApp " + waLink("Bonjour WAT, j'ai une question") + " ou par e-mail " + mail() + ". Vous pouvez aussi choisir un sujet ci-dessous."
+      }
+    };
+    function kb(key) {
+      var d = KB[lang()] || KB.en;
+      return d[key] || KB.en[key] || KB.en.fallback;
+    }
+
+    // Keyword → intent (specific first; greeting/thanks use word boundaries)
+    var INTENTS = [
+      ["voip|voice|t[ée]l[ée]phon|phone system|pbx|\\bsip\\b", "voip"],
+      ["devops|docker|kubernet|ci/?cd|\\baws\\b|cloud|terraform|ansible|pipeline", "devops"],
+      ["website|site web|web app|\\bweb\\b|mobile|android|\\bios\\b|application|\\bapp\\b", "web"],
+      ["network|r[ée]seau|cctv|cam[ée]ra|surveillance|security|s[ée]curit|alarm|access control|contr[ôo]le d'acc", "network"],
+      ["starlink|satellite", "starlink"],
+      ["wifi|wi-fi|hotspot|hot spot|captif|captive|hotel|h[ôo]tel", "wifi"],
+      ["consult|conseil", "consultancy"],
+      ["price|pricing|cost|how much|quote|devis|tarif|\\bprix\\b|co[ûu]t|payment|\\bpay\\b|momo|orange money|invoice|facture|combien", "pricing"],
+      ["career|\\bjob\\b|hiring|recrut|emploi|\\bcv\\b|vacanc|carri", "careers"],
+      ["hour|schedule|horaire|ouvert|open(ing)?", "hours"],
+      ["where|location|address|adresse|located|situ|office|bureau|o[ùu] [êe]tes", "location"],
+      ["human|agent|\\bperson\\b|someone|parler|humain|real person|staff|\\bteam\\b|[ée]quipe", "human"],
+      ["contact|reach|e-?mail|\\bmail\\b|call|appeler|joindre|num[ée]ro|\\bnumber\\b", "contact"],
+      ["service|\\boffer\\b|what do you|que faites|prestation", "services"],
+      ["\\b(thanks|thank you|thx|merci|great|cool|ok|okay|super|nice|parfait)\\b", "thanks"],
+      ["\\b(hi|hey|hello|salut|bonjour|bonsoir|coucou|good morning|good evening)\\b", "greeting"]
+    ];
+    function detect(text) {
+      var s = (text || "").toLowerCase();
+      for (var i = 0; i < INTENTS.length; i++) {
+        if (new RegExp(INTENTS[i][0]).test(s)) return INTENTS[i][1];
+      }
+      return "fallback";
+    }
+
+    var CHIP_INTENTS = ["services", "voip", "pricing", "careers", "contact", "human"];
+
+    // ---- state ----
+    var history = [];
+    var consent = store.get(KEY_CONSENT, "") === "yes";
+    var greeted = false;
+
+    // ---- build DOM ----
+    var launch = document.createElement("button");
+    launch.id = "watChatLaunch";
+    launch.className = "wc-launch";
+    launch.type = "button";
+    launch.innerHTML = '<span class="wc-unread">1</span>' + ICON_OPEN + ICON_CLOSE;
+
+    var panel = document.createElement("div");
+    panel.id = "watChatPanel";
+    panel.className = "wc-panel";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-label", ui().title);
+    panel.innerHTML =
+      '<div class="wc-head">' +
+        '<div class="wc-ava">' + ICON_BOT + '</div>' +
+        '<div><h4 class="wc-title"></h4><div class="wc-status"><span class="wc-status-txt"></span></div></div>' +
+        '<div class="wc-head-actions">' +
+          '<button type="button" class="wc-clear">' + ICON_TRASH + '</button>' +
+          '<button type="button" class="wc-close">' + ICON_X + '</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="wc-body"></div>' +
+      '<div class="wc-chips"></div>' +
+      '<div class="wc-input"><input type="text" maxlength="500" autocomplete="off"><button type="button" class="wc-send">' + ICON_SEND + '</button></div>';
+
+    document.body.appendChild(launch);
+    document.body.appendChild(panel);
+
+    var body = panel.querySelector(".wc-body");
+    var chips = panel.querySelector(".wc-chips");
+    var input = panel.querySelector(".wc-input input");
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+    function persist() { if (consent) store.set(KEY_HISTORY, JSON.stringify(history)); }
+    function addMsg(role, html, save) {
+      var m = document.createElement("div");
+      m.className = "wc-msg " + role;
+      m.innerHTML = html;
+      body.appendChild(m);
+      body.scrollTop = body.scrollHeight;
+      if (save) { history.push({ role: role, html: html }); persist(); }
+    }
+    function showTyping() {
+      hideTyping();
+      var tp = document.createElement("div");
+      tp.className = "wc-typing"; tp.id = "wcTyping";
+      tp.innerHTML = "<span></span><span></span><span></span>";
+      body.appendChild(tp); body.scrollTop = body.scrollHeight;
+    }
+    function hideTyping() { var tp = document.getElementById("wcTyping"); if (tp) tp.remove(); }
+
+    function renderChips() {
+      chips.innerHTML = "";
+      ui().chips.forEach(function (label, i) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = label;
+        b.addEventListener("click", function () { sendUser(label, CHIP_INTENTS[i]); });
+        chips.appendChild(b);
+      });
+    }
+    function showConsent() {
+      if (consent || panel.querySelector(".wc-consent")) return;
+      var c = document.createElement("div");
+      c.className = "wc-consent";
+      c.innerHTML = ui().consent +
+        '<div class="wc-consent-acts"><button type="button" class="wc-accept"></button>' +
+        '<button type="button" class="wc-decline"></button></div>';
+      c.querySelector(".wc-accept").textContent = ui().accept;
+      c.querySelector(".wc-decline").textContent = ui().decline;
+      c.querySelector(".wc-accept").addEventListener("click", function () {
+        consent = true; store.set(KEY_CONSENT, "yes"); persist(); c.remove();
+      });
+      c.querySelector(".wc-decline").addEventListener("click", function () { c.remove(); });
+      panel.insertBefore(c, chips);
+    }
+    function sendUser(text, forced) {
+      text = (text || "").trim();
+      if (!text) return;
+      addMsg("user", escapeHtml(text), true);
+      var intent = forced || detect(text);
+      showTyping();
+      setTimeout(function () {
+        hideTyping();
+        addMsg("bot", kb(intent), true);
+      }, 480 + Math.random() * 350);
+    }
+    function greet() {
+      if (greeted) return;
+      greeted = true;
+      addMsg("bot", kb("greeting"), true);
+      showConsent();
+    }
+    function openPanel() {
+      panel.classList.add("open");
+      launch.classList.add("open");
+      launch.classList.remove("has-unread");
+      launch.setAttribute("aria-label", ui().close);
+      greet();
+      setTimeout(function () { input.focus(); }, 300);
+    }
+    function closePanel() {
+      panel.classList.remove("open");
+      launch.classList.remove("open");
+      launch.setAttribute("aria-label", ui().open);
+    }
+    function applyChatLang() {
+      panel.setAttribute("aria-label", ui().title);
+      panel.querySelector(".wc-title").textContent = ui().title;
+      panel.querySelector(".wc-status-txt").textContent = ui().status;
+      input.placeholder = ui().placeholder;
+      panel.querySelector(".wc-clear").setAttribute("aria-label", ui().clear);
+      panel.querySelector(".wc-close").setAttribute("aria-label", ui().close);
+      panel.querySelector(".wc-send").setAttribute("aria-label", ui().send);
+      launch.setAttribute("aria-label", panel.classList.contains("open") ? ui().close : ui().open);
+      renderChips();
+      var c = panel.querySelector(".wc-consent");
+      if (c) { c.remove(); showConsent(); }
+    }
+
+    // ---- restore retained conversation ----
+    if (consent) {
+      try {
+        var saved = JSON.parse(store.get(KEY_HISTORY, "[]"));
+        if (Array.isArray(saved)) history = saved;
+      } catch (e) { history = []; }
+      history.forEach(function (m) { addMsg(m.role, m.html, false); });
+      greeted = history.length > 0;
+    }
+    if (!greeted) launch.classList.add("has-unread");
+
+    applyChatLang();
+
+    // ---- events ----
+    launch.addEventListener("click", function () {
+      if (panel.classList.contains("open")) closePanel(); else openPanel();
+    });
+    panel.querySelector(".wc-close").addEventListener("click", closePanel);
+    panel.querySelector(".wc-send").addEventListener("click", function () {
+      sendUser(input.value); input.value = "";
+    });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); sendUser(input.value); input.value = ""; }
+    });
+    panel.querySelector(".wc-clear").addEventListener("click", function () {
+      history = []; store.set(KEY_HISTORY, "[]");
+      body.innerHTML = ""; greeted = false;
+      var c = panel.querySelector(".wc-consent"); if (c) c.remove();
+      greet();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && panel.classList.contains("open")) closePanel();
+    });
+    // keep chatbot labels in sync when the site language changes
+    document.querySelectorAll(".lang-toggle button").forEach(function (b) {
+      b.addEventListener("click", function () { setTimeout(applyChatLang, 0); });
     });
   }
 })();
