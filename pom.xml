@@ -74,14 +74,14 @@
     -->
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
+            <id>app-wat-releases</id>
             <name>Nexus Release Repository</name>
-            <url>http://NEXUS_HOST:8081/repository/maven-releases/</url>
+            <url>http://192.168.100.11:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>nexus-snapshots</id>
+            <id>app-wat-snapshots</id>
             <name>Nexus Snapshot Repository</name>
-            <url>http://NEXUS_HOST:8081/repository/maven-snapshots/</url>
+            <url>http://192.168.100.11:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
