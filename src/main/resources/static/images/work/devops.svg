@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="DevOps continuous integration and delivery pipeline">
+  <defs>
+    <linearGradient id="dbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0e18"/>
+      <stop offset="1" stop-color="#06080f"/>
+    </linearGradient>
+    <linearGradient id="dmix" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFD15C"/>
+      <stop offset="0.55" stop-color="#46DBFF"/>
+      <stop offset="1" stop-color="#8b6cff"/>
+    </linearGradient>
+    <radialGradient id="dglow" cx="50%" cy="42%" r="55%">
+      <stop offset="0" stop-color="#8b6cff" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#8b6cff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="dblur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#dbg)"/>
+  <rect width="1200" height="800" fill="url(#dglow)"/>
+
+  <!-- grid -->
+  <g stroke="#8b6cff" stroke-opacity="0.07" stroke-width="1">
+    <path d="M0 600 L1200 600 M0 680 L1200 680 M0 760 L1200 760"/>
+    <path d="M300 580 L220 800 M600 580 L600 800 M900 580 L980 800"/>
+  </g>
+
+  <!-- infinity loop glow -->
+  <g filter="url(#dblur)" opacity="0.5">
+    <path d="M600 360
+             C600 250 470 250 430 330
+             C390 410 300 410 270 360
+             C240 310 290 250 360 270
+             C470 300 540 420 600 420
+             C660 420 730 300 840 270
+             C910 250 960 310 930 360
+             C900 410 810 410 770 330
+             C730 250 600 250 600 360 Z"
+          fill="none" stroke="#8b6cff" stroke-width="22"/>
+  </g>
+  <!-- infinity loop -->
+  <path d="M600 360
+           C600 250 470 250 430 330
+           C390 410 300 410 270 360
+           C240 310 290 250 360 270
+           C470 300 540 420 600 420
+           C660 420 730 300 840 270
+           C910 250 960 310 930 360
+           C900 410 810 410 770 330
+           C730 250 600 250 600 360 Z"
+        fill="none" stroke="url(#dmix)" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- pipeline stage nodes -->
+  <g>
+    <circle cx="270" cy="360" r="13" fill="#0a0e18" stroke="#FFD15C" stroke-width="4"/>
+    <circle cx="430" cy="330" r="10" fill="#FFD15C"/>
+    <circle cx="600" cy="360" r="16" fill="#0a0e18" stroke="#46DBFF" stroke-width="4"/>
+    <circle cx="770" cy="330" r="10" fill="#46DBFF"/>
+    <circle cx="930" cy="360" r="13" fill="#0a0e18" stroke="#8b6cff" stroke-width="4"/>
+  </g>
+
+  <!-- gear at center -->
+  <g transform="translate(600,360)" fill="none" stroke="#46DBFF" stroke-width="3.5">
+    <circle r="7" fill="#46DBFF" stroke="none"/>
+    <g stroke-linecap="round">
+      <path d="M0 -26 L0 -17"/><path d="M0 26 L0 17"/><path d="M-26 0 L-17 0"/><path d="M26 0 L17 0"/>
+      <path d="M-18 -18 L-12 -12"/><path d="M18 18 L12 12"/><path d="M-18 18 L-12 12"/><path d="M18 -18 L12 -12"/>
+    </g>
+  </g>
+
+  <!-- stage labels -->
+  <g fill="#9fabc0" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" text-anchor="middle">
+    <text x="270" y="470">PLAN</text>
+    <text x="430" y="250">CODE</text>
+    <text x="600" y="500">BUILD · TEST</text>
+    <text x="770" y="250">RELEASE</text>
+    <text x="930" y="470">DEPLOY</text>
+  </g>
+
+  <!-- floating particles -->
+  <g fill="#FFD15C" fill-opacity="0.55">
+    <circle cx="180" cy="200" r="3.5"/><circle cx="1020" cy="200" r="3"/><circle cx="1040" cy="430" r="4"/><circle cx="160" cy="450" r="3"/>
+  </g>
+</svg>

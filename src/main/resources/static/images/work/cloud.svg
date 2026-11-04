@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Cloud infrastructure and migration">
+  <defs>
+    <linearGradient id="cbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0e18"/>
+      <stop offset="1" stop-color="#06080f"/>
+    </linearGradient>
+    <linearGradient id="cmix" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD15C"/>
+      <stop offset="0.6" stop-color="#46DBFF"/>
+      <stop offset="1" stop-color="#8b6cff"/>
+    </linearGradient>
+    <radialGradient id="cglow" cx="50%" cy="38%" r="55%">
+      <stop offset="0" stop-color="#46DBFF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#46DBFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cblur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#cbg)"/>
+  <rect width="1200" height="800" fill="url(#cglow)"/>
+
+  <!-- grid floor -->
+  <g stroke="#46DBFF" stroke-opacity="0.08" stroke-width="1">
+    <path d="M0 560 L1200 560 M0 620 L1200 620 M0 690 L1200 690 M0 770 L1200 770"/>
+    <path d="M150 540 L40 800 M400 540 L330 800 M600 540 L600 800 M800 540 L870 800 M1050 540 L1160 800"/>
+  </g>
+
+  <!-- connection lines cloud -> nodes -->
+  <g stroke="url(#cmix)" stroke-width="2.5" stroke-opacity="0.55" fill="none">
+    <path d="M600 330 L330 560"/>
+    <path d="M600 330 L600 560"/>
+    <path d="M600 330 L870 560"/>
+  </g>
+
+  <!-- server nodes -->
+  <g>
+    <g transform="translate(270,560)">
+      <rect x="0" y="0" width="120" height="86" rx="12" fill="#0a0e18" stroke="url(#cmix)" stroke-width="2"/>
+      <circle cx="18" cy="20" r="5" fill="#FFD15C"/><rect x="34" y="16" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.5"/>
+      <circle cx="18" cy="43" r="5" fill="#46DBFF"/><rect x="34" y="39" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.35"/>
+      <circle cx="18" cy="66" r="5" fill="#8b6cff"/><rect x="34" y="62" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.25"/>
+    </g>
+    <g transform="translate(540,560)">
+      <rect x="0" y="0" width="120" height="86" rx="12" fill="#0a0e18" stroke="url(#cmix)" stroke-width="2"/>
+      <circle cx="18" cy="20" r="5" fill="#FFD15C"/><rect x="34" y="16" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.5"/>
+      <circle cx="18" cy="43" r="5" fill="#46DBFF"/><rect x="34" y="39" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.35"/>
+      <circle cx="18" cy="66" r="5" fill="#8b6cff"/><rect x="34" y="62" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.25"/>
+    </g>
+    <g transform="translate(810,560)">
+      <rect x="0" y="0" width="120" height="86" rx="12" fill="#0a0e18" stroke="url(#cmix)" stroke-width="2"/>
+      <circle cx="18" cy="20" r="5" fill="#FFD15C"/><rect x="34" y="16" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.5"/>
+      <circle cx="18" cy="43" r="5" fill="#46DBFF"/><rect x="34" y="39" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.35"/>
+      <circle cx="18" cy="66" r="5" fill="#8b6cff"/><rect x="34" y="62" width="70" height="7" rx="3.5" fill="#46DBFF" fill-opacity="0.25"/>
+    </g>
+  </g>
+
+  <!-- node connection dots -->
+  <g fill="#FFD15C">
+    <circle cx="330" cy="560" r="6"/><circle cx="600" cy="560" r="6"/><circle cx="870" cy="560" r="6"/>
+  </g>
+
+  <!-- cloud glow -->
+  <path filter="url(#cblur)" d="M430 330 a95 95 0 0 1 95 -95 a120 120 0 0 1 225 25 a85 85 0 0 1 10 170 H470 a80 80 0 0 1 -40 -100 z" fill="#46DBFF" fill-opacity="0.18"/>
+  <!-- cloud shape -->
+  <path d="M440 332 a88 88 0 0 1 90 -88 a118 118 0 0 1 222 24 a80 80 0 0 1 8 160 H478 a76 76 0 0 1 -38 -96 z" fill="#0a0e18" stroke="url(#cmix)" stroke-width="4"/>
+  <!-- up arrow (migration) -->
+  <g stroke="#FFD15C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M600 410 L600 300"/>
+    <path d="M560 338 L600 298 L640 338"/>
+  </g>
+
+  <!-- floating particles -->
+  <g fill="#46DBFF" fill-opacity="0.6">
+    <circle cx="300" cy="200" r="3.5"/><circle cx="930" cy="170" r="3"/><circle cx="1010" cy="300" r="4"/><circle cx="200" cy="330" r="3"/>
+  </g>
+</svg>
