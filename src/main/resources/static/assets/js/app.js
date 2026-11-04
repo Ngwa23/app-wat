@@ -9,6 +9,27 @@
     en: {
       "nav.about": "About", "nav.services": "Services", "nav.voip": "VoIP", "nav.team": "Team",
       "nav.careers": "Careers", "nav.payment": "Payment", "nav.contact": "Contact",
+      "nav.work": "Work", "em.label": "Emergency",
+      "work.label": "Our Work", "work.title": "Projects We've Delivered",
+      "work.sub": "Real installations and systems we've built for clients across Cameroon.",
+      "work.1.t": "CCTV Camera Installation", "work.1.c": "Security & Surveillance",
+      "work.2.t": "Network Rack Configuration", "work.2.c": "Network Infrastructure",
+      "work.3.t": "Enterprise Data Center", "work.3.c": "Data Center",
+      "work.4.t": "Structured Cabling", "work.4.c": "Cat6 / Fibre",
+      "work.5.t": "24/7 CCTV Monitoring", "work.5.c": "Surveillance",
+      "work.6.t": "Biometric Access Control", "work.6.c": "Access Control",
+      "work.7.t": "VoIP Phone System", "work.7.c": "VoIP",
+      "work.8.t": "Starlink Installation", "work.8.c": "Connectivity",
+      "work.9.t": "Server Rack & UPS", "work.9.c": "Power & Racks",
+      "work.10.t": "Rack Cleanup — Before", "work.10.c": "Structured Cabling",
+      "work.11.t": "Rack Cleanup — After", "work.11.c": "Structured Cabling",
+      "work.12.t": "On-Site Project Team", "work.12.c": "Our Team",
+      "work.13.t": "On-Site Equipment Installation", "work.13.c": "Field Installation",
+      "work.14.t": "Point-to-Point Wireless Link", "work.14.c": "Wireless Networks",
+      "work.15.t": "Rooftop Network Survey", "work.15.c": "Connectivity",
+      "work.16.t": "Walk-Through Security Gate", "work.16.c": "Access & Security",
+      "work.17.t": "Network Cabling Supply", "work.17.c": "Structured Cabling",
+      "work.18.t": "Field Deployment", "work.18.c": "On-Site Delivery",
       "hero.badge": "Cameroon's Premier IT Company",
       "hero.sub": "IT Consultancy • DevOps • VoIP Solutions • Networks • Web & Mobile. Enterprise-grade technology built for African businesses.",
       "hero.cta1": "Our Services", "hero.cta2": "Get in Touch",
@@ -22,8 +43,8 @@
       "ceo.contact": "Contact the CEO",
       "why.label": "The WAT Difference", "why.title": "Why businesses choose us",
       "why.1.t": "Cisco & AWS Certified", "why.1.d": "Certified network and cloud engineers you can rely on.",
-      "why.2.t": "8+ Years Experience", "why.2.d": "A proven track record delivering across Cameroon since 2016.",
-      "why.3.t": "150+ Happy Clients", "why.3.d": "Banks, schools and enterprises trust us with their infrastructure.",
+      "why.2.t": "7+ Years Experience", "why.2.d": "A proven track record delivering across Cameroon since 2019.",
+      "why.3.t": "38+ Happy Clients", "why.3.d": "Banks, schools and enterprises trust us with their infrastructure.",
       "why.4.t": "24/7 Support", "why.4.d": "Round-the-clock technical support whenever you need it.",
       "svc.label": "What We Do", "svc.title": "Our Services", "svc.sub": "End-to-end IT solutions for modern businesses.", "svc.learn": "Learn More",
       "svc1.title": "IT Consultancy", "svc1.desc": "Expert IT consultation, infrastructure assessment, technology planning and strategic guidance.",
@@ -62,7 +83,7 @@
       "contact.label": "Get In Touch", "contact.title": "Contact Us", "contact.sub": "We respond within 2 hours — 24/7 support available.",
       "f.name": "Full Name *", "f.email": "Email *", "f.phone": "Phone", "f.service": "Service Needed", "f.subject": "Subject *", "f.message": "Message *", "f.send": "Send Message",
       "ci.phone": "Phone / WhatsApp", "ci.email": "Email", "ci.addr": "Address", "ci.hours": "Opening Hours", "ci.weekend": "Sat–Sun: Closed",
-      "foot.tag": "Enterprise-grade IT, DevOps and private VoIP for African businesses. Based in Yaoundé, serving Cameroon & beyond since 2016.",
+      "foot.tag": "Enterprise-grade IT, DevOps and private VoIP for African businesses. Based in Yaoundé, serving Cameroon & beyond since 2019.",
       "foot.quick": "Quick Links", "foot.services": "Services", "foot.contact": "Contact", "foot.rights": "All rights reserved.",
       "det.title": "What we deliver", "det.quote": "Get a Quote on WhatsApp", "det.contact": "Contact Us",
       "det1": "IT infrastructure audit & assessment|Technology roadmap & strategic planning|Cloud readiness & migration strategy|Vendor selection & cost optimization|Security, backup & compliance review",
@@ -76,6 +97,27 @@
     fr: {
       "nav.about": "À Propos", "nav.services": "Services", "nav.voip": "VoIP", "nav.team": "Équipe",
       "nav.careers": "Carrières", "nav.payment": "Paiement", "nav.contact": "Contact",
+      "nav.work": "Réalisations", "em.label": "Urgence",
+      "work.label": "Nos Réalisations", "work.title": "Des projets que nous avons livrés",
+      "work.sub": "Installations et systèmes réels déployés pour nos clients au Cameroun.",
+      "work.1.t": "Installation de caméra CCTV", "work.1.c": "Sécurité & vidéosurveillance",
+      "work.2.t": "Configuration de baie réseau", "work.2.c": "Infrastructure réseau",
+      "work.3.t": "Centre de données", "work.3.c": "Data center",
+      "work.4.t": "Câblage structuré", "work.4.c": "Cat6 / Fibre",
+      "work.5.t": "Supervision CCTV 24/7", "work.5.c": "Vidéosurveillance",
+      "work.6.t": "Contrôle d'accès biométrique", "work.6.c": "Contrôle d'accès",
+      "work.7.t": "Système téléphonique VoIP", "work.7.c": "VoIP",
+      "work.8.t": "Installation Starlink", "work.8.c": "Connectivité",
+      "work.9.t": "Baie serveur & onduleur", "work.9.c": "Énergie & baies",
+      "work.10.t": "Nettoyage de baie — Avant", "work.10.c": "Câblage structuré",
+      "work.11.t": "Nettoyage de baie — Après", "work.11.c": "Câblage structuré",
+      "work.12.t": "Équipe sur site", "work.12.c": "Notre équipe",
+      "work.13.t": "Installation d'équipement sur site", "work.13.c": "Installation terrain",
+      "work.14.t": "Liaison sans fil point à point", "work.14.c": "Réseaux sans fil",
+      "work.15.t": "Étude réseau en toiture", "work.15.c": "Connectivité",
+      "work.16.t": "Portique de sécurité", "work.16.c": "Accès & sécurité",
+      "work.17.t": "Fourniture de câblage réseau", "work.17.c": "Câblage structuré",
+      "work.18.t": "Matériel de déploiement", "work.18.c": "Livraison sur site",
       "hero.badge": "Première Entreprise IT du Cameroun",
       "hero.sub": "Conseil IT • DevOps • Solutions VoIP • Réseaux • Web & Mobile. Une technologie d'entreprise conçue pour les sociétés africaines.",
       "hero.cta1": "Nos Services", "hero.cta2": "Nous Contacter",
@@ -89,8 +131,8 @@
       "ceo.contact": "Contacter le PDG",
       "why.label": "La Différence WAT", "why.title": "Pourquoi les entreprises nous choisissent",
       "why.1.t": "Certifié Cisco & AWS", "why.1.d": "Des ingénieurs réseau et cloud certifiés sur qui compter.",
-      "why.2.t": "8+ Ans d'Expérience", "why.2.d": "Un parcours prouvé au Cameroun depuis 2016.",
-      "why.3.t": "150+ Clients Satisfaits", "why.3.d": "Banques, écoles et entreprises nous confient leur infrastructure.",
+      "why.2.t": "7+ Ans d'Expérience", "why.2.d": "Un parcours prouvé au Cameroun depuis 2019.",
+      "why.3.t": "38+ Clients Satisfaits", "why.3.d": "Banques, écoles et entreprises nous confient leur infrastructure.",
       "why.4.t": "Support 24/7", "why.4.d": "Un support technique disponible à tout moment.",
       "svc.label": "Ce Que Nous Faisons", "svc.title": "Nos Services", "svc.sub": "Des solutions IT de bout en bout pour les entreprises modernes.", "svc.learn": "En Savoir Plus",
       "svc1.title": "Conseil IT", "svc1.desc": "Consultation IT experte, évaluation d'infrastructure, planification technologique et conseil stratégique.",
@@ -129,7 +171,7 @@
       "contact.label": "Contactez-Nous", "contact.title": "Contact", "contact.sub": "Nous répondons en moins de 2 heures — support 24/7 disponible.",
       "f.name": "Nom Complet *", "f.email": "Email *", "f.phone": "Téléphone", "f.service": "Service Souhaité", "f.subject": "Sujet *", "f.message": "Message *", "f.send": "Envoyer le Message",
       "ci.phone": "Téléphone / WhatsApp", "ci.email": "Email", "ci.addr": "Adresse", "ci.hours": "Heures d'Ouverture", "ci.weekend": "Sam–Dim : Fermé",
-      "foot.tag": "IT, DevOps et VoIP privé de niveau entreprise pour les sociétés africaines. Basés à Yaoundé, au service du Cameroun et au-delà depuis 2016.",
+      "foot.tag": "IT, DevOps et VoIP privé de niveau entreprise pour les sociétés africaines. Basés à Yaoundé, au service du Cameroun et au-delà depuis 2019.",
       "foot.quick": "Liens Rapides", "foot.services": "Services", "foot.contact": "Contact", "foot.rights": "Tous droits réservés.",
       "det.title": "Ce que nous livrons", "det.quote": "Demander un devis sur WhatsApp", "det.contact": "Nous contacter",
       "det1": "Audit et évaluation de l'infrastructure IT|Feuille de route technologique et planification stratégique|Stratégie de migration et d'adoption du cloud|Sélection des fournisseurs et optimisation des coûts|Revue sécurité, sauvegarde et conformité",
@@ -143,6 +185,27 @@
     es: {
       "nav.about": "Sobre Nosotros", "nav.services": "Servicios", "nav.voip": "VoIP", "nav.team": "Equipo",
       "nav.careers": "Carreras", "nav.payment": "Pago", "nav.contact": "Contacto",
+      "nav.work": "Proyectos", "em.label": "Emergencia",
+      "work.label": "Nuestro Trabajo", "work.title": "Proyectos que hemos realizado",
+      "work.sub": "Instalaciones y sistemas reales que hemos desplegado para clientes en Camerún.",
+      "work.1.t": "Instalación de cámaras CCTV", "work.1.c": "Seguridad y videovigilancia",
+      "work.2.t": "Configuración de rack de red", "work.2.c": "Infraestructura de red",
+      "work.3.t": "Centro de datos empresarial", "work.3.c": "Centro de datos",
+      "work.4.t": "Cableado estructurado", "work.4.c": "Cat6 / Fibra",
+      "work.5.t": "Monitoreo CCTV 24/7", "work.5.c": "Videovigilancia",
+      "work.6.t": "Control de acceso biométrico", "work.6.c": "Control de acceso",
+      "work.7.t": "Sistema telefónico VoIP", "work.7.c": "VoIP",
+      "work.8.t": "Instalación de Starlink", "work.8.c": "Conectividad",
+      "work.9.t": "Rack de servidores y SAI", "work.9.c": "Energía y racks",
+      "work.10.t": "Limpieza de rack — Antes", "work.10.c": "Cableado estructurado",
+      "work.11.t": "Limpieza de rack — Después", "work.11.c": "Cableado estructurado",
+      "work.12.t": "Equipo de proyecto en sitio", "work.12.c": "Nuestro equipo",
+      "work.13.t": "Instalación de equipos en sitio", "work.13.c": "Instalación en campo",
+      "work.14.t": "Enlace inalámbrico punto a punto", "work.14.c": "Redes inalámbricas",
+      "work.15.t": "Estudio de red en azotea", "work.15.c": "Conectividad",
+      "work.16.t": "Arco de seguridad peatonal", "work.16.c": "Acceso y seguridad",
+      "work.17.t": "Suministro de cableado de red", "work.17.c": "Cableado estructurado",
+      "work.18.t": "Despliegue en campo", "work.18.c": "Entrega en sitio",
       "hero.badge": "Primera Empresa IT de Camerún",
       "hero.sub": "Consultoría IT • DevOps • Soluciones VoIP • Redes • Web & Móvil. Tecnología empresarial creada para las empresas africanas.",
       "hero.cta1": "Nuestros Servicios", "hero.cta2": "Contáctenos",
@@ -156,8 +219,8 @@
       "ceo.contact": "Contactar al CEO",
       "why.label": "La Diferencia WAT", "why.title": "Por qué las empresas nos eligen",
       "why.1.t": "Certificado Cisco & AWS", "why.1.d": "Ingenieros de red y nube certificados en quien confiar.",
-      "why.2.t": "8+ Años de Experiencia", "why.2.d": "Una trayectoria probada en Camerún desde 2016.",
-      "why.3.t": "150+ Clientes Satisfechos", "why.3.d": "Bancos, escuelas y empresas confían su infraestructura en nosotros.",
+      "why.2.t": "7+ Años de Experiencia", "why.2.d": "Una trayectoria probada en Camerún desde 2019.",
+      "why.3.t": "38+ Clientes Satisfechos", "why.3.d": "Bancos, escuelas y empresas confían su infraestructura en nosotros.",
       "why.4.t": "Soporte 24/7", "why.4.d": "Soporte técnico ininterrumpido cuando lo necesite.",
       "svc.label": "Lo Que Hacemos", "svc.title": "Nuestros Servicios", "svc.sub": "Soluciones IT integrales para empresas modernas.", "svc.learn": "Saber Más",
       "svc1.title": "Consultoría IT", "svc1.desc": "Consultoría IT experta, evaluación de infraestructura, planificación tecnológica y asesoramiento estratégico.",
@@ -196,7 +259,7 @@
       "contact.label": "Contáctenos", "contact.title": "Contáctenos", "contact.sub": "Respondemos en menos de 2 horas — soporte 24/7 disponible.",
       "f.name": "Nombre Completo *", "f.email": "Email *", "f.phone": "Teléfono", "f.service": "Servicio Deseado", "f.subject": "Asunto *", "f.message": "Mensaje *", "f.send": "Enviar Mensaje",
       "ci.phone": "Teléfono / WhatsApp", "ci.email": "Email", "ci.addr": "Dirección", "ci.hours": "Horario de Atención", "ci.weekend": "Sáb–Dom: Cerrado",
-      "foot.tag": "IT, DevOps y VoIP privado de nivel empresarial para empresas africanas. Con sede en Yaundé, al servicio de Camerún y más allá desde 2016.",
+      "foot.tag": "IT, DevOps y VoIP privado de nivel empresarial para empresas africanas. Con sede en Yaundé, al servicio de Camerún y más allá desde 2019.",
       "foot.quick": "Accesos Rápidos", "foot.services": "Servicios", "foot.contact": "Contacto", "foot.rights": "Todos los derechos reservados.",
       "det.title": "Lo que entregamos", "det.quote": "Pedir presupuesto por WhatsApp", "det.contact": "Contáctenos",
       "det1": "Auditoría y evaluación de la infraestructura IT|Hoja de ruta tecnológica y planificación estratégica|Estrategia de migración y adopción cloud|Selección de proveedores y optimización de costes|Revisión de seguridad, copias y cumplimiento",
@@ -210,6 +273,27 @@
     de: {
       "nav.about": "Über Uns", "nav.services": "Leistungen", "nav.voip": "VoIP", "nav.team": "Team",
       "nav.careers": "Karriere", "nav.payment": "Zahlung", "nav.contact": "Kontakt",
+      "nav.work": "Projekte", "em.label": "Notruf",
+      "work.label": "Unsere Arbeit", "work.title": "Projekte, die wir umgesetzt haben",
+      "work.sub": "Echte Installationen und Systeme, die wir für Kunden in Kamerun umgesetzt haben.",
+      "work.1.t": "CCTV-Kamerainstallation", "work.1.c": "Sicherheit & Videoüberwachung",
+      "work.2.t": "Netzwerk-Rack-Konfiguration", "work.2.c": "Netzwerkinfrastruktur",
+      "work.3.t": "Unternehmens-Rechenzentrum", "work.3.c": "Rechenzentrum",
+      "work.4.t": "Strukturierte Verkabelung", "work.4.c": "Cat6 / Glasfaser",
+      "work.5.t": "24/7 CCTV-Überwachung", "work.5.c": "Videoüberwachung",
+      "work.6.t": "Biometrische Zutrittskontrolle", "work.6.c": "Zutrittskontrolle",
+      "work.7.t": "VoIP-Telefonsystem", "work.7.c": "VoIP",
+      "work.8.t": "Starlink-Installation", "work.8.c": "Konnektivität",
+      "work.9.t": "Serverschrank & USV", "work.9.c": "Strom & Racks",
+      "work.10.t": "Rack-Aufräumen — Vorher", "work.10.c": "Strukturierte Verkabelung",
+      "work.11.t": "Rack-Aufräumen — Nachher", "work.11.c": "Strukturierte Verkabelung",
+      "work.12.t": "Projektteam vor Ort", "work.12.c": "Unser Team",
+      "work.13.t": "Geräteinstallation vor Ort", "work.13.c": "Feldinstallation",
+      "work.14.t": "Punkt-zu-Punkt-Funkverbindung", "work.14.c": "Funknetzwerke",
+      "work.15.t": "Netzwerk-Begehung auf dem Dach", "work.15.c": "Konnektivität",
+      "work.16.t": "Personenschleuse / Sicherheitstor", "work.16.c": "Zutritt & Sicherheit",
+      "work.17.t": "Lieferung von Netzwerkverkabelung", "work.17.c": "Strukturierte Verkabelung",
+      "work.18.t": "Einsatz vor Ort", "work.18.c": "Lieferung vor Ort",
       "hero.badge": "Kameruns führendes IT-Unternehmen",
       "hero.sub": "IT-Beratung • DevOps • VoIP-Lösungen • Netzwerke • Web & Mobil. Unternehmenstechnologie für afrikanische Unternehmen.",
       "hero.cta1": "Unsere Leistungen", "hero.cta2": "Kontakt aufnehmen",
@@ -223,8 +307,8 @@
       "ceo.contact": "CEO kontaktieren",
       "why.label": "Der WAT-Unterschied", "why.title": "Warum Unternehmen uns wählen",
       "why.1.t": "Cisco & AWS zertifiziert", "why.1.d": "Zertifizierte Netzwerk- und Cloud-Ingenieure, auf die Sie sich verlassen können.",
-      "why.2.t": "8+ Jahre Erfahrung", "why.2.d": "Eine bewährte Erfolgsbilanz in Kamerun seit 2016.",
-      "why.3.t": "150+ zufriedene Kunden", "why.3.d": "Banken, Schulen und Unternehmen vertrauen uns ihre Infrastruktur an.",
+      "why.2.t": "7+ Jahre Erfahrung", "why.2.d": "Eine bewährte Erfolgsbilanz in Kamerun seit 2019.",
+      "why.3.t": "38+ zufriedene Kunden", "why.3.d": "Banken, Schulen und Unternehmen vertrauen uns ihre Infrastruktur an.",
       "why.4.t": "24/7-Support", "why.4.d": "Rund-um-die-Uhr technischer Support, wann immer Sie ihn brauchen.",
       "svc.label": "Was Wir Tun", "svc.title": "Unsere Leistungen", "svc.sub": "End-to-End IT-Lösungen für moderne Unternehmen.", "svc.learn": "Mehr Erfahren",
       "svc1.title": "IT-Beratung", "svc1.desc": "Experten-IT-Beratung, Infrastrukturbewertung, Technologieplanung und strategische Begleitung.",
@@ -263,7 +347,7 @@
       "contact.label": "Kontakt", "contact.title": "Kontaktieren Sie Uns", "contact.sub": "Wir antworten innerhalb von 2 Stunden — 24/7-Support verfügbar.",
       "f.name": "Vollständiger Name *", "f.email": "E-Mail *", "f.phone": "Telefon", "f.service": "Gewünschter Dienst", "f.subject": "Betreff *", "f.message": "Nachricht *", "f.send": "Nachricht Senden",
       "ci.phone": "Telefon / WhatsApp", "ci.email": "E-Mail", "ci.addr": "Adresse", "ci.hours": "Öffnungszeiten", "ci.weekend": "Sa–So: Geschlossen",
-      "foot.tag": "Unternehmens-IT, DevOps und privates VoIP für afrikanische Unternehmen. Ansässig in Yaoundé, im Dienst Kameruns und darüber hinaus seit 2016.",
+      "foot.tag": "Unternehmens-IT, DevOps und privates VoIP für afrikanische Unternehmen. Ansässig in Yaoundé, im Dienst Kameruns und darüber hinaus seit 2019.",
       "foot.quick": "Schnelllinks", "foot.services": "Leistungen", "foot.contact": "Kontakt", "foot.rights": "Alle Rechte vorbehalten.",
       "det.title": "Was wir liefern", "det.quote": "Angebot per WhatsApp anfordern", "det.contact": "Kontakt",
       "det1": "Audit und Bewertung der IT-Infrastruktur|Technologie-Roadmap und strategische Planung|Cloud-Migrations- und Einführungsstrategie|Anbieterauswahl und Kostenoptimierung|Sicherheits-, Backup- und Compliance-Prüfung",
@@ -485,6 +569,81 @@
         });
         hero.addEventListener("pointerleave", function () { orbit.style.transform = ""; });
       }
+    }
+
+    /* ---------- work gallery lightbox ---------- */
+    (function () {
+      var opens = Array.prototype.slice.call(document.querySelectorAll(".work-open"));
+      if (!opens.length) return;
+      var X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+      var PREV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>';
+      var NEXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+      var lb = document.createElement("div");
+      lb.className = "wk-lb";
+      lb.setAttribute("role", "dialog");
+      lb.setAttribute("aria-hidden", "true");
+      lb.innerHTML =
+        '<button type="button" class="wk-lb-btn wk-lb-close" aria-label="Close">' + X + '</button>' +
+        '<button type="button" class="wk-lb-btn wk-lb-prev" aria-label="Previous">' + PREV + '</button>' +
+        '<img alt="">' +
+        '<button type="button" class="wk-lb-btn wk-lb-next" aria-label="Next">' + NEXT + '</button>' +
+        '<div class="wk-lb-cap"></div>';
+      document.body.appendChild(lb);
+      var lbImg = lb.querySelector("img");
+      var lbCap = lb.querySelector(".wk-lb-cap");
+      var cur = 0;
+      function show(i) {
+        cur = (i + opens.length) % opens.length;
+        var btn = opens[cur];
+        lbImg.src = btn.getAttribute("data-full");
+        var fc = btn.querySelector(".work-cap");
+        var label = fc ? fc.textContent : "";
+        lbImg.alt = label; lbCap.textContent = label;
+      }
+      function openLb(i) { show(i); lb.classList.add("open"); lb.setAttribute("aria-hidden", "false"); document.body.classList.add("modal-open"); }
+      function closeLb() { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); document.body.classList.remove("modal-open"); }
+      opens.forEach(function (b, i) { b.addEventListener("click", function () { openLb(i); }); });
+      lb.querySelector(".wk-lb-close").addEventListener("click", closeLb);
+      lb.querySelector(".wk-lb-prev").addEventListener("click", function (e) { e.stopPropagation(); show(cur - 1); });
+      lb.querySelector(".wk-lb-next").addEventListener("click", function (e) { e.stopPropagation(); show(cur + 1); });
+      lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+      document.addEventListener("keydown", function (e) {
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") closeLb();
+        else if (e.key === "ArrowLeft") show(cur - 1);
+        else if (e.key === "ArrowRight") show(cur + 1);
+      });
+    })();
+
+    /* ---------- work carousel arrows ---------- */
+    (function () {
+      var track = document.getElementById("workTrack");
+      if (!track) return;
+      var prev = document.querySelector(".work-prev");
+      var next = document.querySelector(".work-next");
+      function step(dir) { track.scrollBy({ left: dir * Math.max(track.clientWidth * 0.8, 260), behavior: "smooth" }); }
+      if (prev) prev.addEventListener("click", function () { step(-1); });
+      if (next) next.addEventListener("click", function () { step(1); });
+    })();
+
+    /* ---------- cinematic 3D tilt + glare on work tiles ---------- */
+    if (canTilt) {
+      document.querySelectorAll(".work-open").forEach(function (tile) {
+        tile.addEventListener("pointermove", function (e) {
+          var r = tile.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          tile.style.transition = "transform .08s linear, box-shadow .4s, border-color .35s";
+          tile.style.transform = "perspective(820px) rotateY(" + (px * 16).toFixed(2) +
+            "deg) rotateX(" + (-py * 16).toFixed(2) + "deg) translateY(-6px) scale(1.05)";
+          tile.style.setProperty("--mx", ((px + 0.5) * 100).toFixed(1) + "%");
+          tile.style.setProperty("--my", ((py + 0.5) * 100).toFixed(1) + "%");
+        });
+        tile.addEventListener("pointerleave", function () {
+          tile.style.transition = "transform .6s cubic-bezier(.22,1,.36,1), box-shadow .4s, border-color .35s";
+          tile.style.transform = "";
+        });
+      });
     }
 
     wireForm("contactForm", "/api/contact", "contactStatus");
