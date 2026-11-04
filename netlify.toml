@@ -1,0 +1,19 @@
+# Netlify hosts static files only — it cannot run the Spring Boot JAR.
+# The WAT site is fully static (index.html + /assets + /images), so we simply
+# publish the Spring static resources folder as the site root.
+#
+# NOTE: the contact/careers forms POST to /api/contact and /api/careers, which
+# are served by the Java backend and will NOT work on Netlify. Host the Spring
+# app (Docker/k8s) for those, or wire the forms to Netlify Forms / a function.
+
+[build]
+  # No build step — these are prebuilt static assets.
+  command = "echo 'Static site: nothing to build'"
+  publish = "src/main/resources/static"
+
+# Serve index.html for the root (Netlify does this automatically for publish dir,
+# listed here for clarity).
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
