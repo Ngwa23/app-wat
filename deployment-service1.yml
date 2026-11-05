@@ -25,11 +25,11 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 7070
         env:
-        # Make the app listen on 8080 (matches Dockerfile EXPOSE / HEALTHCHECK).
+        # Make the app listen on 7070 (matches Dockerfile EXPOSE / HEALTHCHECK).
         - name: PORT
-          value: "8080"
+          value: "7070"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=75 -XX:+UseG1GC"
         # Optional SMTP config. Create a Secret named "app-wat-mail" with keys
@@ -91,5 +91,5 @@ spec:
   - name: http
     protocol: TCP
     port: 80
-    targetPort: http # container port 8080
+    targetPort: http # container port 7070
     nodePort: 30080 # must be in the 30000-32767 range

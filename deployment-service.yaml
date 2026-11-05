@@ -17,7 +17,7 @@ spec:
         image: ngwa23/watapp:v1 # Image that will be used to containers in the cluster
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080 # The port that the container is running on in the cluster
+        - containerPort: 7070 # The port that the container is running on in the cluster
 ---
 apiVersion: v1
 kind: Service
@@ -30,7 +30,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 7070
     nodePort: 30008 # Optional (default: 30000-32767)
     #apiVersion: v1
     #kind: Service
@@ -42,7 +42,7 @@ spec:
     #ports:
     # - protocol: "TCP"
     # port: 80
-    #targetPort: 8080 
+    #targetPort: 7070 
     #type: ClusterIP # type of the service.
 
 
@@ -57,5 +57,5 @@ spec:
     #ports:
     # - protocol: "TCP"
     #  port: 80
-    # targetPort: 8080 
+    # targetPort: 7070 
     #type: LoadBalancer # type of the service.
