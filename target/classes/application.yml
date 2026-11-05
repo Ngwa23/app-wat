@@ -24,7 +24,7 @@ spring:
             enable: true
 
 server:
-  port: ${PORT:8081}
+  port: ${PORT:7070}
   compression:
     enabled: true
     mime-types: text/html,text/css,application/javascript,image/svg+xml,application/json
