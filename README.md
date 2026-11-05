@@ -8,7 +8,7 @@ animated front-end and exposes a small JSON API for the contact and careers form
 
 - **Artifact:** `app-wat`  •  **Version:** `3.0.0`
 - **Group:** `com.worldadvancedtechnology`
-- **Runs on:** **port 8081** (configurable)
+- **Runs on:** **port 7070** (configurable)
 - **Author:** NGWA CLOVIS OCHANG — CEO & Lead Architect
 
 ---
@@ -146,7 +146,7 @@ mvnw.cmd clean package -DskipTests
 java -jar target/app-wat.jar
 ```
 
-Then open **http://localhost:8081**.
+Then open **http://localhost:7070**.
 
 > **First build after plugin changes must be online** — JaCoCo and the Sonar plugin are
 > downloaded on first use, so don't use `-o` (offline) the first time.
@@ -166,7 +166,7 @@ environment variables.
 
 | Setting | Env var | Default | Purpose |
 |---------|---------|---------|---------|
-| Server port | `PORT` | `8081` | HTTP port |
+| Server port | `PORT` | `7070` | HTTP port |
 | SMTP host | `MAIL_HOST` | *(empty)* | Mail server host |
 | SMTP port | `MAIL_PORT` | `587` | Mail server port |
 | SMTP user | `MAIL_USERNAME` | *(empty)* | Mail username |
@@ -175,10 +175,10 @@ environment variables.
 | Recipient | `WAT_MAIL_TO` | `worldadvancedtechnology23@gmail.com` | Where submissions go |
 | Sender | `WAT_MAIL_FROM` | `no-reply@worldadvancedtechnology.cm` | From address |
 
-Example — run on port 8080 with email enabled:
+Example — run on port 7070 with email enabled:
 
 ```bash
-PORT=8080 \
+PORT=7070 \
 WAT_MAIL_ENABLED=true \
 MAIL_HOST=smtp.gmail.com MAIL_USERNAME=you@example.com MAIL_PASSWORD=app-password \
 java -jar target/app-wat.jar
@@ -257,12 +257,12 @@ Multi-stage build (builds with Maven + Temurin 21, runs on a non-root Alpine JRE
 
 ```bash
 docker build -t app-wat:3.0.0 .
-docker run -p 8080:8080 -e PORT=8080 app-wat:3.0.0
-# open http://localhost:8080
+docker run -p 7070:7070 -e PORT=7070 app-wat:3.0.0
+# open http://localhost:7070
 ```
 
-The image `EXPOSE`s **8080** and has a `HEALTHCHECK` on `/actuator/health`, so set
-`PORT=8080` when running the container (the app itself defaults to 8081).
+The image `EXPOSE`s **7070** and has a `HEALTHCHECK` on `/actuator/health`. The app
+defaults to port 7070, so `PORT` only needs setting to run on a different port.
 
 ---
 
@@ -270,7 +270,7 @@ The image `EXPOSE`s **8080** and has a `HEALTHCHECK` on `/actuator/health`, so s
 
 Manifests are in the repo root:
 
-- `deployment.yml` — a `Deployment` (2 replicas, container port 8080 via `PORT=8080`,
+- `deployment.yml` — a `Deployment` (2 replicas, container port 7070 via `PORT=7070`,
   startup/liveness/readiness probes on the actuator endpoints, resource limits, hardened
   non-root `securityContext`, optional `app-wat-mail` Secret for SMTP).
 - `service.yml` — three Services defined separately: **ClusterIP** (`app-wat`),
