@@ -18,6 +18,12 @@ spec:
         app.kubernetes.io/name: app-wat
         app.kubernetes.io/version: "3.0.0"
     spec:
+      # Pod-level security: a numeric fsGroup makes the emptyDir /tmp group-owned
+      # and writable by the non-root user below.
+      securityContext:
+        fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: app-wat
           # Replace with your registry/image:tag, e.g. ghcr.io/you/app-wat:3.0.0
@@ -70,6 +76,11 @@ spec:
             failureThreshold: 3
           securityContext:
             runAsNonRoot: true
+            # A NUMERIC uid/gid is required: with runAsNonRoot and only a named
+            # USER in the image, the kubelet can't verify non-root and fails with
+            # CreateContainerConfigError. 1001 matches the Dockerfile's USER.
+            runAsUser: 1001
+            runAsGroup: 1001
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:

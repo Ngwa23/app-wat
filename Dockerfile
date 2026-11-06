@@ -11,11 +11,13 @@ RUN mvn -q -B clean package -DskipTests
 # ---- Runtime stage ----
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-# Run as a non-root user
-RUN addgroup -S wat && adduser -S wat -G wat
+# Run as a non-root user with a FIXED NUMERIC uid/gid. A numeric USER lets
+# Kubernetes verify runAsNonRoot without a runAsUser override; a named user
+# there causes CreateContainerConfigError.
+RUN addgroup -S -g 1001 wat && adduser -S -u 1001 -G wat wat
 COPY --from=build /app/target/app-wat.jar app.jar
-RUN chown -R wat:wat /app
-USER wat
+RUN chown -R 1001:1001 /app
+USER 1001
 
 EXPOSE 9090
 # Make the app listen on 9090 to match EXPOSE / HEALTHCHECK and the k8s manifests.
