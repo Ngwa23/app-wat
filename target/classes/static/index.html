@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/assets/css/styles.css">
 
 <script>
-(function(){try{var t=localStorage.getItem("wat-theme")||(window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
+(function(){try{var t=localStorage.getItem("wat-theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
 </script>
 
 <script type="application/ld+json">

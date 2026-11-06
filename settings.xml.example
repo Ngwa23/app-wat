@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Maven settings template for deploying app-wat to Nexus and running SonarQube.
+
+  USAGE
+  -----
+  1. Copy this file to ~/.m2/settings.xml  (or pass it explicitly:
+     mvn deploy -s settings.xml.example).
+  2. Provide credentials via environment variables so NO secrets live in git:
+       export NEXUS_USERNAME=deployer
+       export NEXUS_PASSWORD='********'
+       export SONAR_TOKEN='sqp_********'
+  3. Deploy:
+       # release (version 3.0.0)  -> maven-releases
+       mvn clean deploy
+       # snapshot                 -> maven-snapshots
+       mvn -Drevision=3.0.1-SNAPSHOT clean deploy   # or set <version> to *-SNAPSHOT
+     Point at a different Nexus without editing the POM:
+       mvn clean deploy -Dnexus.host=http://your-nexus:8081
+
+  The <server> ids below MUST match <distributionManagement> in pom.xml
+  (nexus-releases / nexus-snapshots).
+-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <servers>
+    <server>
+      <id>nexus-releases</id>
+      <username>${env.NEXUS_USERNAME}</username>
+      <password>${env.NEXUS_PASSWORD}</password>
+    </server>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>${env.NEXUS_USERNAME}</username>
+      <password>${env.NEXUS_PASSWORD}</password>
+    </server>
+  </servers>
+
+  <!--
+    OPTIONAL: if you also pull DEPENDENCIES through Nexus (recommended), uncomment
+    this mirror so every download goes through your Nexus proxy. Nexus must expose
+    a "maven-public" group repository.
+  -->
+  <!--
+  <mirrors>
+    <mirror>
+      <id>nexus-public</id>
+      <name>Nexus Public Mirror</name>
+      <url>http://192.168.100.11:8081/repository/maven-public/</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+  -->
+
+  <profiles>
+    <profile>
+      <id>sonar</id>
+      <properties>
+        <!-- Reachable SonarQube server; override with -Dsonar.host.url=... -->
+        <sonar.host.url>http://192.168.100.11:9000</sonar.host.url>
+        <!-- Token is read from the SONAR_TOKEN env var; never hard-code it here. -->
+        <sonar.token>${env.SONAR_TOKEN}</sonar.token>
+      </properties>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>sonar</activeProfile>
+  </activeProfiles>
+
+</settings>
