@@ -20,7 +20,7 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: http   # container port 7070
+      targetPort: http   # container port 9090
 ---
 # 2) NodePort — exposes the app on a static port on every node.
 #    Reachable at:  http://<node-ip>:30080
@@ -39,7 +39,7 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: http   # container port 7070
+      targetPort: http   # container port 9090
       nodePort: 30080    # must be in the 30000-32767 range
 ---
 # 3) LoadBalancer — provisions an external load balancer (cloud providers).
@@ -59,4 +59,4 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: http   # container port 7070
+      targetPort: http   # container port 9090

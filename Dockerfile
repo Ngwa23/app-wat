@@ -17,12 +17,12 @@ COPY --from=build /app/target/app-wat.jar app.jar
 RUN chown -R wat:wat /app
 USER wat
 
-EXPOSE 7070
-# Make the app listen on 7070 to match EXPOSE / HEALTHCHECK and the k8s manifests.
-# (application.yml defaults to 7070 via ${PORT:7070} when this is unset.)
-ENV PORT=7070
+EXPOSE 9090
+# Make the app listen on 9090 to match EXPOSE / HEALTHCHECK and the k8s manifests.
+# (application.yml defaults to 9090 via ${PORT:9090} when this is unset.)
+ENV PORT=9090
 ENV JAVA_OPTS="-XX:MaxRAMPercentage=75 -XX:+UseG1GC"
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s \
-  CMD wget -qO- http://localhost:7070/actuator/health | grep -q UP || exit 1
+  CMD wget -qO- http://localhost:9090/actuator/health | grep -q UP || exit 1
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
