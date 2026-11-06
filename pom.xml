@@ -43,8 +43,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Plugin versions -->
-        <sonar.maven.plugin.version>4.0.0.4121</sonar.maven.plugin.version>
+        <!-- SonarScanner for Maven. This default works with current servers, but
+             you can switch scanner version per server WITHOUT editing the POM:
+               mvn sonar:sonar -Dsonar-maven-plugin.version=3.9.1.2184   # SonarQube 7.9 LTS – 9.x
+               mvn sonar:sonar -Dsonar-maven-plugin.version=4.0.0.4121   # SonarQube 9.9 LTS / 2025.x
+               mvn sonar:sonar -Dsonar-maven-plugin.version=5.1.0.4751   # latest
+             NB: the property is deliberately NOT named "sonar.*", otherwise Maven
+             would ship it to the server as a bogus analysis property. -->
+        <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
         <jacoco.version>0.8.12</jacoco.version>
+
+        <!-- Nexus base URL for `mvn deploy`. Override without touching the POM:
+               mvn deploy -Dnexus.host=http://your-nexus:8081 -->
+        <nexus.host>http://192.168.100.11:8081</nexus.host>
 
         <!-- SonarQube analysis settings.
              Override on the command line as needed, e.g.:
@@ -57,10 +68,10 @@
         <sonar.projectKey>com.worldadvancedtechnology:app-wat</sonar.projectKey>
         <sonar.projectName>WORLD ADVANCED TECHNOLOGY Website</sonar.projectName>
         <sonar.java.source>${java.version}</sonar.java.source>
-        <!-- Where Sonar reads the JaCoCo coverage report produced below -->
-        <sonar.coverage.jacoco.xmlReportPaths>
-            ${project.build.directory}/site/jacoco/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
+        <!-- Where Sonar reads the JaCoCo coverage report produced below.
+             Keep this on ONE line: a newline/indent inside the value becomes part
+             of the path and silently breaks coverage upload. -->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <!--
@@ -69,19 +80,20 @@
       -SNAPSHOT (e.g. 3.0.1-SNAPSHOT) goes to <snapshotRepository>, a release
       version (e.g. 3.0.0) goes to <repository>.
 
-      TODO: replace NEXUS_HOST with your server's host[:port], and make sure the
-      <id> values match a <server> entry (with credentials) in your ~/.m2/settings.xml.
+      Set the host once via the ${nexus.host} property above (or -Dnexus.host=...).
+      The <id> values MUST match a <server> entry (with credentials) in your
+      settings.xml — see settings.xml.example in the repo root for a ready template.
     -->
     <distributionManagement>
         <repository>
-            <id>app-wat-releases</id>
+            <id>nexus-releases</id>
             <name>Nexus Release Repository</name>
-            <url>http://192.168.100.11:8081/repository/maven-releases/</url>
+            <url>${nexus.host}/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>app-wat-snapshots</id>
+            <id>nexus-snapshots</id>
             <name>Nexus Snapshot Repository</name>
-            <url>http://192.168.100.11:8081/repository/maven-snapshots/</url>
+            <url>${nexus.host}/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -138,7 +150,7 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>${sonar.maven.plugin.version}</version>
+                <version>${sonar-maven-plugin.version}</version>
             </plugin>
 
             <!-- JaCoCo: measures test coverage and writes the report that
