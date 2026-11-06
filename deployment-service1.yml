@@ -25,11 +25,11 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
-          containerPort: 7070
+          containerPort: 9090
         env:
-        # Make the app listen on 7070 (matches Dockerfile EXPOSE / HEALTHCHECK).
+        # Make the app listen on 9090 (matches Dockerfile EXPOSE / HEALTHCHECK).
         - name: PORT
-          value: "7070"
+          value: "9090"
         - name: JAVA_OPTS
           value: "-XX:MaxRAMPercentage=75 -XX:+UseG1GC"
         # Optional SMTP config. Create a Secret named "app-wat-mail" with keys
@@ -75,6 +75,15 @@ spec:
           capabilities:
             drop:
             - ALL
+        # The root filesystem is read-only, so give the JVM / embedded Tomcat
+        # writable scratch space. Without this the server cannot create its
+        # work/temp dir and the pod CrashLoopBackOffs on startup.
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: tmp
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
@@ -91,5 +100,5 @@ spec:
   - name: http
     protocol: TCP
     port: 80
-    targetPort: http # container port 7070
+    targetPort: http # container port 9090
     nodePort: 30080 # must be in the 30000-32767 range
