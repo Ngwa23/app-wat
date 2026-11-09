@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: watapp
-        image: ngwa23/watapp:v4 # Image that will be used to containers in the cluster
+        image: ngwa23/watapp:v2 # Image that will be used to containers in the cluster
         imagePullPolicy: Always
         ports:
         - containerPort: 9090 # The port that the container is running on in the cluster
