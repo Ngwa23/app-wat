@@ -8,6 +8,27 @@ spring:
       chain:
         cache: true
 
+  # Embedded H2 database in FILE mode. Persists under ${WAT_DATA_DIR} so the
+  # admin's content survives restarts and lives outside the packaged jar.
+  datasource:
+    url: jdbc:h2:file:${WAT_DATA_DIR:./data}/wat;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  # Allow reasonably large image uploads from the admin panel.
+  servlet:
+    multipart:
+      max-file-size: 8MB
+      max-request-size: 10MB
+
   # SMTP is optional. Configure these (preferably via environment variables) to
   # enable email delivery of contact / careers submissions. Left unset, the app
   # still runs and records every submission to the log.
@@ -31,11 +52,28 @@ server:
     min-response-size: 1024
   http2:
     enabled: true
+  servlet:
+    session:
+      cookie:
+        # SameSite=Lax means the admin session cookie is NOT sent on cross-site
+        # POSTs, which blocks CSRF against the admin API without token plumbing.
+        same-site: lax
+        http-only: true
   error:
     whitelabel:
       enabled: true
 
 wat:
+  # Writable directory for the database, uploaded images and JSON backups.
+  data-dir: ${WAT_DATA_DIR:./data}
+
+  # Superadmin seeded on first run (only if no admin user exists yet).
+  admin:
+    username: ${WAT_ADMIN_USER:NGWA23}
+    # BCrypt hash of the initial password — NEVER the plaintext. Rotate it from
+    # the admin panel (Account tab) after first login.
+    password-hash: "${WAT_ADMIN_PASSWORD_HASH:$2a$10$ijQyemqCFG6VPi8YQFoBDOS2j5RdOYCAIvvzJchaqSlMRPGgHOL3S}"
+
   mail:
     enabled: ${WAT_MAIL_ENABLED:false}
     to: ${WAT_MAIL_TO:worldadvancedtechnology23@gmail.com}

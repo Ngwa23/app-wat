@@ -2,6 +2,8 @@ package com.worldadvancedtechnology.service;
 
 import com.worldadvancedtechnology.dto.ContactRequest;
 import com.worldadvancedtechnology.dto.JobApplicationRequest;
+import com.worldadvancedtechnology.entity.Submission;
+import com.worldadvancedtechnology.repo.SubmissionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -25,6 +27,7 @@ public class NotificationService {
     private static final Logger log = LoggerFactory.getLogger(NotificationService.class);
 
     private final ObjectProvider<JavaMailSender> mailSenderProvider;
+    private final SubmissionRepository submissions;
 
     @Value("${wat.mail.enabled:false}")
     private boolean mailEnabled;
@@ -35,13 +38,26 @@ public class NotificationService {
     @Value("${wat.mail.from:no-reply@worldadvancedtechnology.cm}")
     private String from;
 
-    public NotificationService(ObjectProvider<JavaMailSender> mailSenderProvider) {
+    public NotificationService(ObjectProvider<JavaMailSender> mailSenderProvider,
+                               SubmissionRepository submissions) {
         this.mailSenderProvider = mailSenderProvider;
+        this.submissions = submissions;
     }
 
     public void handleContact(ContactRequest r) {
         log.info("New contact message | name={} email={} phone={} service={} subject={}",
                 r.name(), r.email(), r.phone(), r.service(), r.subject());
+
+        // Persist first so nothing is lost, even if email is disabled or fails.
+        Submission s = new Submission();
+        s.setType(Submission.Type.CONTACT.name());
+        s.setName(r.name());
+        s.setEmail(r.email());
+        s.setPhone(r.phone());
+        s.setSubjectOrPosition(r.subject());
+        s.setExtra(r.service());
+        s.setMessage(r.message());
+        submissions.save(s);
 
         String body = """
                 New contact message from the WAT website
@@ -60,9 +76,20 @@ public class NotificationService {
         send("WAT Website — Contact: " + r.subject(), body, r.email());
     }
 
-    public void handleJobApplication(JobApplicationRequest r) {
-        log.info("New job application | name={} email={} position={} experience={}",
-                r.name(), r.email(), r.position(), r.experience());
+    public void handleJobApplication(JobApplicationRequest r, String cvFile) {
+        log.info("New job application | name={} email={} position={} experience={} cv={}",
+                r.name(), r.email(), r.position(), r.experience(), cvFile);
+
+        Submission s = new Submission();
+        s.setType(Submission.Type.APPLICATION.name());
+        s.setName(r.name());
+        s.setEmail(r.email());
+        s.setPhone(r.phone());
+        s.setSubjectOrPosition(r.position());
+        s.setExtra(r.experience());
+        s.setMessage(r.message());
+        s.setCvFile(cvFile);
+        submissions.save(s);
 
         String body = """
                 New job application from the WAT website

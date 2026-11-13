@@ -1,15 +1,26 @@
+# Build artifacts & VCS
 target/
 .git/
 .github/
+.mvn/
+mvnw
+mvnw.cmd
+
+# Local data (DB, uploads, backups) must NOT go into the image
+data/
+
+# Docs / non-app files (do not exclude app assets under src/)
 *.md
 *.docx
-*.jpg
-*.JPG
-*.png
-index.html
-_redirects
-netlify.toml
-cloudformation.yml
-deployment.yml
-Jenkinsfile
 .DS_Store
+workpics/
+netlify.toml
+_redirects
+cloudformation.yml
+Jenkinsfile
+sonar-project.properties
+settings.xml.example
+deployment.yml
+deployment-service.yaml
+deployment-service1.yaml
+service.yml

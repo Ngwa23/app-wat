@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/styles.css?v=20261113c">
 
 <script>
 (function(){try{var t=localStorage.getItem("wat-theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
@@ -254,8 +254,25 @@
   </div>
 </section>
 
+<!-- ============ EMPLOYEE SPOTLIGHT ============ -->
+<section id="spotlight" class="sec">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="dspot.period">Employee of the Month</span>
+      <h2 class="sec-title" id="spotName">—</h2>
+    </div>
+    <div class="spotlight-card reveal">
+      <img id="spotImg" src="" alt="" loading="lazy">
+      <div class="spot-info">
+        <p class="spot-role" id="spotRole" data-i18n="dspot.role"></p>
+        <blockquote class="spot-cite" id="spotCite" data-i18n="dspot.citation"></blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TESTIMONIALS ============ -->
-<section class="sec sec-alt">
+<section id="testimonials" class="sec sec-alt">
   <div class="container">
     <div class="sec-head center reveal">
       <span class="eyebrow" data-i18n="testi.label">Social Proof</span>
@@ -274,8 +291,46 @@
   </div>
 </section>
 
+<!-- ============ REVIEWS & FEEDBACK ============ -->
+<section id="reviews" class="sec">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="rev.label">Your Feedback</span>
+      <h2 class="sec-title" data-i18n="rev.title">Reviews &amp; Ratings</h2>
+      <p class="sec-sub" data-i18n="rev.sub">Rate us, leave a comment, or react — we value your opinion.</p>
+    </div>
+    <div class="rev-top reveal">
+      <div class="rev-score">
+        <div class="rev-avg" id="revAvg">0.0</div>
+        <div><div class="rev-stars" id="revStars">☆☆☆☆☆</div><div class="rev-count" id="revCount" data-i18n="rev.none">No reviews yet</div></div>
+      </div>
+      <div class="rev-react">
+        <button class="rev-btn like" id="revLike" type="button" aria-label="Like"><span class="rev-ic">👍</span> <b id="revLikes">0</b></button>
+        <button class="rev-btn dislike" id="revDislike" type="button" aria-label="Dislike"><span class="rev-ic">👎</span> <b id="revDislikes">0</b></button>
+      </div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-list reveal" id="revList"></div>
+      <div class="card reveal rev-form-card">
+        <h3 data-i18n="rev.formTitle">Leave a review</h3>
+        <form id="reviewForm" class="form" novalidate>
+          <div class="field"><label data-i18n="rev.name">Your name</label><input name="name" maxlength="120"></div>
+          <div class="field"><label data-i18n="rev.rating">Your rating *</label>
+            <div class="star-pick" id="starPick" role="radiogroup" aria-label="Rating">
+              <button type="button" data-v="1" aria-label="1 star">★</button><button type="button" data-v="2" aria-label="2 stars">★</button><button type="button" data-v="3" aria-label="3 stars">★</button><button type="button" data-v="4" aria-label="4 stars">★</button><button type="button" data-v="5" aria-label="5 stars">★</button>
+            </div>
+          </div>
+          <div class="field"><label data-i18n="rev.comment">Your comment *</label><textarea name="comment" maxlength="4000" required></textarea><div class="err"></div></div>
+          <div class="form-status" id="reviewStatus"></div>
+          <button type="submit" class="btn btn-gold btn-block" data-i18n="rev.send">Submit review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CTA BAND ============ -->
-<section class="sec">
+<section id="cta" class="sec">
   <div class="container">
     <div class="cta-band reveal">
       <h2>Let's Build Something <span class="grad-mix" data-i18n="cta.word">Extraordinary</span></h2>
@@ -353,6 +408,7 @@
             <select name="position" id="careerPosition" required><option value="">Select a position…</option><option>Senior DevOps Engineer</option><option>AWS Cloud Engineer</option><option>Network Engineer (Cisco)</option><option>VoIP Technician</option><option>Full-Stack Web Developer</option></select><div class="err"></div>
           </div>
           <div class="field"><label data-i18n="job.cover">Cover Letter / Message *</label><textarea name="message" required></textarea><div class="err"></div></div>
+          <div class="field"><label data-i18n="job.cv">CV / Résumé (PDF, DOC, DOCX) *</label><input type="file" name="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required><div class="err"></div></div>
           <div class="form-status" id="careerStatus"></div>
           <button type="submit" class="btn btn-gold btn-block" data-i18n="job.apply">Submit Application</button>
           <p class="form-note" data-i18n="career.email">Or send your CV to: worldadvancedtechnology23@gmail.com</p>
@@ -451,6 +507,6 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-<script src="/assets/js/app.js" defer></script>
+<script src="/assets/js/app.js?v=20261113c" defer></script>
 </body>
 </html>

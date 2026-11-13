@@ -2,6 +2,7 @@ package com.worldadvancedtechnology;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * World Advanced Technology — company web application.
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * embedded web server, so it deploys anywhere a JDK runs — no external Tomcat.
  */
 @SpringBootApplication
+@EnableCaching
 public class WatWebsiteApplication {
 
     public static void main(String[] args) {
