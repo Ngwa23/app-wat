@@ -23,11 +23,12 @@ spring:
       hibernate:
         format_sql: false
 
-  # Allow reasonably large image uploads from the admin panel.
+  # Allow image, document and (larger) video uploads from the admin panel.
   servlet:
     multipart:
-      max-file-size: 8MB
-      max-request-size: 10MB
+      max-file-size: 200MB
+      max-request-size: 210MB
+      file-size-threshold: 2MB
 
   # SMTP is optional. Configure these (preferably via environment variables) to
   # enable email delivery of contact / careers submissions. Left unset, the app

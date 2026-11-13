@@ -15,6 +15,7 @@
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/AdminUser.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/EmployeeSpotlight.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/JobOpening.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/NewsArticle.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/Review.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/ServiceItem.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/SiteCounters.java
@@ -27,6 +28,7 @@
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/AdminUserRepository.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/EmployeeSpotlightRepository.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/JobOpeningRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/NewsArticleRepository.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/ReviewRepository.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/ServiceItemRepository.java
 /Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/SiteCountersRepository.java

@@ -60,6 +60,7 @@
       if (id === "spotlight") loadSpotlight();
       if (id === "reviews") loadReviews();
       if (id === "stats") loadStats();
+      if (id === "news") loadNews();
     });
   });
 
@@ -316,20 +317,26 @@
     });
     return h + '</div></div>';
   }
-  function uploadField(label, key, e) {
+  function uploadField(label, key, e, kind) {
+    kind = kind || "image";
     var v = e[key] || "";
+    var accept = kind === "video" ? "video/*"
+      : kind === "document" ? ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip"
+      : "image/*";
+    var showImg = kind === "image";
     return '<div class="field"><label>' + escH(label) + '</label><div class="uploader">' +
-      '<img class="up-prev" src="' + escH(v) + '" alt="" onerror="this.style.visibility=\'hidden\'">' +
-      '<div style="flex:1"><input type="file" accept="image/*" class="up-file">' +
+      (showImg ? '<img class="up-prev" src="' + escH(v) + '" alt="" onerror="this.style.visibility=\'hidden\'">' : '') +
+      '<div style="flex:1"><input type="file" accept="' + accept + '" class="up-file" data-kind="' + kind + '">' +
       '<input type="hidden" data-key="' + key + '" data-type="text" value="' + escH(v) + '">' +
-      '<small class="up-path" style="color:var(--muted)">' + escH(v || "No image — upload one") + '</small></div></div></div>';
+      '<small class="up-path" style="color:var(--muted);word-break:break-all">' + escH(v || ("No " + kind + " — upload one")) + '</small></div></div></div>';
   }
 
   /* ---- modal editor ---- */
   var modal = $("#modal"), modalForm = $("#modalForm"), modalBody = $("#modalBody");
   var editorCtx = null;
-  var modalMode = "collection";     // "collection" | "user"
+  var modalMode = "collection";     // "collection" | "user" | "news"
   var userCtx = null;               // { id } when editing a user
+  var newsCtx = null;               // { id } when editing a news article
   function openEditor(kind, item) {
     modalMode = "collection";
     var isNew = !item;
@@ -364,15 +371,18 @@
       var hidden = u.querySelector("input[type=hidden]");
       var prev = u.querySelector(".up-prev");
       var pathEl = u.querySelector(".up-path");
+      var kind = file.getAttribute("data-kind") || "image";
+      var endpoint = kind === "video" ? "/uploads/video" : kind === "document" ? "/uploads/document" : "/uploads";
       file.addEventListener("change", function () {
         if (!file.files || !file.files[0]) return;
         var fd = new FormData(); fd.append("file", file.files[0]);
-        pathEl.textContent = "Uploading…";
-        api("/uploads", { method: "POST", body: fd })
+        pathEl.textContent = "Uploading… (large files may take a moment)";
+        api(endpoint, { method: "POST", body: fd })
           .then(function (res) {
-            hidden.value = res.path; prev.src = res.path; prev.style.visibility = "visible";
+            hidden.value = res.path;
+            if (prev) { prev.src = res.path; prev.style.visibility = "visible"; }
             pathEl.textContent = res.path;
-            toast("Image uploaded", "ok");
+            toast(cap(kind) + " uploaded", "ok");
           })
           .catch(function (e) { pathEl.textContent = "Upload failed"; toast(e.message, "err"); });
       });
@@ -388,6 +398,19 @@
         ? api("/users/" + userCtx.id, { method: "PUT", json: payload })
         : api("/users", { method: "POST", json: payload });
       ureq.then(function () { closeModal(); loadUsers(); toast("User saved", "ok"); })
+        .catch(function (e) { toast(e.message, "err"); });
+      return;
+    }
+
+    if (modalMode === "news") {
+      // Assemble the image slots (img0..img3) into the pipe-separated images field.
+      var imgs = [];
+      ["img0", "img1", "img2", "img3"].forEach(function (k) { if (payload[k]) imgs.push(payload[k]); delete payload[k]; });
+      payload.images = imgs.join("|");
+      var nreq = newsCtx && newsCtx.id
+        ? api("/news/" + newsCtx.id, { method: "PUT", json: payload })
+        : api("/news", { method: "POST", json: payload });
+      nreq.then(function () { closeModal(); loadNews(); toast("Article saved", "ok"); })
         .catch(function (e) { toast(e.message, "err"); });
       return;
     }
@@ -547,6 +570,65 @@
       })
       .catch(function (e) { toast(e.message, "err"); });
   });
+
+  /* ========================================================================
+     NEWS
+     ===================================================================== */
+  function loadNews() {
+    api("/news").then(renderNewsList).catch(function (e) { if (e.message !== "auth") toast(e.message, "err"); });
+  }
+  function renderNewsList(list) {
+    var wrap = $("#newsTable");
+    wrap.innerHTML = "";
+    list = list || [];
+    if (!list.length) { wrap.innerHTML = '<p class="hint">No articles yet. Use “Add article”.</p>'; return; }
+    list.forEach(function (a) {
+      var first = (a.images || "").split("|").filter(Boolean)[0] || "";
+      var card = document.createElement("div");
+      card.className = "item";
+      var acts = state.readOnly ? '' :
+        '<div class="acts"><button class="btn sm" data-edit>Edit</button><button class="btn sm danger" data-del>Delete</button></div>';
+      card.innerHTML =
+        (first ? '<img src="' + escH(first) + '" alt="" onerror="this.style.visibility=\'hidden\'">' : '<div class="ic">📰</div>') +
+        '<div class="meta"><b>' + escH(a.titleEn || "(untitled)") + '</b><small>' + escH(a.date || "") +
+        (a.video || a.videoPath ? ' · 🎬 video' : '') + (a.document || a.documentPath ? ' · 📎 doc' : '') + '</small></div>' +
+        tags([a.published ? ["Published", "on"] : ["Draft", "off"]]) + acts;
+      if (!state.readOnly) {
+        card.querySelector("[data-edit]").addEventListener("click", function () { openNewsEditor(a); });
+        card.querySelector("[data-del]").addEventListener("click", function () {
+          if (!confirm("Delete this article?")) return;
+          api("/news/" + a.id, { method: "DELETE" })
+            .then(function () { loadNews(); toast("Deleted", "ok"); })
+            .catch(function (e) { toast(e.message, "err"); });
+        });
+      }
+      wrap.appendChild(card);
+    });
+  }
+  function openNewsEditor(item) {
+    modalMode = "news";
+    newsCtx = { id: item ? item.id : null };
+    var isNew = !item;
+    var e = item ? Object.assign({}, item) : { published: true, sortOrder: 0, date: new Date().toISOString().slice(0, 10) };
+    var imgs = (e.images || "").split("|").filter(Boolean);
+    e.img0 = imgs[0] || ""; e.img1 = imgs[1] || ""; e.img2 = imgs[2] || ""; e.img3 = imgs[3] || "";
+    $("#modalTitle").textContent = (isNew ? "Add " : "Edit ") + "news article";
+    modalBody.innerHTML =
+      numField("Order (lower shows first)", "sortOrder", e) +
+      '<div class="field"><label>Date (YYYY-MM-DD)</label><input data-key="date" data-type="text" value="' + escH(e.date || "") + '"></div>' +
+      checkField("Published (visible on site)", "published", e) +
+      locArea("Title", "title", e) +
+      locArea("Article body", "body", e) +
+      '<div class="subhead">Photos</div>' +
+      uploadField("Photo 1", "img0", e, "image") + uploadField("Photo 2", "img1", e, "image") +
+      uploadField("Photo 3", "img2", e, "image") + uploadField("Photo 4", "img3", e, "image") +
+      '<div class="subhead">Video (optional)</div>' + uploadField("Video", "videoPath", e, "video") +
+      '<div class="subhead">Document (optional)</div>' + uploadField("Document", "documentPath", e, "document");
+    wireUploaders(modalBody);
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+  $("#addNews").addEventListener("click", function () { openNewsEditor(null); });
 
   /* ========================================================================
      COPY TO CLIPBOARD

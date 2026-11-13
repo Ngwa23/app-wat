@@ -41,7 +41,7 @@ public class DataSeeder implements CommandLineRunner {
 
     /** Sections the admin can show/hide (all visible by default). */
     static final String[] TOGGLE_SECTIONS = {
-            "about", "services", "voip", "work", "team", "spotlight",
+            "about", "services", "voip", "work", "team", "spotlight", "news",
             "testimonials", "reviews", "cta", "payment", "careers", "contact"
     };
 

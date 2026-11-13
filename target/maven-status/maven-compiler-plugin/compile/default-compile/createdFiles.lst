@@ -29,6 +29,7 @@ com/worldadvancedtechnology/repo/TeamMemberRepository.class
 com/worldadvancedtechnology/api/UserController.class
 com/worldadvancedtechnology/service/AdminUserService.class
 com/worldadvancedtechnology/dto/JobApplicationRequest.class
+com/worldadvancedtechnology/repo/NewsArticleRepository.class
 com/worldadvancedtechnology/entity/TextOverride.class
 com/worldadvancedtechnology/entity/EmployeeSpotlight.class
 com/worldadvancedtechnology/config/DataSeeder.class
@@ -36,6 +37,7 @@ com/worldadvancedtechnology/WatWebsiteApplication.class
 com/worldadvancedtechnology/api/FeedbackController.class
 com/worldadvancedtechnology/repo/SubmissionRepository.class
 com/worldadvancedtechnology/service/ContentService.class
+com/worldadvancedtechnology/entity/NewsArticle.class
 com/worldadvancedtechnology/entity/AdminUser.class
 com/worldadvancedtechnology/api/FormController.class
 com/worldadvancedtechnology/repo/ReviewRepository.class

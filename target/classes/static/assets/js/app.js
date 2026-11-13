@@ -618,6 +618,83 @@
     }
   }
 
+  var NEWS_UI = {
+    en: { nav: "News", label: "Latest News", title: "News & Updates", sub: "Events, projects and announcements from World Advanced Technology.", read: "Read article", watch: "Video", photos: "photos", download: "Download document", empty: "No news yet." },
+    fr: { nav: "Actualités", label: "Dernières Actualités", title: "Actualités", sub: "Événements, projets et annonces de World Advanced Technology.", read: "Lire l'article", watch: "Vidéo", photos: "photos", download: "Télécharger le document", empty: "Aucune actualité." },
+    es: { nav: "Noticias", label: "Últimas Noticias", title: "Noticias", sub: "Eventos, proyectos y anuncios de World Advanced Technology.", read: "Leer artículo", watch: "Vídeo", photos: "fotos", download: "Descargar documento", empty: "Sin noticias." },
+    de: { nav: "News", label: "Aktuelle News", title: "News & Updates", sub: "Veranstaltungen, Projekte und Ankündigungen von World Advanced Technology.", read: "Artikel lesen", watch: "Video", photos: "Fotos", download: "Dokument herunterladen", empty: "Noch keine News." }
+  };
+  var newsById = {};
+  function excerpt(s, n) { s = s || ""; return s.length > n ? s.slice(0, n).trim() + "…" : s; }
+  function renderNews(list) {
+    LANGS.forEach(function (l) {
+      var u = NEWS_UI[l] || NEWS_UI.en;
+      if (!T[l]) T[l] = {};
+      T[l]["nav.news"] = u.nav; T[l]["news.label"] = u.label; T[l]["news.title"] = u.title; T[l]["news.sub"] = u.sub;
+    });
+    var grid = document.getElementById("newsGrid");
+    var sec = document.getElementById("news");
+    if (!grid) return;
+    newsById = {};
+    list = list || [];
+    if (!list.length) { if (sec) sec.style.display = "none"; grid.innerHTML = ""; return; }
+    grid.innerHTML = "";
+    list.forEach(function (a) {
+      newsById[a.id] = a;
+      LANGS.forEach(function (l) {
+        T[l]["dnews." + a.id + ".title"] = (a.title && (a.title[l] || a.title.en)) || "";
+        T[l]["dnews." + a.id + ".ex"] = excerpt((a.body && (a.body[l] || a.body.en)) || "", 130);
+      });
+      var cover = (a.images && a.images[0]) || "";
+      var badge = a.video
+        ? '<span class="news-badge vid">▶ ' + escHtml((NEWS_UI[current] || NEWS_UI.en).watch) + '</span>'
+        : (a.images && a.images.length > 1 ? '<span class="news-badge">📷 ' + a.images.length + '</span>' : '');
+      var card = document.createElement("div");
+      card.className = "news-card reveal";
+      card.setAttribute("data-news", a.id);
+      card.innerHTML =
+        '<div class="news-cover">' + (cover ? '<img src="' + escHtml(cover) + '" alt="" loading="lazy">' : '') + badge + '</div>' +
+        '<div class="news-body"><div class="news-date">' + escHtml(a.date || "") + '</div>' +
+        '<h3 data-i18n="dnews.' + a.id + '.title"></h3>' +
+        '<p data-i18n="dnews.' + a.id + '.ex"></p>' +
+        '<span class="news-more" data-i18n="news.read"></span></div>';
+      grid.appendChild(card);
+    });
+  }
+  function openNewsModal(a) {
+    var box = document.getElementById("newsModalBody");
+    var modal = document.getElementById("newsModal");
+    if (!box || !modal || !a) return;
+    var u = NEWS_UI[current] || NEWS_UI.en;
+    var title = (a.title && (a.title[current] || a.title.en)) || "";
+    var body = (a.body && (a.body[current] || a.body.en)) || "";
+    var html = '<div class="nm-date">' + escHtml(a.date || "") + '</div><h2>' + escHtml(title) + '</h2>';
+    if (a.video) html += '<video controls preload="metadata" src="' + escHtml(a.video) + '"></video>';
+    html += '<div class="nm-text">' + escHtml(body) + '</div>';
+    if (a.images && a.images.length) {
+      html += '<div class="nm-gallery">' + a.images.map(function (src) {
+        return '<img src="' + escHtml(src) + '" alt="" loading="lazy">';
+      }).join("") + '</div>';
+    }
+    if (a.document) {
+      html += '<a class="nm-doc" href="' + escHtml(a.document) + '" target="_blank" rel="noopener" download>' +
+        '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> ' +
+        escHtml(u.download) + '</a>';
+    }
+    box.innerHTML = html;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+  function closeNewsModal() {
+    var modal = document.getElementById("newsModal");
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    var v = modal.querySelector("video"); if (v) { try { v.pause(); } catch (e) {} }
+  }
+
   function applyContent(data) {
     if (!data) return;
     mergeOverrides(data.overrides);
@@ -627,6 +704,7 @@
     renderJobs(data.jobs);
     renderSpotlight(data.spotlight);
     renderEngagement(data.engagement);
+    renderNews(data.news);
     applyVisibility(data.visibility);
   }
 
@@ -777,6 +855,20 @@
       if (posSelect) posSelect.value = btn.getAttribute("data-job");
       const form = document.getElementById("careerForm");
       if (form) form.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    // News: open article modal (delegated so re-rendered cards keep working)
+    document.addEventListener("click", function (e) {
+      const card = e.target.closest(".news-card[data-news]");
+      if (!card) return;
+      openNewsModal(newsById[card.getAttribute("data-news")]);
+    });
+    const newsCloseBtn = document.getElementById("newsClose");
+    if (newsCloseBtn) newsCloseBtn.addEventListener("click", closeNewsModal);
+    const newsModalEl = document.getElementById("newsModal");
+    if (newsModalEl) newsModalEl.addEventListener("click", function (e) { if (e.target === newsModalEl) closeNewsModal(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && newsModalEl && newsModalEl.classList.contains("open")) closeNewsModal();
     });
 
     /* ---------- service detail modal ---------- */
