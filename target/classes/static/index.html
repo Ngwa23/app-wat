@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css?v=20261113c">
+<link rel="stylesheet" href="/assets/css/styles.css?v=20261113d">
 
 <script>
 (function(){try{var t=localStorage.getItem("wat-theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
@@ -43,6 +43,7 @@
       <li><a href="#services" data-i18n="nav.services">Services</a></li>
       <li><a href="#voip" data-i18n="nav.voip">VoIP</a></li>
       <li><a href="#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="#news" data-i18n="nav.news">News</a></li>
       <li><a href="#team" data-i18n="nav.team">Team</a></li>
       <li><a href="#careers" data-i18n="nav.careers">Careers</a></li>
       <li><a href="#payment" data-i18n="nav.payment">Payment</a></li>
@@ -228,6 +229,28 @@
     </div>
   </div>
 </section>
+
+<!-- ============ NEWS ============ -->
+<section id="news" class="sec sec-alt">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="news.label">Latest News</span>
+      <h2 class="sec-title" data-i18n="news.title">News &amp; Updates</h2>
+      <p class="sec-sub" data-i18n="news.sub">Events, projects and announcements from World Advanced Technology.</p>
+    </div>
+    <div class="news-grid" id="newsGrid"></div>
+  </div>
+</section>
+
+<!-- News article modal -->
+<div class="news-modal" id="newsModal" aria-hidden="true">
+  <div class="news-modal-box">
+    <button class="news-close" id="newsClose" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="news-modal-body" id="newsModalBody"></div>
+  </div>
+</div>
 
 <!-- ============ TEAM ============ -->
 <section id="team" class="sec">
@@ -507,6 +530,6 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-<script src="/assets/js/app.js?v=20261113c" defer></script>
+<script src="/assets/js/app.js?v=20261113d" defer></script>
 </body>
 </html>

@@ -24,12 +24,23 @@ public class AdminUser {
     @Column(name = "password_hash", nullable = false, length = 100)
     private String passwordHash;
 
-    /** ADMIN (everything + user management), EDITOR (edit content), VIEWER (read-only). */
+    /** ADMIN = Super Admin (full + user management), EDITOR, VIEWER, or CUSTOM. */
     @Column(nullable = false, length = 20)
     private String role = "ADMIN";
 
     @Column(name = "display_name", length = 120)
     private String displayName;
+
+    /** Granular permissions. READ = view admin; WRITE = edit content;
+     *  EXECUTE = sensitive operations (user management, backups/restore). */
+    @Column(name = "can_read", nullable = false, columnDefinition = "boolean default true")
+    private boolean canRead = true;
+
+    @Column(name = "can_write", nullable = false, columnDefinition = "boolean default false")
+    private boolean canWrite = false;
+
+    @Column(name = "can_execute", nullable = false, columnDefinition = "boolean default false")
+    private boolean canExecute = false;
 
     public AdminUser() {
     }
@@ -61,6 +72,15 @@ public class AdminUser {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
+    public boolean isCanRead() { return canRead; }
+    public void setCanRead(boolean canRead) { this.canRead = canRead; }
+
+    public boolean isCanWrite() { return canWrite; }
+    public void setCanWrite(boolean canWrite) { this.canWrite = canWrite; }
+
+    public boolean isCanExecute() { return canExecute; }
+    public void setCanExecute(boolean canExecute) { this.canExecute = canExecute; }
 
     public Long getId() {
         return id;

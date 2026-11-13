@@ -26,6 +26,7 @@
       <button class="tab" data-tab="team">Team</button>
       <button class="tab" data-tab="work">Work</button>
       <button class="tab" data-tab="jobs">Jobs (Hiring)</button>
+      <button class="tab" data-tab="news">News</button>
       <button class="tab" data-tab="spotlight">Employee of the Month</button>
       <button class="tab" data-tab="reviews">Reviews <span class="pill" id="reviewCount"></span></button>
       <button class="tab" data-tab="stats">Statistics</button>
@@ -67,6 +68,12 @@
       <section class="panel" id="panel-jobs">
         <div class="panel-head"><h2>Job openings</h2><button class="btn gold" data-add="jobs">+ Add job</button></div>
         <div id="jobsTable" class="cards"></div>
+      </section>
+
+      <section class="panel" id="panel-news">
+        <div class="panel-head"><h2>News articles</h2><button class="btn gold" id="addNews">+ Add article</button></div>
+        <p class="hint">Create articles with photos, an optional video and a document. Unpublished drafts stay hidden from the public site.</p>
+        <div id="newsTable" class="cards"></div>
       </section>
 
       <section class="panel" id="panel-spotlight">

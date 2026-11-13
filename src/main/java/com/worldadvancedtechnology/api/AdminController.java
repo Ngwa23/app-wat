@@ -2,6 +2,7 @@ package com.worldadvancedtechnology.api;
 
 import com.worldadvancedtechnology.entity.EmployeeSpotlight;
 import com.worldadvancedtechnology.entity.JobOpening;
+import com.worldadvancedtechnology.entity.NewsArticle;
 import com.worldadvancedtechnology.entity.ServiceItem;
 import com.worldadvancedtechnology.entity.SiteSetting;
 import com.worldadvancedtechnology.entity.Submission;
@@ -10,6 +11,7 @@ import com.worldadvancedtechnology.entity.TextOverride;
 import com.worldadvancedtechnology.entity.WorkItem;
 import com.worldadvancedtechnology.repo.EmployeeSpotlightRepository;
 import com.worldadvancedtechnology.repo.JobOpeningRepository;
+import com.worldadvancedtechnology.repo.NewsArticleRepository;
 import com.worldadvancedtechnology.repo.ServiceItemRepository;
 import com.worldadvancedtechnology.repo.SiteSettingRepository;
 import com.worldadvancedtechnology.repo.SubmissionRepository;
@@ -43,6 +45,7 @@ import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -65,6 +68,7 @@ public class AdminController {
     private final BackupService backups;
     private final AdminUserService adminUsers;
     private final EmployeeSpotlightRepository spotlight;
+    private final NewsArticleRepository news;
     private final ContentEvents events;
 
     @Value("${wat.data-dir:./data}")
@@ -75,7 +79,8 @@ public class AdminController {
                            TeamMemberRepository team, WorkItemRepository work,
                            JobOpeningRepository jobs, SubmissionRepository submissions,
                            BackupService backups, AdminUserService adminUsers,
-                           EmployeeSpotlightRepository spotlight, ContentEvents events) {
+                           EmployeeSpotlightRepository spotlight, NewsArticleRepository news,
+                           ContentEvents events) {
         this.content = content;
         this.settings = settings;
         this.overrides = overrides;
@@ -87,6 +92,7 @@ public class AdminController {
         this.backups = backups;
         this.adminUsers = adminUsers;
         this.spotlight = spotlight;
+        this.news = news;
         this.events = events;
     }
 
@@ -269,6 +275,37 @@ public class AdminController {
         return saved;
     }
 
+    // ---- news ----
+    @GetMapping("/news")
+    public List<NewsArticle> listNews() {
+        return news.findAllByOrderBySortOrderAscCreatedAtDesc();
+    }
+
+    @PostMapping("/news")
+    public NewsArticle createNews(@RequestBody NewsArticle n) {
+        n.setId(null);
+        if (n.getCreatedAt() == null) n.setCreatedAt(java.time.Instant.now());
+        NewsArticle saved = news.save(n);
+        changed();
+        return saved;
+    }
+
+    @PutMapping("/news/{id}")
+    public NewsArticle updateNews(@PathVariable Long id, @RequestBody NewsArticle n) {
+        n.setId(id);
+        news.findById(id).ifPresent(e -> n.setCreatedAt(e.getCreatedAt()));
+        NewsArticle saved = news.save(n);
+        changed();
+        return saved;
+    }
+
+    @DeleteMapping("/news/{id}")
+    public Map<String, Object> deleteNews(@PathVariable Long id) {
+        news.deleteById(id);
+        changed();
+        return ok();
+    }
+
     // ---- submissions inbox ----
     @GetMapping("/submissions")
     public List<Submission> listSubmissions() {
@@ -325,11 +362,45 @@ public class AdminController {
         if (dot >= 0 && dot < original.length() - 1) {
             ext = original.substring(dot).replaceAll("[^A-Za-z0-9.]", "");
         }
+        return storeUpload(file, "/uploads/");
+    }
+
+    // ---- video upload (news) ----
+    @PostMapping(value = "/uploads/video", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Map<String, Object>> uploadVideo(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()) return ResponseEntity.badRequest().body(Map.of("ok", false, "message", "Empty file"));
+        String ct = file.getContentType();
+        if (ct == null || !ct.startsWith("video/")) {
+            return ResponseEntity.badRequest().body(Map.of("ok", false, "message", "Only video files are allowed"));
+        }
+        return storeUpload(file, "/uploads/");
+    }
+
+    // ---- document upload (news) ----
+    @PostMapping(value = "/uploads/document", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Map<String, Object>> uploadDocument(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()) return ResponseEntity.badRequest().body(Map.of("ok", false, "message", "Empty file"));
+        String original = file.getOriginalFilename() == null ? "" : file.getOriginalFilename().toLowerCase();
+        Set<String> allowed = Set.of(".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".txt", ".csv", ".zip");
+        boolean okExt = allowed.stream().anyMatch(original::endsWith);
+        if (!okExt) {
+            return ResponseEntity.badRequest().body(Map.of("ok", false, "message", "Allowed documents: PDF, DOC(X), XLS(X), PPT(X), TXT, CSV, ZIP"));
+        }
+        return storeUpload(file, "/uploads/");
+    }
+
+    private ResponseEntity<Map<String, Object>> storeUpload(MultipartFile file, String urlPrefix) throws IOException {
+        String original = file.getOriginalFilename() == null ? "file" : file.getOriginalFilename();
+        String ext = "";
+        int dot = original.lastIndexOf('.');
+        if (dot >= 0 && dot < original.length() - 1) {
+            ext = original.substring(dot).replaceAll("[^A-Za-z0-9.]", "");
+        }
         String name = UUID.randomUUID().toString().replace("-", "") + ext;
         Path uploads = Paths.get(dataDir, "uploads");
         Files.createDirectories(uploads);
         file.transferTo(uploads.resolve(name).toAbsolutePath());
-        return ResponseEntity.ok(Map.of("ok", true, "path", "/uploads/" + name));
+        return ResponseEntity.ok(Map.of("ok", true, "path", urlPrefix + name));
     }
 
     // ---- backups ----

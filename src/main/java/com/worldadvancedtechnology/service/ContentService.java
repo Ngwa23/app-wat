@@ -2,6 +2,7 @@ package com.worldadvancedtechnology.service;
 
 import com.worldadvancedtechnology.entity.EmployeeSpotlight;
 import com.worldadvancedtechnology.entity.JobOpening;
+import com.worldadvancedtechnology.entity.NewsArticle;
 import com.worldadvancedtechnology.entity.Review;
 import com.worldadvancedtechnology.entity.ServiceItem;
 import com.worldadvancedtechnology.entity.SiteCounters;
@@ -11,6 +12,7 @@ import com.worldadvancedtechnology.entity.TextOverride;
 import com.worldadvancedtechnology.entity.WorkItem;
 import com.worldadvancedtechnology.repo.EmployeeSpotlightRepository;
 import com.worldadvancedtechnology.repo.JobOpeningRepository;
+import com.worldadvancedtechnology.repo.NewsArticleRepository;
 import com.worldadvancedtechnology.repo.ReviewRepository;
 import com.worldadvancedtechnology.repo.ServiceItemRepository;
 import com.worldadvancedtechnology.repo.SiteCountersRepository;
@@ -46,12 +48,13 @@ public class ContentService {
     private final EmployeeSpotlightRepository spotlight;
     private final ReviewRepository reviews;
     private final SiteCountersRepository counters;
+    private final NewsArticleRepository news;
 
     public ContentService(SiteSettingRepository settings, TextOverrideRepository overrides,
                           ServiceItemRepository services, TeamMemberRepository team,
                           WorkItemRepository work, JobOpeningRepository jobs,
                           EmployeeSpotlightRepository spotlight, ReviewRepository reviews,
-                          SiteCountersRepository counters) {
+                          SiteCountersRepository counters, NewsArticleRepository news) {
         this.settings = settings;
         this.overrides = overrides;
         this.services = services;
@@ -61,6 +64,7 @@ public class ContentService {
         this.spotlight = spotlight;
         this.reviews = reviews;
         this.counters = counters;
+        this.news = news;
     }
 
     /** Clears the cached public payload; called whenever content changes. */
@@ -80,7 +84,26 @@ public class ContentService {
         out.put("jobs", jobs.findAllByOrderBySortOrderAsc().stream().map(this::job).toList());
         out.put("spotlight", spotlightMap());
         out.put("engagement", engagementMap());
+        out.put("news", news.findByPublishedTrueOrderBySortOrderAscCreatedAtDesc().stream().map(this::newsItem).toList());
         return out;
+    }
+
+    private Map<String, Object> newsItem(NewsArticle n) {
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("id", n.getId());
+        m.put("date", n.getDate());
+        m.put("video", n.getVideoPath());
+        m.put("document", n.getDocumentPath());
+        List<String> imgs = new java.util.ArrayList<>();
+        if (n.getImages() != null) {
+            for (String p : n.getImages().split("\\|")) {
+                if (p != null && !p.isBlank()) imgs.add(p.trim());
+            }
+        }
+        m.put("images", imgs);
+        m.put("title", loc(n.getTitleEn(), n.getTitleFr(), n.getTitleEs(), n.getTitleDe()));
+        m.put("body", loc(n.getBodyEn(), n.getBodyFr(), n.getBodyEs(), n.getBodyDe()));
+        return m;
     }
 
     private Map<String, Object> engagementMap() {
