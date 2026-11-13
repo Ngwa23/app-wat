@@ -1,0 +1,317 @@
+{
+  "services": [
+    {
+      "order": 0,
+      "ctaType": "contact",
+      "titleKey": "svc1.title",
+      "descKey": "svc1.desc",
+      "detailsKey": "det1",
+      "iconSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z\"/></svg>"
+    },
+    {
+      "order": 1,
+      "ctaType": "contact",
+      "titleKey": "svc2.title",
+      "descKey": "svc2.desc",
+      "detailsKey": "det2",
+      "iconSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 8a4 4 0 1 0 3.3 6.2L12 12l1.7-2.2A4 4 0 1 1 17 16a4 4 0 0 1-3.3-1.8L12 12l-1.7 2.2A4 4 0 0 1 7 16a4 4 0 0 1 0-8z\"/></svg>"
+    },
+    {
+      "order": 2,
+      "ctaType": "voip",
+      "titleKey": "svc3.title",
+      "descKey": "svc3.desc",
+      "detailsKey": "det3",
+      "iconSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>"
+    },
+    {
+      "order": 3,
+      "ctaType": "contact",
+      "titleKey": "svc4.title",
+      "descKey": "svc4.desc",
+      "detailsKey": "det4",
+      "iconSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"8.5\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><path d=\"M6.5 10v2.5a1.5 1.5 0 0 0 1.5 1.5M17.5 10v2.5a1.5 1.5 0 0 1-1.5 1.5\"/></svg>"
+    },
+    {
+      "order": 4,
+      "ctaType": "contact",
+      "titleKey": "svc5.title",
+      "descKey": "svc5.desc",
+      "detailsKey": "det5",
+      "iconSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m8 9-3 3 3 3M16 9l3 3-3 3M13.5 6l-3 12\"/></svg>"
+    },
+    {
+      "order": 5,
+      "ctaType": "contact",
+      "titleKey": "svc6.title",
+      "descKey": "svc6.desc",
+      "detailsKey": "det6",
+      "iconSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 15 15 5M2 12l4-4 6 6-4 4zM13 11l3-3M9 7l3-3\"/><path d=\"M16 16a4 4 0 0 1 4 4M14 20a2 2 0 0 1 2 2\"/></svg>"
+    },
+    {
+      "order": 6,
+      "ctaType": "contact",
+      "titleKey": "svc7.title",
+      "descKey": "svc7.desc",
+      "detailsKey": "det7",
+      "iconSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M2 9a15 15 0 0 1 20 0\"/><circle cx=\"12\" cy=\"19.5\" r=\"1\"/></svg>"
+    }
+  ],
+  "work": [
+    {
+      "order": 0,
+      "full": "/images/work/cloud.svg",
+      "thumb": "/images/work/cloud.svg",
+      "catKey": "work.19.c",
+      "titleKey": "work.19.t"
+    },
+    {
+      "order": 1,
+      "full": "/images/work/devops.svg",
+      "thumb": "/images/work/devops.svg",
+      "catKey": "work.20.c",
+      "titleKey": "work.20.t"
+    },
+    {
+      "order": 2,
+      "full": "/images/work/work01.jpg",
+      "thumb": "/images/work/work01-t.jpg",
+      "catKey": "work.1.c",
+      "titleKey": "work.1.t"
+    },
+    {
+      "order": 3,
+      "full": "/images/work/work02.jpg",
+      "thumb": "/images/work/work02-t.jpg",
+      "catKey": "work.2.c",
+      "titleKey": "work.2.t"
+    },
+    {
+      "order": 4,
+      "full": "/images/work/work03.jpg",
+      "thumb": "/images/work/work03-t.jpg",
+      "catKey": "work.3.c",
+      "titleKey": "work.3.t"
+    },
+    {
+      "order": 5,
+      "full": "/images/work/work04.jpg",
+      "thumb": "/images/work/work04-t.jpg",
+      "catKey": "work.4.c",
+      "titleKey": "work.4.t"
+    },
+    {
+      "order": 6,
+      "full": "/images/work/work05.jpg",
+      "thumb": "/images/work/work05-t.jpg",
+      "catKey": "work.5.c",
+      "titleKey": "work.5.t"
+    },
+    {
+      "order": 7,
+      "full": "/images/work/work06.jpg",
+      "thumb": "/images/work/work06-t.jpg",
+      "catKey": "work.6.c",
+      "titleKey": "work.6.t"
+    },
+    {
+      "order": 8,
+      "full": "/images/work/work07.jpg",
+      "thumb": "/images/work/work07-t.jpg",
+      "catKey": "work.7.c",
+      "titleKey": "work.7.t"
+    },
+    {
+      "order": 9,
+      "full": "/images/work/work08.jpg",
+      "thumb": "/images/work/work08-t.jpg",
+      "catKey": "work.8.c",
+      "titleKey": "work.8.t"
+    },
+    {
+      "order": 10,
+      "full": "/images/work/work09.jpg",
+      "thumb": "/images/work/work09-t.jpg",
+      "catKey": "work.9.c",
+      "titleKey": "work.9.t"
+    },
+    {
+      "order": 11,
+      "full": "/images/work/work10.jpg",
+      "thumb": "/images/work/work10-t.jpg",
+      "catKey": "work.10.c",
+      "titleKey": "work.10.t"
+    },
+    {
+      "order": 12,
+      "full": "/images/work/work11.jpg",
+      "thumb": "/images/work/work11-t.jpg",
+      "catKey": "work.11.c",
+      "titleKey": "work.11.t"
+    },
+    {
+      "order": 13,
+      "full": "/images/work/work12.jpg",
+      "thumb": "/images/work/work12-t.jpg",
+      "catKey": "work.12.c",
+      "titleKey": "work.12.t"
+    },
+    {
+      "order": 14,
+      "full": "/images/work/p1.jpg",
+      "thumb": "/images/work/p1-t.jpg",
+      "catKey": "work.13.c",
+      "titleKey": "work.13.t"
+    },
+    {
+      "order": 15,
+      "full": "/images/work/p2.jpg",
+      "thumb": "/images/work/p2-t.jpg",
+      "catKey": "work.14.c",
+      "titleKey": "work.14.t"
+    },
+    {
+      "order": 16,
+      "full": "/images/work/p3.jpg",
+      "thumb": "/images/work/p3-t.jpg",
+      "catKey": "work.15.c",
+      "titleKey": "work.15.t"
+    },
+    {
+      "order": 17,
+      "full": "/images/work/p4.jpg",
+      "thumb": "/images/work/p4-t.jpg",
+      "catKey": "work.16.c",
+      "titleKey": "work.16.t"
+    },
+    {
+      "order": 18,
+      "full": "/images/work/p5.jpg",
+      "thumb": "/images/work/p5-t.jpg",
+      "catKey": "work.17.c",
+      "titleKey": "work.17.t"
+    },
+    {
+      "order": 19,
+      "full": "/images/work/p6.jpg",
+      "thumb": "/images/work/p6-t.jpg",
+      "catKey": "work.18.c",
+      "titleKey": "work.18.t"
+    }
+  ],
+  "jobs": [
+    {
+      "order": 0,
+      "titleKey": "j1.title",
+      "location": "Yaoundé",
+      "type": "Full-time"
+    },
+    {
+      "order": 1,
+      "titleKey": "j2.title",
+      "location": "Yaoundé",
+      "type": "Full-time"
+    },
+    {
+      "order": 2,
+      "titleKey": "j3.title",
+      "location": "Yaoundé",
+      "type": "Full-time"
+    },
+    {
+      "order": 3,
+      "titleKey": "j4.title",
+      "location": "Yaoundé",
+      "type": "Full-time"
+    },
+    {
+      "order": 4,
+      "titleKey": "j5.title",
+      "location": "Yaoundé",
+      "type": "Full-time"
+    }
+  ],
+  "team": [
+    {
+      "order": 0,
+      "name": "NGWA CLOVIS OCHANG",
+      "roleKey": "role.ceo",
+      "roleEn": null,
+      "image": "/images/team/ceo4.jpg",
+      "badge": "CEO",
+      "lead": true
+    },
+    {
+      "order": 1,
+      "name": "EMILE NKEH",
+      "roleKey": "role.itm",
+      "roleEn": null,
+      "image": "/images/team/em.jpg",
+      "badge": "IT MGR",
+      "lead": true
+    },
+    {
+      "order": 2,
+      "name": "NDAM CALEB AKORO",
+      "roleKey": null,
+      "roleEn": "DevOps Engineer & Team Lead",
+      "image": "/images/team/cal.jpg",
+      "badge": "LEAD",
+      "lead": true
+    },
+    {
+      "order": 3,
+      "name": "ANDY",
+      "roleKey": null,
+      "roleEn": "AWS Cloud Engineer & Team Lead",
+      "image": "/images/team/andy.jpg",
+      "badge": "LEAD",
+      "lead": true
+    },
+    {
+      "order": 4,
+      "name": "Asakeze P. Bradley",
+      "roleKey": null,
+      "roleEn": "AWS Cloud Engineer",
+      "image": "/images/team/brad.jpg",
+      "badge": null,
+      "lead": false
+    },
+    {
+      "order": 5,
+      "name": "BULA M. CHRISTIAN",
+      "roleKey": null,
+      "roleEn": "Network Administrator",
+      "image": "/images/team/bu.jpg",
+      "badge": null,
+      "lead": false
+    },
+    {
+      "order": 6,
+      "name": "TANDU YANMICK",
+      "roleKey": "role.dev",
+      "roleEn": null,
+      "image": "/images/team/yam.jpg",
+      "badge": null,
+      "lead": false
+    },
+    {
+      "order": 7,
+      "name": "YAMBAH N. CABREL",
+      "roleKey": "role.dev",
+      "roleEn": null,
+      "image": "/images/team/zin.jpg",
+      "badge": null,
+      "lead": false
+    },
+    {
+      "order": 8,
+      "name": "MRS CLEO",
+      "roleKey": "role.dev",
+      "roleEn": null,
+      "image": "/images/team/cleo.jpg",
+      "badge": null,
+      "lead": false
+    }
+  ]
+}

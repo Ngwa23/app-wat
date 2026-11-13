@@ -1,8 +1,45 @@
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/WatWebsiteApplication.java
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/api/ApiExceptionHandler.java
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/api/ApiResult.java
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/api/FormController.java
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/config/WebConfig.java
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/dto/ContactRequest.java
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/dto/JobApplicationRequest.java
-/Users/ngwaochang/Desktop/app-wat/src/main/java/com/worldadvancedtechnology/service/NotificationService.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/WatWebsiteApplication.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/AdminController.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/AdminExtrasController.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/ApiExceptionHandler.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/ApiResult.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/FeedbackController.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/FormController.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/PublicContentController.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/api/UserController.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/config/DataSeeder.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/config/SecurityConfig.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/config/WebConfig.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/dto/ContactRequest.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/dto/JobApplicationRequest.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/AdminUser.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/EmployeeSpotlight.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/JobOpening.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/Review.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/ServiceItem.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/SiteCounters.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/SiteSetting.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/Submission.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/TeamMember.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/TextOverride.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/VisitStat.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/entity/WorkItem.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/AdminUserRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/EmployeeSpotlightRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/JobOpeningRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/ReviewRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/ServiceItemRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/SiteCountersRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/SiteSettingRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/SubmissionRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/TeamMemberRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/TextOverrideRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/VisitStatRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/repo/WorkItemRepository.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/service/AdminUserService.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/service/BackupService.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/service/ContentEvents.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/service/ContentService.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/service/EngagementService.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/service/NotificationService.java
+/Users/ngwaochang/Desktop/CLAUDE PROJECT:PROMPTS/app-wat-project/app-wat/src/main/java/com/worldadvancedtechnology/service/StatsService.java

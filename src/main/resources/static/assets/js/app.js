@@ -80,7 +80,7 @@
       "pay.call": "Call", "pay.email": "Email for Invoice",
       "career.label": "Join Our Team", "career.title": "We Are Hiring", "career.sub": "World Advanced Technology is growing — join our passionate team.",
       "j1.title": "Senior DevOps Engineer", "j2.title": "AWS Cloud Engineer", "j3.title": "Network Engineer (Cisco)", "j4.title": "VoIP Technician", "j5.title": "Full-Stack Web Developer",
-      "career.apply": "Apply", "job.title": "Apply for a Position", "job.exp": "Years of Experience", "job.pos": "Position *", "job.cover": "Cover Letter / Message *", "job.apply": "Submit Application",
+      "career.apply": "Apply", "job.title": "Apply for a Position", "job.exp": "Years of Experience", "job.pos": "Position *", "job.cover": "Cover Letter / Message *", "job.apply": "Submit Application", "job.cv": "CV / Résumé (PDF, DOC, DOCX) *",
       "career.email": "Or send your CV to: worldadvancedtechnology23@gmail.com",
       "contact.label": "Get In Touch", "contact.title": "Contact Us", "contact.sub": "We respond within 2 hours — 24/7 support available.",
       "f.name": "Full Name *", "f.email": "Email *", "f.phone": "Phone", "f.service": "Service Needed", "f.subject": "Subject *", "f.message": "Message *", "f.send": "Send Message",
@@ -170,7 +170,7 @@
       "pay.call": "Appeler", "pay.email": "Email pour Facture",
       "career.label": "Rejoignez-Nous", "career.title": "Nous Recrutons", "career.sub": "World Advanced Technology grandit — rejoignez notre équipe passionnée.",
       "j1.title": "Ingénieur DevOps Senior", "j2.title": "Ingénieur AWS Cloud", "j3.title": "Ingénieur Réseau (Cisco)", "j4.title": "Technicien VoIP", "j5.title": "Développeur Web Full-Stack",
-      "career.apply": "Postuler", "job.title": "Postuler à un Poste", "job.exp": "Années d'Expérience", "job.pos": "Poste *", "job.cover": "Lettre de Motivation / Message *", "job.apply": "Envoyer la Candidature",
+      "career.apply": "Postuler", "job.title": "Postuler à un Poste", "job.exp": "Années d'Expérience", "job.pos": "Poste *", "job.cover": "Lettre de Motivation / Message *", "job.apply": "Envoyer la Candidature", "job.cv": "CV (PDF, DOC, DOCX) *",
       "career.email": "Ou envoyez votre CV à : worldadvancedtechnology23@gmail.com",
       "contact.label": "Contactez-Nous", "contact.title": "Contact", "contact.sub": "Nous répondons en moins de 2 heures — support 24/7 disponible.",
       "f.name": "Nom Complet *", "f.email": "Email *", "f.phone": "Téléphone", "f.service": "Service Souhaité", "f.subject": "Sujet *", "f.message": "Message *", "f.send": "Envoyer le Message",
@@ -260,7 +260,7 @@
       "pay.call": "Llamar", "pay.email": "Email para Factura",
       "career.label": "Únase a Nosotros", "career.title": "Estamos Contratando", "career.sub": "World Advanced Technology está creciendo — únase a nuestro apasionado equipo.",
       "j1.title": "Ingeniero DevOps Senior", "j2.title": "Ingeniero Cloud AWS", "j3.title": "Ingeniero de Redes (Cisco)", "j4.title": "Técnico VoIP", "j5.title": "Desarrollador Full-Stack",
-      "career.apply": "Aplicar", "job.title": "Solicitar un Puesto", "job.exp": "Años de Experiencia", "job.pos": "Puesto *", "job.cover": "Carta de Presentación / Mensaje *", "job.apply": "Enviar Solicitud",
+      "career.apply": "Aplicar", "job.title": "Solicitar un Puesto", "job.exp": "Años de Experiencia", "job.pos": "Puesto *", "job.cover": "Carta de Presentación / Mensaje *", "job.apply": "Enviar Solicitud", "job.cv": "CV / Currículum (PDF, DOC, DOCX) *",
       "career.email": "O envíe su CV a: worldadvancedtechnology23@gmail.com",
       "contact.label": "Contáctenos", "contact.title": "Contáctenos", "contact.sub": "Respondemos en menos de 2 horas — soporte 24/7 disponible.",
       "f.name": "Nombre Completo *", "f.email": "Email *", "f.phone": "Teléfono", "f.service": "Servicio Deseado", "f.subject": "Asunto *", "f.message": "Mensaje *", "f.send": "Enviar Mensaje",
@@ -350,7 +350,7 @@
       "pay.call": "Anrufen", "pay.email": "E-Mail für Rechnung",
       "career.label": "Werden Sie Teil des Teams", "career.title": "Wir Stellen Ein", "career.sub": "World Advanced Technology wächst — treten Sie unserem leidenschaftlichen Team bei.",
       "j1.title": "Senior DevOps-Ingenieur", "j2.title": "AWS Cloud-Ingenieur", "j3.title": "Netzwerkingenieur (Cisco)", "j4.title": "VoIP-Techniker", "j5.title": "Full-Stack-Entwickler",
-      "career.apply": "Bewerben", "job.title": "Auf eine Stelle Bewerben", "job.exp": "Jahre Berufserfahrung", "job.pos": "Position *", "job.cover": "Anschreiben / Nachricht *", "job.apply": "Bewerbung Einreichen",
+      "career.apply": "Bewerben", "job.title": "Auf eine Stelle Bewerben", "job.exp": "Jahre Berufserfahrung", "job.pos": "Position *", "job.cover": "Anschreiben / Nachricht *", "job.apply": "Bewerbung Einreichen", "job.cv": "Lebenslauf (PDF, DOC, DOCX) *",
       "career.email": "Oder senden Sie Ihren Lebenslauf an: worldadvancedtechnology23@gmail.com",
       "contact.label": "Kontakt", "contact.title": "Kontaktieren Sie Uns", "contact.sub": "Wir antworten innerhalb von 2 Stunden — 24/7-Support verfügbar.",
       "f.name": "Vollständiger Name *", "f.email": "E-Mail *", "f.phone": "Telefon", "f.service": "Gewünschter Dienst", "f.subject": "Betreff *", "f.message": "Nachricht *", "f.send": "Nachricht Senden",
@@ -395,8 +395,315 @@
     if (refreshOpenModal) refreshOpenModal();
   }
 
+  /* ---------------- dynamic content from the admin store ----------------
+     The public page fetches /api/content and (1) merges admin text overrides
+     into the i18n dictionary, (2) renders the services / team / work / jobs
+     collections from the database, injecting their localized text under
+     dedicated keys so applyLang() handles language switching, and (3) hides
+     any section the admin has toggled off. If the fetch fails the page simply
+     falls back to its built-in static content. All of this runs BEFORE
+     initSite() so every event handler binds to the freshly rendered nodes. */
+  var LANGS = ["en", "fr", "es", "de"];
+
+  function escHtml(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function injectText(key, loc) {
+    var en = (loc && loc.en != null) ? loc.en : "";
+    LANGS.forEach(function (l) {
+      var v = (loc && loc[l] != null && loc[l] !== "") ? loc[l] : en;
+      if (!T[l]) T[l] = {};
+      T[l][key] = v;
+    });
+  }
+
+  function mergeOverrides(ov) {
+    if (!ov) return;
+    LANGS.forEach(function (l) {
+      var o = ov[l];
+      if (!o) return;
+      if (!T[l]) T[l] = {};
+      Object.keys(o).forEach(function (k) { if (o[k] != null) T[l][k] = o[k]; });
+    });
+  }
+
+  function renderServices(list) {
+    var grid = document.querySelector("#services .svc-grid");
+    if (!grid || !list) return;
+    grid.innerHTML = "";
+    list.filter(function (s) { return s.visible; }).forEach(function (s, idx) {
+      injectText("svc" + s.id + ".title", s.title);
+      injectText("svc" + s.id + ".desc", s.desc);
+      injectText("det" + s.id, s.details);
+      var href = s.cta === "voip" ? "#voip" : "#contact";
+      var linkKey = s.cta === "voip" ? "svc3.cta" : "svc.learn";
+      var card = document.createElement("div");
+      card.className = "card svc tilt reveal";
+      card.style.setProperty("--i", idx % 3);
+      card.innerHTML =
+        '<div class="svc-ic">' + (s.icon || "") + '</div>' +
+        '<h3 data-i18n="svc' + s.id + '.title"></h3>' +
+        '<p data-i18n="svc' + s.id + '.desc"></p>' +
+        '<a class="svc-link" href="' + href + '" data-svc="' + s.id + '" data-i18n="' + linkKey + '"></a>';
+      grid.appendChild(card);
+    });
+  }
+
+  function renderTeam(list) {
+    var leads = document.querySelector("#team .team-leads");
+    var devs = document.querySelector("#team .team-devs");
+    if (!leads || !devs || !list) return;
+    leads.innerHTML = ""; devs.innerHTML = "";
+    var li = 0, di = 0;
+    list.filter(function (m) { return m.visible; }).forEach(function (m) {
+      injectText("dteam." + m.id + ".role", m.role);
+      var card = document.createElement("div");
+      var idx = m.lead ? li++ : di++;
+      card.className = "card member" + (m.lead ? "" : " dev") + " tilt reveal";
+      card.style.setProperty("--i", idx);
+      var html = '<img src="' + escHtml(m.image || "") + '" alt="' + escHtml(m.name) + '" loading="lazy">' +
+        '<h4>' + escHtml(m.name) + '</h4><p data-i18n="dteam.' + m.id + '.role"></p>';
+      if (m.lead && m.badge) html += '<span class="badge">' + escHtml(m.badge) + '</span>';
+      card.innerHTML = html;
+      (m.lead ? leads : devs).appendChild(card);
+    });
+  }
+
+  function renderWork(list) {
+    var track = document.getElementById("workTrack");
+    if (!track || !list) return;
+    track.innerHTML = "";
+    list.filter(function (w) { return w.visible; }).forEach(function (w, idx) {
+      injectText("dwork." + w.id + ".t", w.title);
+      injectText("dwork." + w.id + ".c", w.cat);
+      var fig = document.createElement("figure");
+      fig.className = "work-item reveal";
+      fig.style.setProperty("--i", idx % 3);
+      fig.innerHTML =
+        '<button type="button" class="work-open" data-full="' + escHtml(w.full || "") + '">' +
+          '<img src="' + escHtml(w.thumb || "") + '" alt="' + escHtml((w.title && w.title.en) || "") + '" loading="lazy">' +
+          '<span class="work-cat" data-i18n="dwork.' + w.id + '.c"></span>' +
+          '<figcaption class="work-cap" data-i18n="dwork.' + w.id + '.t"></figcaption>' +
+        '</button>';
+      track.appendChild(fig);
+    });
+  }
+
+  function renderJobs(list) {
+    if (!list) return;
+    var active = list.filter(function (j) { return j.active; });
+    var jobList = document.querySelector("#careers .job-list");
+    if (jobList) {
+      jobList.innerHTML = "";
+      active.forEach(function (j) {
+        injectText("djob." + j.id + ".title", j.title);
+        var loc = [j.location, j.type].filter(Boolean).join(" · ");
+        var row = document.createElement("div");
+        row.className = "card job";
+        row.innerHTML =
+          '<div><h4 data-i18n="djob.' + j.id + '.title"></h4><span>' + escHtml(loc) + '</span></div>' +
+          '<button data-job="' + escHtml((j.title && j.title.en) || "") + '" data-i18n="career.apply"></button>';
+        jobList.appendChild(row);
+      });
+    }
+    var sel = document.getElementById("careerPosition");
+    if (sel) {
+      sel.innerHTML = '<option value="">Select a position…</option>';
+      active.forEach(function (j) {
+        var v = (j.title && j.title.en) || "";
+        var o = document.createElement("option");
+        o.value = v; o.textContent = v;
+        sel.appendChild(o);
+      });
+    }
+  }
+
+  function applyVisibility(vis) {
+    if (!vis) return;
+    Object.keys(vis).forEach(function (id) {
+      if (vis[id]) return;
+      var sec = document.getElementById(id);
+      if (sec) sec.style.display = "none";
+      var nav = document.querySelector('#navLinks a[href="#' + id + '"]');
+      if (nav) {
+        var li = nav.closest("li");
+        (li || nav).style.display = "none";
+      }
+    });
+  }
+
+  var SPOT_LABEL = {
+    en: { MONTH: "Employee of the Month", WEEK: "Employee of the Week" },
+    fr: { MONTH: "Employé du mois", WEEK: "Employé de la semaine" },
+    es: { MONTH: "Empleado del mes", WEEK: "Empleado de la semana" },
+    de: { MONTH: "Mitarbeiter des Monats", WEEK: "Mitarbeiter der Woche" }
+  };
+  function renderSpotlight(sp) {
+    var sec = document.getElementById("spotlight");
+    if (!sec) return;
+    if (!sp || !sp.enabled) { sec.style.display = "none"; return; }
+    sec.style.display = "";
+    var period = sp.period === "WEEK" ? "WEEK" : "MONTH";
+    LANGS.forEach(function (l) {
+      if (!T[l]) T[l] = {};
+      T[l]["dspot.period"] = (SPOT_LABEL[l] || SPOT_LABEL.en)[period];
+    });
+    injectText("dspot.role", sp.role);
+    injectText("dspot.citation", sp.citation);
+    var nameEl = document.getElementById("spotName");
+    if (nameEl) nameEl.textContent = sp.name || "";
+    var img = document.getElementById("spotImg");
+    if (img) { img.src = sp.image || ""; img.alt = sp.name || ""; }
+  }
+
+  var REVIEW_UI = {
+    en: { label: "Your Feedback", title: "Reviews & Ratings", sub: "Rate us, leave a comment, or react — we value your opinion.",
+          formTitle: "Leave a review", name: "Your name", rating: "Your rating *", comment: "Your comment *",
+          send: "Submit review", none: "No reviews yet", word: "reviews", pending: "awaiting approval" },
+    fr: { label: "Votre Avis", title: "Avis & Notes", sub: "Notez-nous, laissez un commentaire ou réagissez — votre avis compte.",
+          formTitle: "Laisser un avis", name: "Votre nom", rating: "Votre note *", comment: "Votre commentaire *",
+          send: "Envoyer l'avis", none: "Aucun avis pour le moment", word: "avis", pending: "en attente d'approbation" },
+    es: { label: "Tu Opinión", title: "Reseñas y Valoraciones", sub: "Valóranos, deja un comentario o reacciona — tu opinión cuenta.",
+          formTitle: "Deja una reseña", name: "Tu nombre", rating: "Tu valoración *", comment: "Tu comentario *",
+          send: "Enviar reseña", none: "Aún no hay reseñas", word: "reseñas", pending: "pendiente de aprobación" },
+    de: { label: "Ihr Feedback", title: "Bewertungen", sub: "Bewerten Sie uns, hinterlassen Sie einen Kommentar oder reagieren Sie.",
+          formTitle: "Bewertung abgeben", name: "Ihr Name", rating: "Ihre Bewertung *", comment: "Ihr Kommentar *",
+          send: "Bewertung senden", none: "Noch keine Bewertungen", word: "Bewertungen", pending: "wartet auf Freigabe" }
+  };
+  function stars(n) {
+    n = Math.round(n || 0);
+    return "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
+  }
+  function renderEngagement(e) {
+    // localized labels for the section
+    LANGS.forEach(function (l) {
+      var u = REVIEW_UI[l] || REVIEW_UI.en;
+      if (!T[l]) T[l] = {};
+      T[l]["rev.label"] = u.label; T[l]["rev.title"] = u.title; T[l]["rev.sub"] = u.sub;
+      T[l]["rev.formTitle"] = u.formTitle; T[l]["rev.name"] = u.name; T[l]["rev.rating"] = u.rating;
+      T[l]["rev.comment"] = u.comment; T[l]["rev.send"] = u.send; T[l]["rev.none"] = u.none;
+    });
+    if (!e) return;
+    var ui = REVIEW_UI[current] || REVIEW_UI.en;
+    var avgEl = document.getElementById("revAvg"); if (avgEl) avgEl.textContent = (e.ratingAvg || 0).toFixed(1);
+    var stEl = document.getElementById("revStars"); if (stEl) stEl.textContent = stars(e.ratingAvg);
+    var cntEl = document.getElementById("revCount");
+    if (cntEl) {
+      if (e.ratingCount) { cntEl.removeAttribute("data-i18n"); cntEl.textContent = e.ratingCount + " " + ui.word; }
+      else { cntEl.setAttribute("data-i18n", "rev.none"); cntEl.textContent = ui.none; }
+    }
+    var lk = document.getElementById("revLikes"); if (lk) lk.textContent = e.likes || 0;
+    var dl = document.getElementById("revDislikes"); if (dl) dl.textContent = e.dislikes || 0;
+    // mark already-voted
+    var voted = null; try { voted = localStorage.getItem("wat-reacted"); } catch (x) {}
+    var likeBtn = document.getElementById("revLike"), disBtn = document.getElementById("revDislike");
+    if (likeBtn) likeBtn.classList.toggle("voted", voted === "like");
+    if (disBtn) disBtn.classList.toggle("voted", voted === "dislike");
+    // list
+    var list = document.getElementById("revList");
+    if (list) {
+      var items = e.reviews || [];
+      if (!items.length) { list.innerHTML = '<div class="rev-empty" data-i18n="rev.none">' + escHtml(ui.none) + '</div>'; }
+      else {
+        list.innerHTML = items.map(function (r) {
+          var d = ""; try { d = new Date(r.date).toLocaleDateString(); } catch (x) {}
+          return '<div class="rev-item"><div class="rev-head"><span class="rev-name">' + escHtml(r.name || "Anonymous") +
+            '</span><span class="rev-item-stars">' + stars(r.rating) + '</span></div>' +
+            '<p>' + escHtml(r.comment || "") + '</p><div class="rev-date">' + escHtml(d) + '</div></div>';
+        }).join("");
+      }
+    }
+  }
+
+  function applyContent(data) {
+    if (!data) return;
+    mergeOverrides(data.overrides);
+    renderServices(data.services);
+    renderTeam(data.team);
+    renderWork(data.work);
+    renderJobs(data.jobs);
+    renderSpotlight(data.spotlight);
+    renderEngagement(data.engagement);
+    applyVisibility(data.visibility);
+  }
+
+  function fetchContent() {
+    return fetch("/api/content", { headers: { "Accept": "application/json" } })
+      .then(function (r) { return r.ok ? r.json() : null; });
+  }
+
+  /* ---- re-usable dynamic wiring (so live updates keep interactivity) ---- */
+  var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canTilt = !prefersReduced && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  function bindTilt() {
+    if (!canTilt) return;
+    document.querySelectorAll(".tilt, .work-open").forEach(function (card) {
+      if (card.dataset.tiltBound) return;
+      card.dataset.tiltBound = "1";
+      var isWork = card.classList.contains("work-open");
+      var k = isWork ? 16 : 7;
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transition = "transform .08s linear, box-shadow .4s, border-color .35s";
+        card.style.transform = "perspective(820px) rotateY(" + (px * k).toFixed(2) +
+          "deg) rotateX(" + (-py * k).toFixed(2) + "deg) translateY(" + (isWork ? "-6px) scale(1.05)" : "-5px)");
+        if (isWork) {
+          card.style.setProperty("--mx", ((px + 0.5) * 100).toFixed(1) + "%");
+          card.style.setProperty("--my", ((py + 0.5) * 100).toFixed(1) + "%");
+        }
+      });
+      card.addEventListener("pointerleave", function () {
+        card.style.transition = "transform .5s cubic-bezier(.22,1,.36,1), box-shadow .4s, border-color .35s";
+        card.style.transform = "";
+      });
+    });
+  }
+  function showReveal() {
+    document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+  }
+
+  function reapplyContent() {
+    return fetchContent().then(function (data) {
+      if (!data) return;
+      try {
+        applyContent(data);
+        applyLang(current);
+        showReveal();
+        bindTilt();
+      } catch (e) { /* ignore a bad live update */ }
+    });
+  }
+
+  /* ---- live updates: re-render instantly when the admin changes content ---- */
+  function startLiveUpdates() {
+    if (!("EventSource" in window)) return;
+    var timer = null;
+    try {
+      var es = new EventSource("/api/stream");
+      es.addEventListener("changed", function () {
+        clearTimeout(timer);
+        timer = setTimeout(reapplyContent, 120);
+      });
+      es.onerror = function () { /* browser auto-reconnects */ };
+    } catch (e) { /* no live updates */ }
+  }
+
   /* ---------------- init ---------------- */
   document.addEventListener("DOMContentLoaded", function () {
+    fetchContent().then(function (data) {
+      try { applyContent(data); } catch (e) { /* fall back to static content */ }
+      initSite();
+      startLiveUpdates();
+    }).catch(function () { initSite(); });
+  });
+
+  function initSite() {
     applyLang(store.get("wat-lang", "en"));
 
     document.querySelectorAll(".lang-toggle button").forEach(function (btn) {
@@ -461,14 +768,15 @@
     const yr = document.getElementById("year");
     if (yr) yr.textContent = new Date().getFullYear();
 
-    // Careers "Apply" buttons -> prefill position + scroll to form
+    // Careers "Apply" buttons -> prefill position + scroll to form (delegated,
+    // so it keeps working after live re-renders replace the job cards).
     const posSelect = document.getElementById("careerPosition");
-    document.querySelectorAll(".job button[data-job]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        if (posSelect) posSelect.value = btn.getAttribute("data-job");
-        const form = document.getElementById("careerForm");
-        if (form) form.scrollIntoView({ behavior: "smooth", block: "center" });
-      });
+    document.addEventListener("click", function (e) {
+      const btn = e.target.closest(".job button[data-job]");
+      if (!btn) return;
+      if (posSelect) posSelect.value = btn.getAttribute("data-job");
+      const form = document.getElementById("careerForm");
+      if (form) form.scrollIntoView({ behavior: "smooth", block: "center" });
     });
 
     /* ---------- service detail modal ---------- */
@@ -507,13 +815,14 @@
       }
       refreshOpenModal = function () { if (openId) render(openId); };
 
-      document.querySelectorAll(".svc-link[data-svc]").forEach(function (link) {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          const card = link.closest(".svc");
-          const icWrap = card ? card.querySelector(".svc-ic") : null;
-          openModal(link.getAttribute("data-svc"), icWrap ? icWrap.innerHTML : "");
-        });
+      // Delegated so re-rendered service cards keep opening the modal.
+      document.addEventListener("click", function (e) {
+        const link = e.target.closest(".svc-link[data-svc]");
+        if (!link) return;
+        e.preventDefault();
+        const card = link.closest(".svc");
+        const icWrap = card ? card.querySelector(".svc-ic") : null;
+        openModal(link.getAttribute("data-svc"), icWrap ? icWrap.innerHTML : "");
       });
       closeEl.addEventListener("click", closeModal);
       modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
@@ -549,23 +858,10 @@
       })(start);
     });
 
-    // 3D tilt + hero-orbit parallax (fine pointers only)
-    const canTilt = !prefersReduced && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    // 3D tilt on all .tilt / .work-open cards (handled by the reusable bindTilt
+    // so re-rendered cards stay interactive) + hero-orbit parallax.
+    bindTilt();
     if (canTilt) {
-      document.querySelectorAll(".tilt").forEach(function (card) {
-        card.addEventListener("pointerenter", function () { card.style.transition = "transform .06s linear"; });
-        card.addEventListener("pointermove", function (e) {
-          const r = card.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width - 0.5;
-          const py = (e.clientY - r.top) / r.height - 0.5;
-          card.style.transform = "perspective(820px) rotateY(" + (px * 7).toFixed(2) + "deg) rotateX(" + (-py * 7).toFixed(2) + "deg) translateY(-5px)";
-        });
-        card.addEventListener("pointerleave", function () {
-          card.style.transition = "transform .5s cubic-bezier(.22,1,.36,1)";
-          card.style.transform = "";
-        });
-      });
-
       const orbit = document.getElementById("orbit");
       const hero = document.getElementById("hero");
       if (orbit && hero) {
@@ -581,8 +877,7 @@
 
     /* ---------- work gallery lightbox ---------- */
     (function () {
-      var opens = Array.prototype.slice.call(document.querySelectorAll(".work-open"));
-      if (!opens.length) return;
+      function opensList() { return Array.prototype.slice.call(document.querySelectorAll(".work-open")); }
       var X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
       var PREV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>';
       var NEXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
@@ -601,6 +896,8 @@
       var lbCap = lb.querySelector(".wk-lb-cap");
       var cur = 0;
       function show(i) {
+        var opens = opensList();
+        if (!opens.length) return;
         cur = (i + opens.length) % opens.length;
         var btn = opens[cur];
         lbImg.src = btn.getAttribute("data-full");
@@ -610,7 +907,13 @@
       }
       function openLb(i) { show(i); lb.classList.add("open"); lb.setAttribute("aria-hidden", "false"); document.body.classList.add("modal-open"); }
       function closeLb() { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); document.body.classList.remove("modal-open"); }
-      opens.forEach(function (b, i) { b.addEventListener("click", function () { openLb(i); }); });
+      // Delegated click so re-rendered work tiles keep opening the lightbox.
+      var track = document.getElementById("workTrack");
+      if (track) track.addEventListener("click", function (e) {
+        var btn = e.target.closest(".work-open");
+        if (!btn) return;
+        openLb(opensList().indexOf(btn));
+      });
       lb.querySelector(".wk-lb-close").addEventListener("click", closeLb);
       lb.querySelector(".wk-lb-prev").addEventListener("click", function (e) { e.stopPropagation(); show(cur - 1); });
       lb.querySelector(".wk-lb-next").addEventListener("click", function (e) { e.stopPropagation(); show(cur + 1); });
@@ -634,31 +937,116 @@
       if (next) next.addEventListener("click", function () { step(1); });
     })();
 
-    /* ---------- cinematic 3D tilt + glare on work tiles ---------- */
-    if (canTilt) {
-      document.querySelectorAll(".work-open").forEach(function (tile) {
-        tile.addEventListener("pointermove", function (e) {
-          var r = tile.getBoundingClientRect();
-          var px = (e.clientX - r.left) / r.width - 0.5;
-          var py = (e.clientY - r.top) / r.height - 0.5;
-          tile.style.transition = "transform .08s linear, box-shadow .4s, border-color .35s";
-          tile.style.transform = "perspective(820px) rotateY(" + (px * 16).toFixed(2) +
-            "deg) rotateX(" + (-py * 16).toFixed(2) + "deg) translateY(-6px) scale(1.05)";
-          tile.style.setProperty("--mx", ((px + 0.5) * 100).toFixed(1) + "%");
-          tile.style.setProperty("--my", ((py + 0.5) * 100).toFixed(1) + "%");
-        });
-        tile.addEventListener("pointerleave", function () {
-          tile.style.transition = "transform .6s cubic-bezier(.22,1,.36,1), box-shadow .4s, border-color .35s";
-          tile.style.transform = "";
-        });
-      });
-    }
+    // (Work-tile 3D tilt + glare is now handled by bindTilt above.)
 
     wireForm("contactForm", "/api/contact", "contactStatus");
-    wireForm("careerForm", "/api/careers", "careerStatus");
+    wireCareersForm();
+    wireReviews();
+    trackVisit();
 
     initChatbot();
-  });
+  }
+
+  /* ---- reviews: star picker, submit, like/dislike ---- */
+  function wireReviews() {
+    var picker = document.getElementById("starPick");
+    var form = document.getElementById("reviewForm");
+    var selected = 0;
+    if (picker) {
+      var btns = Array.prototype.slice.call(picker.querySelectorAll("button"));
+      var paint = function (n) { btns.forEach(function (b, i) { b.classList.toggle("on", i < n); }); };
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () { selected = parseInt(b.getAttribute("data-v"), 10); paint(selected); });
+        b.addEventListener("mouseenter", function () { paint(parseInt(b.getAttribute("data-v"), 10)); });
+      });
+      picker.addEventListener("mouseleave", function () { paint(selected); });
+    }
+    if (form) {
+      var status = document.getElementById("reviewStatus");
+      var submitBtn = form.querySelector('button[type="submit"]');
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        clearErrors(form);
+        if (!selected) { setStatus(status, false, "Please pick a star rating."); return; }
+        var data = { name: form.name.value.trim(), rating: selected, comment: form.comment.value.trim() };
+        if (!data.comment) { setStatus(status, false, "Please write a comment."); return; }
+        var original = submitBtn ? submitBtn.textContent : "";
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
+        fetch("/api/reviews", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) })
+          .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+          .then(function (res) {
+            if (res.ok && res.body && res.body.ok) {
+              setStatus(status, true, res.body.message || "Thank you!");
+              form.reset(); selected = 0;
+              if (picker) picker.querySelectorAll("button").forEach(function (b) { b.classList.remove("on"); });
+            } else { setStatus(status, false, (res.body && res.body.message) || "Please try again."); }
+          })
+          .catch(function () { setStatus(status, false, "Network error. Please try again."); })
+          .finally(function () { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = original; } });
+      });
+    }
+    function react(type) {
+      var voted = null; try { voted = localStorage.getItem("wat-reacted"); } catch (x) {}
+      if (voted) return; // one reaction per browser
+      fetch("/api/reaction", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ type: type }) })
+        .then(function (r) { return r.json(); })
+        .then(function (c) {
+          var lk = document.getElementById("revLikes"); if (lk) lk.textContent = c.likes;
+          var dl = document.getElementById("revDislikes"); if (dl) dl.textContent = c.dislikes;
+          try { localStorage.setItem("wat-reacted", type); } catch (x) {}
+          var likeBtn = document.getElementById("revLike"), disBtn = document.getElementById("revDislike");
+          if (likeBtn) likeBtn.classList.toggle("voted", type === "like");
+          if (disBtn) disBtn.classList.toggle("voted", type === "dislike");
+        }).catch(function () {});
+    }
+    var likeBtn = document.getElementById("revLike");
+    var disBtn = document.getElementById("revDislike");
+    if (likeBtn) likeBtn.addEventListener("click", function () { react("like"); });
+    if (disBtn) disBtn.addEventListener("click", function () { react("dislike"); });
+  }
+
+  /* ---- visitor tracking (counts a view; unique once per browser per day) ---- */
+  function trackVisit() {
+    var today = new Date().toISOString().slice(0, 10);
+    var last = null; try { last = localStorage.getItem("wat-visit-day"); } catch (x) {}
+    var unique = last !== today;
+    try { localStorage.setItem("wat-visit-day", today); } catch (x) {}
+    fetch("/api/visit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ unique: unique }) }).catch(function () {});
+  }
+
+  /* ---- careers form: multipart submit with CV attachment ---- */
+  function wireCareersForm() {
+    const form = document.getElementById("careerForm");
+    if (!form) return;
+    const status = document.getElementById("careerStatus");
+    const submitBtn = form.querySelector('button[type="submit"]');
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      clearErrors(form);
+      if (status) status.className = "form-status";
+      const fd = new FormData(form); // text fields + the CV file
+      const original = submitBtn ? submitBtn.textContent : "";
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
+      fetch("/api/careers", { method: "POST", body: fd, headers: { "Accept": "application/json" } })
+        .then(function (r) { return r.json().then(function (body) { return { ok: r.ok, body: body }; }); })
+        .then(function (res) {
+          if (res.ok && res.body && res.body.ok) {
+            setStatus(status, true, res.body.message || "Application submitted.");
+            form.reset();
+          } else {
+            const b = res.body || {};
+            if (b.errors && Object.keys(b.errors).length) showErrors(form, b.errors);
+            setStatus(status, false, b.message || "Please check the form and try again.");
+          }
+        })
+        .catch(function () {
+          setStatus(status, false, "Network error. Please reach us on WhatsApp: +237 651 798 173.");
+        })
+        .finally(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = original; }
+        });
+    });
+  }
 
   /* ---------------- forms ---------------- */
   function clearErrors(form) {

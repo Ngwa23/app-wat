@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>WAT Admin · Dashboard</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">W</div><div><strong>WAT Admin</strong><span id="who"></span></div></div>
+    <div class="top-actions">
+      <a class="btn ghost" href="/" target="_blank" rel="noopener">View site ↗</a>
+      <form method="post" action="/admin/logout" style="display:inline">
+        <button class="btn ghost" type="submit">Log out</button>
+      </form>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side" id="tabs">
+      <button class="tab active" data-tab="visibility">Visibility</button>
+      <button class="tab" data-tab="text">Text &amp; Labels</button>
+      <button class="tab" data-tab="services">Services</button>
+      <button class="tab" data-tab="team">Team</button>
+      <button class="tab" data-tab="work">Work</button>
+      <button class="tab" data-tab="jobs">Jobs (Hiring)</button>
+      <button class="tab" data-tab="spotlight">Employee of the Month</button>
+      <button class="tab" data-tab="reviews">Reviews <span class="pill" id="reviewCount"></span></button>
+      <button class="tab" data-tab="stats">Statistics</button>
+      <button class="tab" data-tab="inbox">Inbox <span class="pill" id="inboxCount"></span></button>
+      <button class="tab" data-tab="backup">Backup &amp; Restore</button>
+      <button class="tab admin-only" data-tab="users">Users</button>
+      <button class="tab" data-tab="account">Account</button>
+    </nav>
+
+    <main class="main">
+      <section class="panel active" id="panel-visibility">
+        <h2>Section visibility</h2>
+        <p class="hint">Toggle whole sections of the public site on or off. “We Are Hiring” is the <b>Careers</b> section.</p>
+        <div id="visibilityList" class="toggle-list"></div>
+      </section>
+
+      <section class="panel" id="panel-text">
+        <h2>Text &amp; labels</h2>
+        <p class="hint">Edit any wording on the site. Leave a language blank to use the built-in translation. English is the fallback.</p>
+        <input id="textSearch" class="search" type="search" placeholder="Search text (e.g. hero, contact, price)…">
+        <div id="textList" class="text-list"></div>
+      </section>
+
+      <section class="panel" id="panel-services">
+        <div class="panel-head"><h2>Services</h2><button class="btn gold" data-add="services">+ Add service</button></div>
+        <div id="servicesTable" class="cards"></div>
+      </section>
+
+      <section class="panel" id="panel-team">
+        <div class="panel-head"><h2>Team members</h2><button class="btn gold" data-add="team">+ Add member</button></div>
+        <div id="teamTable" class="cards"></div>
+      </section>
+
+      <section class="panel" id="panel-work">
+        <div class="panel-head"><h2>Work / portfolio</h2><button class="btn gold" data-add="work">+ Add work item</button></div>
+        <div id="workTable" class="cards"></div>
+      </section>
+
+      <section class="panel" id="panel-jobs">
+        <div class="panel-head"><h2>Job openings</h2><button class="btn gold" data-add="jobs">+ Add job</button></div>
+        <div id="jobsTable" class="cards"></div>
+      </section>
+
+      <section class="panel" id="panel-spotlight">
+        <h2>Employee of the Month / Week</h2>
+        <p class="hint">Highlight a team member on the public site. Changes appear live.</p>
+        <form id="spotForm" class="spot-form"></form>
+      </section>
+
+      <section class="panel" id="panel-users">
+        <div class="panel-head"><h2>Users &amp; permissions</h2><button class="btn gold admin-only" id="addUser">+ Add user</button></div>
+        <p class="hint"><b>Admin</b> = full access incl. user management. <b>Editor</b> = edit all site content. <b>Viewer</b> = read-only.</p>
+        <div id="usersTable" class="rows"></div>
+      </section>
+
+      <section class="panel" id="panel-reviews">
+        <div class="panel-head"><h2>Reviews &amp; moderation</h2><button class="btn ghost" id="refreshReviews">Refresh</button></div>
+        <p class="hint">New reviews are hidden until you <b>approve</b> them. Approved reviews show on the public site.</p>
+        <div id="reviewsTable" class="rows"></div>
+      </section>
+
+      <section class="panel" id="panel-stats">
+        <div class="panel-head"><h2>Visitor statistics</h2><button class="btn ghost" id="refreshStats">Refresh</button></div>
+        <div id="statCards" class="stat-cards"></div>
+        <h3 style="margin:1.5rem 0 .6rem;font-size:1rem">Last 14 days</h3>
+        <div id="statChart" class="stat-chart"></div>
+      </section>
+
+      <section class="panel" id="panel-inbox">
+        <div class="panel-head"><h2>Submissions inbox</h2><button class="btn ghost" id="refreshInbox">Refresh</button></div>
+        <div id="inboxTable" class="rows"></div>
+      </section>
+
+      <section class="panel" id="panel-backup">
+        <div class="panel-head"><h2>Backup &amp; restore</h2><button class="btn gold" id="createBackup">Create backup now</button></div>
+        <p class="hint">A backup saves all site content (sections, text, services, team, work, jobs). Restoring replaces current content — a safety backup is taken automatically first.</p>
+        <div id="backupTable" class="rows"></div>
+      </section>
+
+      <section class="panel" id="panel-account">
+        <h2>Change password</h2>
+        <p class="hint">Rotate the superadmin password. You will be signed out afterwards.</p>
+        <form id="pwForm" class="form-narrow">
+          <label>Current password<input type="password" name="current" required></label>
+          <label>New password (min 8 chars)<input type="password" name="next" minlength="8" required></label>
+          <label>Confirm new password<input type="password" name="confirm" minlength="8" required></label>
+          <button class="btn gold" type="submit">Update password</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- edit modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head"><h3 id="modalTitle">Edit</h3><button class="x" id="modalClose">✕</button></div>
+      <form id="modalForm"><div id="modalBody" class="modal-body"></div>
+        <div class="modal-foot"><button type="button" class="btn ghost" id="modalCancel">Cancel</button><button type="submit" class="btn gold">Save</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
