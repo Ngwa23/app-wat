@@ -84,14 +84,16 @@
       The <id> values MUST match a <server> entry (with credentials) in your
       settings.xml — see settings.xml.example in the repo root for a ready template.
     -->
-    <distributionManagement>
+   <distributionManagement>
         <repository>
-            <id>app-wat-releases</id>
-            <url>http://192.168.100.11:8081/repository/app-wat-releases/</url>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>${nexus.host}/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>app-wat-snapshots</id>
-            <url>http://192.168.100.11:8081/repository/app-wat-snapshots/</url>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>${nexus.host}/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
