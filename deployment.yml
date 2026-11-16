@@ -5,7 +5,7 @@ metadata:
   labels:
     app: app-wat
     app.kubernetes.io/name: app-wat
-    app.kubernetes.io/version: "3.0.0"
+    app.kubernetes.io/version: "3.0.1"
 spec:
   replicas: 2
   selector:
@@ -16,7 +16,7 @@ spec:
       labels:
         app: app-wat
         app.kubernetes.io/name: app-wat
-        app.kubernetes.io/version: "3.0.0"
+        app.kubernetes.io/version: "3.0.1"
     spec:
       # Pod-level security: a numeric fsGroup makes the emptyDir /tmp group-owned
       # and writable by the non-root user below.
@@ -26,8 +26,11 @@ spec:
           type: RuntimeDefault
       containers:
         - name: app-wat
-          # Replace with your registry/image:tag, e.g. ghcr.io/you/app-wat:3.0.0
-          image: app-wat:3.0.0
+          # Replace with your registry/image:tag, e.g. ghcr.io/you/app-wat:3.0.1
+          # IMPORTANT: bump this tag on every rebuild. With imagePullPolicy:
+          # IfNotPresent, reusing the SAME tag makes nodes keep their cached
+          # (old) image — which is why the new animations never appeared.
+          image: app-wat:3.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -38,6 +41,12 @@ spec:
               value: "9090"
             - name: JAVA_OPTS
               value: "-XX:MaxRAMPercentage=75 -XX:+UseG1GC"
+            # The root filesystem is read-only, so the H2 file DB, uploads and
+            # JSON backups MUST live on a writable volume. Point the app's data
+            # dir at the mounted "data" volume below; otherwise the pod cannot
+            # create /app/data/wat.mv.db and CrashLoopBackOffs on startup.
+            - name: WAT_DATA_DIR
+              value: "/data"
           # Optional SMTP config. Create a Secret named "app-wat-mail" with keys
           # MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, WAT_MAIL_ENABLED, etc.
           # It is marked optional so the Deployment still runs if the Secret is absent.
@@ -92,6 +101,20 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /tmp
+            # Writable data dir for the H2 database, uploaded images and JSON
+            # backups (WAT_DATA_DIR=/data above). emptyDir keeps the pod from
+            # crashing on the read-only root; see the note below on persistence.
+            - name: data
+              mountPath: /data
       volumes:
         - name: tmp
+          emptyDir: {}
+        # NOTE: emptyDir is per-pod and ephemeral — admin content and uploads do
+        # NOT survive a restart and are NOT shared across the 2 replicas. For
+        # durable, shared data replace this with a ReadWriteMany PersistentVolume
+        # (e.g. an NFS-backed PVC named "app-wat-data"):
+        #   - name: data
+        #     persistentVolumeClaim:
+        #       claimName: app-wat-data
+        - name: data
           emptyDir: {}
