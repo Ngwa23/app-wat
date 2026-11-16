@@ -86,12 +86,12 @@
     -->
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
+            <id>app-wat-releases</id>
             <name>Nexus Release Repository</name>
             <url>${nexus.host}/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>nexus-snapshots</id>
+            <id>app-wat-snapshots</id>
             <name>Nexus Snapshot Repository</name>
             <url>${nexus.host}/repository/maven-snapshots/</url>
         </snapshotRepository>
