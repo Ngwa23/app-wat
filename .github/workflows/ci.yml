@@ -13,6 +13,16 @@ on:
     branches: [ master ]          # Run on every push to master (build + publish image).
   pull_request:
     branches: [ master ]          # Run on PRs too, but only build+test (no publish).
+  workflow_dispatch:              # A manual "Run workflow" button in the Actions tab.
+    inputs:
+      runner:
+        description: 'Runner to deploy from (self-hosted = on your LAN; ubuntu-latest = cloud, only if the cluster is public)'
+        type: choice
+        options: [ self-hosted, ubuntu-latest ]
+        default: self-hosted
+      image_tag:
+        description: 'Image tag to deploy (e.g. v6, or latest)'
+        default: latest
 
 # The image goes to Docker Hub, but we DO write back one thing to GitHub:
 # the new version tag (e.g. v6), so contents:write is required.
@@ -158,21 +168,37 @@ jobs:
         run: ./mvnw -B -ntp -DskipTests clean deploy -s settings-ci.xml -Dnexus.host="${NEXUS_HOST}"
 
   # ===================================================================
-  # OPTIONAL — deploy to Kubernetes (template; uncomment & add secrets)
+  # JOB 4 — deploy to Kubernetes (manual: Actions tab -> Run workflow)
+  # Runs ONLY on the manual "Run workflow" trigger, so a normal push
+  # never deploys by accident. The `runner` choice decides where it
+  # runs: `self-hosted` (a runner on your LAN that can reach the
+  # 192.168.100.x cluster) or `ubuntu-latest` (cloud — only works if
+  # the cluster's API server is publicly reachable).
   # ===================================================================
-  # deploy:
-  #   needs: docker
-  #   if: github.event_name == 'push'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Configure kubectl
-  #       uses: azure/k8s-set-context@v4
-  #       with:
-  #         method: kubeconfig
-  #         kubeconfig: ${{ secrets.KUBECONFIG }}       # Add this secret in repo Settings > Secrets.
-  #     - name: Roll out new image
-  #       run: |
-  #         kubectl set image deployment/app-wat \
-  #           app-wat=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-  #         kubectl rollout status deployment/app-wat --timeout=120s
+  deploy-k8s:
+    if: github.event_name == 'workflow_dispatch'       # Manual only.
+    runs-on: ${{ inputs.runner }}                       # self-hosted OR ubuntu-latest (your choice).
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4                    # Ensures a kubectl binary is present.
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p "$HOME/.kube"
+          # KUBECONFIG secret holds your base64-encoded ~/.kube/config.
+          # Create it with:  base64 -i ~/.kube/config | pbcopy   (macOS)
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+
+      - name: Deploy to the cluster
+        run: |
+          # 1) Ensure the Deployment + Services exist (creates them first time).
+          kubectl apply -f deployment.yml -f service.yml
+          # 2) Roll out the chosen image tag onto the running Deployment.
+          kubectl set image deployment/app-wat \
+            app-wat=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
+          # 3) Wait until the new pods are healthy (fails the job if they aren't).
+          kubectl rollout status deployment/app-wat --timeout=180s

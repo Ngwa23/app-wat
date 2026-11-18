@@ -114,9 +114,11 @@ pipeline {
                 // Requires `kubectl` on the agent and a kubeconfig credential.
                 withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                     sh '''
-                        kubectl set image deployment/app-wat app-wat=${IMAGE} --record || \
-                          kubectl apply -f deployment.yml -f service.yml
-                        kubectl rollout status deployment/app-wat --timeout=120s
+                        # Ensure the Deployment + Services exist (first deploy creates them),
+                        # then roll the freshly built image onto the running Deployment.
+                        kubectl apply -f deployment.yml -f service.yml
+                        kubectl set image deployment/app-wat app-wat=${IMAGE}
+                        kubectl rollout status deployment/app-wat --timeout=180s
                     '''
                 }
             }

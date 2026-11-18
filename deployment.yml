@@ -26,12 +26,12 @@ spec:
           type: RuntimeDefault
       containers:
         - name: app-wat
-          # Replace with your registry/image:tag, e.g. ghcr.io/you/app-wat:3.0.1
-          # IMPORTANT: bump this tag on every rebuild. With imagePullPolicy:
-          # IfNotPresent, reusing the SAME tag makes nodes keep their cached
-          # (old) image — which is why the new animations never appeared.
-          image: app-wat:3.0.1
-          imagePullPolicy: IfNotPresent
+          # Your Docker Hub image. CI (`kubectl set image`) overrides this with a
+          # specific version tag (e.g. :v6) on each deploy; the :latest default
+          # here is only used by a plain `kubectl apply`. imagePullPolicy: Always
+          # makes nodes re-pull :latest instead of serving a stale cached layer.
+          image: docker.io/ngwa23/watapp:latest
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 9090
