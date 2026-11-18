@@ -148,7 +148,7 @@ jobs:
     env:
       TRIVY_VERSION: v0.58.1
       TAG: ${{ needs.build-push.outputs.tag }}
-      REF: ${{ env.IMAGE }}:${{ needs.build-push.outputs.tag }}
+      REF: ngwa23/watapp:${{ needs.build-push.outputs.tag }}
       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
     steps:
       - name: Log in to Docker Hub
@@ -158,7 +158,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Install Trivy
-        uses: aquasecurity/setup-trivy@v0.2.3
+        uses: aquasecurity/setup-trivy@v0.2.6
         with:
           version: ${{ env.TRIVY_VERSION }}
 
