@@ -146,7 +146,7 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     env:
-      TRIVY_VERSION: v0.58.1
+      TRIVY_VERSION: v0.76.2
       TAG: ${{ needs.build-push.outputs.tag }}
       REF: ngwa23/watapp:${{ needs.build-push.outputs.tag }}
       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
@@ -164,11 +164,12 @@ jobs:
             | sudo sh -s -- -b /usr/local/bin "${TRIVY_VERSION}"
           trivy --version
 
-      - name: Get Trivy report templates (HTML + CSV)
+      - name: Get the Trivy HTML template
         run: |
-          base="https://raw.githubusercontent.com/aquasecurity/trivy/${TRIVY_VERSION}/contrib"
-          curl -sSL -o html.tpl "$base/html.tpl"
-          curl -sSL -o csv.tpl  "$base/csv.tpl"
+          # Only html.tpl exists in contrib; there is NO csv.tpl (we build CSV
+          # ourselves from the JSON report in a later step).
+          curl -sSL -o html.tpl \
+            "https://raw.githubusercontent.com/aquasecurity/trivy/${TRIVY_VERSION}/contrib/html.tpl"
 
       - name: Install PDF/Word converters
         run: |
@@ -190,11 +191,29 @@ jobs:
             --exit-code 0 \
             "$REF"
 
-      - name: Render HTML, CSV, and a text summary
+      - name: Render HTML + text summary (from the JSON report)
         run: |
           trivy convert --format template --template "@html.tpl" --output trivy-report.html trivy-report.json
-          trivy convert --format template --template "@csv.tpl"  --output trivy-report.csv  trivy-report.json
-          trivy convert --format table    --output trivy-report.txt  trivy-report.json
+          trivy convert --format table                           --output trivy-report.txt  trivy-report.json
+
+      - name: Build CSV from the JSON report
+        run: |
+          python3 - <<'PY'
+          import json, csv
+          data = json.load(open("trivy-report.json"))
+          rows = []
+          for res in data.get("Results", []):
+              target = res.get("Target", "")
+              for v in res.get("Vulnerabilities", []) or []:
+                  rows.append([target, v.get("VulnerabilityID",""), v.get("PkgName",""),
+                               v.get("InstalledVersion",""), v.get("FixedVersion",""),
+                               v.get("Severity",""), (v.get("Title","") or "")[:120]])
+          with open("trivy-report.csv", "w", newline="") as f:
+              w = csv.writer(f)
+              w.writerow(["Target","VulnerabilityID","Package","Installed","Fixed","Severity","Title"])
+              w.writerows(rows)
+          print(f"CSV rows: {len(rows)}")
+          PY
 
       - name: Convert HTML -> PDF and Word
         run: |
