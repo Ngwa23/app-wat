@@ -137,21 +137,101 @@ jobs:
           git push
 
   # ===================================================================
-  # JOB 3 — scan the published image for known vulnerabilities
+  # JOB 3 — full Trivy scan of the pushed image, reports in 4 formats,
+  #         emailed as attachments (HTML, CSV, PDF, Word).
+  # Trivy natively makes JSON/HTML/CSV; PDF+DOCX are converted from HTML.
   # ===================================================================
   scan:
     needs: build-push
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    env:
+      TRIVY_VERSION: v0.58.1
+      TAG: ${{ needs.build-push.outputs.tag }}
+      REF: ${{ env.IMAGE }}:${{ needs.build-push.outputs.tag }}
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
     steps:
-      - name: Trivy scan of the pushed image
-        uses: aquasecurity/trivy-action@0.28.0
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
-          image-ref: ${{ env.IMAGE }}:${{ needs.build-push.outputs.tag }}
-          format: table
-          severity: CRITICAL,HIGH       # Report high-impact findings.
-          ignore-unfixed: true          # Skip issues with no available fix.
-          exit-code: '0'                # Report only. Set to '1' to FAIL on findings.
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.3
+        with:
+          version: ${{ env.TRIVY_VERSION }}
+
+      - name: Get Trivy report templates (HTML + CSV)
+        run: |
+          base="https://raw.githubusercontent.com/aquasecurity/trivy/${TRIVY_VERSION}/contrib"
+          curl -sSL -o html.tpl "$base/html.tpl"
+          curl -sSL -o csv.tpl  "$base/csv.tpl"
+
+      - name: Install PDF/Word converters
+        run: |
+          sudo apt-get update
+          # pandoc -> DOCX; the libs are WeasyPrint's runtime deps for PDF.
+          sudo apt-get install -y pandoc \
+            libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0 \
+            libgdk-pixbuf-2.0-0 libcairo2 libffi-dev
+          pipx install weasyprint
+
+      - name: Scan the image (all severities + vuln/secret/misconfig) -> JSON
+        run: |
+          # One scan to JSON; every other format is rendered from it.
+          # exit-code 0 so findings don't fail the job before the email is sent.
+          trivy image \
+            --scanners vuln,secret,misconfig \
+            --severity UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL \
+            --format json --output trivy-report.json \
+            --exit-code 0 \
+            "$REF"
+
+      - name: Render HTML, CSV, and a text summary
+        run: |
+          trivy convert --format template --template "@html.tpl" --output trivy-report.html trivy-report.json
+          trivy convert --format template --template "@csv.tpl"  --output trivy-report.csv  trivy-report.json
+          trivy convert --format table    --output trivy-report.txt  trivy-report.json
+
+      - name: Convert HTML -> PDF and Word
+        run: |
+          weasyprint trivy-report.html trivy-report.pdf        # HTML -> PDF
+          pandoc trivy-report.html -o trivy-report.docx         # HTML -> Word
+
+      - name: Upload reports as build artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-reports
+          path: trivy-report.*
+          if-no-files-found: warn
+
+      - name: Email the Trivy reports (all formats attached)
+        if: always() && env.MAIL_USERNAME != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: WAT CI <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "🔍 Trivy scan report — ngwa23/watapp:${{ env.TAG }}"
+          html_body: |
+            <div style="font-family:Arial,sans-serif;max-width:560px">
+              <div style="background:#2563eb;color:#fff;padding:18px 20px;border-radius:10px 10px 0 0">
+                <h2 style="margin:0">🔍 Trivy security scan</h2>
+              </div>
+              <div style="border:1px solid #e5e7eb;border-top:0;padding:18px 20px;border-radius:0 0 10px 10px">
+                <p>Full vulnerability / secret / misconfig scan of
+                   <b>ngwa23/watapp:${{ env.TAG }}</b>.</p>
+                <p>Reports attached in <b>HTML, CSV, PDF and Word</b>.</p>
+                <p><a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}">View the run</a></p>
+              </div>
+            </div>
+          attachments: trivy-report.html,trivy-report.csv,trivy-report.pdf,trivy-report.docx
 
   # ===================================================================
   # JOB 4 — email the result (GREEN on success, RED on failure)
