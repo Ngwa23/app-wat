@@ -1,0 +1,125 @@
+# GitHub Actions CI/CD for app-wat (WORLD ADVANCED TECHNOLOGY website)
+# Mirrors the Jenkinsfile, but runs on GitHub's hosted runners instead of a
+# self-managed Jenkins server. Flow:
+#   Build & Test  ->  Build & Push Docker image to GHCR
+# The deploy step is intentionally left as a commented template (see bottom).
+
+name: CI/CD                       # Shown in the repo's "Actions" tab.
+
+# ---- When does this pipeline run? ----
+on:
+  push:
+    branches: [ master ]          # Run on every push to master (build + publish image).
+  pull_request:
+    branches: [ master ]          # Run on PRs too, but only build+test (no publish).
+
+# Least-privilege token: allow reading code and writing packages (the image).
+permissions:
+  contents: read                  # Clone the repo.
+  packages: write                 # Push the Docker image to GHCR.
+
+# ---- Shared values, written once, reused below ----
+env:
+  REGISTRY: ghcr.io                           # GitHub Container Registry (free, built in).
+  IMAGE_NAME: ${{ github.repository }}        # e.g. ngwa23/app-wat — your repo path, lowercased by GHCR.
+
+jobs:
+  # ===================================================================
+  # JOB 1 — compile, run tests, and produce the jar as an artifact
+  # ===================================================================
+  build-and-test:
+    runs-on: ubuntu-latest        # GitHub spins up a fresh Linux VM for free.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Pulls your repository onto the runner.
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin   # Eclipse Temurin — matches your Dockerfile/pom.
+          java-version: '17'      # Your pom.xml sets <java.version>17</java.version>.
+          cache: maven            # Cache ~/.m2 so later builds skip re-downloading deps.
+
+      - name: Make Maven wrapper executable
+        run: chmod +x mvnw        # Git may not preserve the +x bit on ./mvnw.
+
+      - name: Build & test (with coverage)
+        # -B = batch/non-interactive, -ntp = no transfer progress spam.
+        # `verify` compiles, runs unit tests, and produces the JaCoCo coverage report.
+        run: ./mvnw -B -ntp clean verify
+
+      - name: Publish test results
+        if: always()              # Run even if the previous step failed, so you see WHY.
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: target/surefire-reports/**   # JUnit XML from the test run.
+          if-no-files-found: ignore
+
+      - name: Upload built jar
+        if: success()             # Only if the build passed.
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-wat-jar
+          path: target/app-wat.jar           # <finalName>app-wat</finalName> in pom.xml.
+
+  # ===================================================================
+  # JOB 2 — build the Docker image and push it to GHCR
+  # Only runs on push to master (not on pull requests), and only after
+  # the tests pass.
+  # ===================================================================
+  docker:
+    needs: build-and-test                              # Wait for Job 1 to succeed.
+    if: github.event_name == 'push'                    # Skip on pull requests.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}                # The user who triggered the run.
+          password: ${{ secrets.GITHUB_TOKEN }}        # Auto-provided by GitHub — no setup needed.
+
+      - name: Derive image tags
+        id: meta                                       # Later steps read steps.meta.outputs.*
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          # Produce two tags: the short commit SHA (immutable/traceable) and
+          # `latest` for the newest master build.
+          tags: |
+            type=sha,prefix=,format=short
+            type=raw,value=latest
+
+      - name: Build & push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .                                   # Use the repo's multi-stage Dockerfile.
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha                         # Reuse Docker layer cache between runs.
+          cache-to: type=gha,mode=max                  # Save the layer cache for next time.
+
+  # ===================================================================
+  # OPTIONAL — deploy to Kubernetes (template; uncomment & add secrets)
+  # ===================================================================
+  # deploy:
+  #   needs: docker
+  #   if: github.event_name == 'push'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Configure kubectl
+  #       uses: azure/k8s-set-context@v4
+  #       with:
+  #         method: kubeconfig
+  #         kubeconfig: ${{ secrets.KUBECONFIG }}       # Add this secret in repo Settings > Secrets.
+  #     - name: Roll out new image
+  #       run: |
+  #         kubectl set image deployment/app-wat \
+  #           app-wat=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+  #         kubectl rollout status deployment/app-wat --timeout=120s

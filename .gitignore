@@ -1,0 +1,31 @@
+# ---- Maven build output ----
+# target/ holds compiled .class files and the packaged jar. It is produced by
+# `mvn package` every build, so it must never be committed.
+target/
+
+# ---- Runtime data (H2 database, trace, uploads, JSON backups) ----
+# The app writes its database and uploads under ./data at runtime. These change
+# on every run and are environment-specific, so they stay out of version control.
+data/
+*.mv.db
+*.trace.db
+
+# ---- macOS / editor / OS noise ----
+.DS_Store
+*.swp
+*~
+
+# ---- IDE project files ----
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# ---- Local secrets / config overrides (never commit real credentials) ----
+settings.xml
+application-local.yml
+application-local.properties
+*.env
+.env
