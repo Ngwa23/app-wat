@@ -1,7 +1,8 @@
 # GitHub Actions CI/CD for app-wat (WORLD ADVANCED TECHNOLOGY website)
 # Mirrors the Jenkinsfile, but runs on GitHub's hosted runners instead of a
 # self-managed Jenkins server. Flow:
-#   Build & Test  ->  Build & Push Docker image to GHCR
+#   Build & Test  ->  Auto-version + Build & Push image to Docker Hub
+# Each push to master bumps the version: v5 exists -> publishes v6 (+ latest).
 # The deploy step is intentionally left as a commented template (see bottom).
 
 name: CI/CD                       # Shown in the repo's "Actions" tab.
@@ -13,9 +14,10 @@ on:
   pull_request:
     branches: [ master ]          # Run on PRs too, but only build+test (no publish).
 
-# Only need to read the code — the image goes to Docker Hub, not GitHub.
+# The image goes to Docker Hub, but we DO write back one thing to GitHub:
+# the new version tag (e.g. v6), so contents:write is required.
 permissions:
-  contents: read                  # Clone the repo.
+  contents: write                 # Clone the repo AND push the new git tag.
 
 # ---- Shared values, written once, reused below ----
 env:
@@ -74,6 +76,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0             # Fetch full history + all tags so we can read existing vN tags.
+
+      - name: Compute next version (vN -> vN+1)
+        id: version
+        run: |
+          # List tags that look exactly like v<number> (v1, v2, ...), strip the
+          # leading 'v', sort numerically, and take the highest. No tags yet -> 0.
+          latest=$(git tag -l 'v*' | grep -E '^v[0-9]+$' | sed 's/^v//' | sort -n | tail -1)
+          latest=${latest:-0}
+          next=$((latest + 1))       # The new version number.
+          echo "tag=v${next}" >> "$GITHUB_OUTPUT"   # Expose as steps.version.outputs.tag
+          echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"  # 7-char commit id
+          echo "Previous: v${latest}  ->  New: v${next}"
+
+      - name: Create and push the git tag
+        run: |
+          # Tag this commit so the version lives in git history too, and so the
+          # NEXT run sees it and increments past it.
+          git tag ${{ steps.version.outputs.tag }}
+          git push origin ${{ steps.version.outputs.tag }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -82,24 +105,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}  # Repo secret you add (your Docker Hub login).
           password: ${{ secrets.DOCKERHUB_TOKEN }}     # Repo secret: a Docker Hub ACCESS TOKEN (not your password).
 
-      - name: Derive image tags
-        id: meta                                       # Later steps read steps.meta.outputs.*
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          # Produce two tags: the short commit SHA (immutable/traceable) and
-          # `latest` for the newest master build.
-          tags: |
-            type=sha,prefix=,format=short
-            type=raw,value=latest
-
       - name: Build & push image
         uses: docker/build-push-action@v6
         with:
           context: .                                   # Use the repo's multi-stage Dockerfile.
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          # Publish THREE tags of the same image: the new version, the short
+          # commit id (precise traceability), and `latest`.
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.tag }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           cache-from: type=gha                         # Reuse Docker layer cache between runs.
           cache-to: type=gha,mode=max                  # Save the layer cache for next time.
 
