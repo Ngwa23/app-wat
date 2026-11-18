@@ -13,15 +13,14 @@ on:
   pull_request:
     branches: [ master ]          # Run on PRs too, but only build+test (no publish).
 
-# Least-privilege token: allow reading code and writing packages (the image).
+# Only need to read the code — the image goes to Docker Hub, not GitHub.
 permissions:
   contents: read                  # Clone the repo.
-  packages: write                 # Push the Docker image to GHCR.
 
 # ---- Shared values, written once, reused below ----
 env:
-  REGISTRY: ghcr.io                           # GitHub Container Registry (free, built in).
-  IMAGE_NAME: ${{ github.repository }}        # e.g. ngwa23/app-wat — your repo path, lowercased by GHCR.
+  REGISTRY: docker.io                         # Docker Hub (matches the Jenkinsfile).
+  IMAGE_NAME: ngwa23/watapp                   # Your Docker Hub repo: <account>/<repo>.
 
 jobs:
   # ===================================================================
@@ -76,12 +75,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Log in to GHCR
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}                # The user who triggered the run.
-          password: ${{ secrets.GITHUB_TOKEN }}        # Auto-provided by GitHub — no setup needed.
+          username: ${{ secrets.DOCKERHUB_USERNAME }}  # Repo secret you add (your Docker Hub login).
+          password: ${{ secrets.DOCKERHUB_TOKEN }}     # Repo secret: a Docker Hub ACCESS TOKEN (not your password).
 
       - name: Derive image tags
         id: meta                                       # Later steps read steps.meta.outputs.*

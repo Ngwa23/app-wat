@@ -19,8 +19,8 @@ pipeline {
 
     environment {
         // --- Image coordinates: change REGISTRY to your registry (e.g. ghcr.io/you) ---
-        REGISTRY   = 'docker.io/ngwaochang'
-        IMAGE_NAME = 'app-wat'
+        REGISTRY   = 'docker.io/ngwa23'
+        IMAGE_NAME = 'watapp'
         // Immutable, traceable tag: <pom version>-<build>-<short sha>
         APP_VERSION = '3.0.0'
         IMAGE_TAG   = "${APP_VERSION}-${BUILD_NUMBER}-${GIT_COMMIT.take(7)}"
