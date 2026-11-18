@@ -16,10 +16,10 @@ name: CI/CD
 
 on:
   push:
-    branches: [ master ]
-    # Don't re-trigger on the bot's own "bump image" commit (manifest only).
-    paths-ignore:
-      - 'deployment-service1.yaml'
+    branches: [ master ]        # EVERY commit pushed to master triggers the CI.
+    # NOTE: no paths-ignore here on purpose — any file change triggers a run.
+    # The auto-bump loop is prevented by the "[skip ci]" tag in the bot's
+    # commit message (GitHub Actions skips runs whose head commit says that).
   pull_request:
     branches: [ master ]        # Run tests on PRs too (no publish).
   workflow_dispatch:            # Allow manual runs from the Actions tab.
