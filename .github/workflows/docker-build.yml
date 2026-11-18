@@ -1,0 +1,78 @@
+# Build the app image, push it to Docker Hub with an auto-incremented vN tag,
+# then write that new tag back into deployment-service1.yaml and commit it.
+#
+# Versioning: the CURRENT version is read straight from the image line in
+# deployment-service1.yaml. If it says ngwa23/watapp:v4, this build publishes
+# ngwa23/watapp:v5 and updates the file to v5. Next run -> v6, and so on.
+
+name: Docker Build & Push
+
+on:
+  push:
+    branches: [ master ]
+    # Don't re-trigger on the bot's own "bump image" commit (which only edits
+    # the manifest). A push is skipped only if it touches NOTHING else.
+    paths-ignore:
+      - 'deployment-service1.yaml'
+  workflow_dispatch:            # Allow manual runs from the Actions tab.
+
+# Needed so the workflow can commit the updated manifest back to the repo.
+permissions:
+  contents: write
+
+env:
+  IMAGE: ngwa23/watapp          # Docker Hub repo (already created).
+  MANIFEST: deployment-service1.yaml
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Compute next version (vN -> vN+1)
+        id: ver
+        run: |
+          # Read the current tag from the manifest's image line, e.g. "...:v4" -> 4.
+          current=$(grep -oE "${IMAGE}:v[0-9]+" "$MANIFEST" | head -1 | sed 's/.*:v//')
+          current=${current:-0}                 # No tag yet -> start at 0 (first build = v1).
+          next=$((current + 1))
+          echo "tag=v${next}" >> "$GITHUB_OUTPUT"
+          echo "Current: v${current}  ->  New: v${next}"
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}   # Repo secret: your Docker Hub login (ngwa23).
+          password: ${{ secrets.DOCKERHUB_TOKEN }}      # Repo secret: a Docker Hub access token.
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3             # Enables caching + modern builds.
+
+      - name: Build & push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .                                    # Uses the repo's multi-stage Dockerfile.
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ steps.ver.outputs.tag }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Update image tag in the manifest
+        run: |
+          # Replace ".../watapp:vN" with the new version in deployment-service1.yaml.
+          sed -i -E "s|(${IMAGE}:)v[0-9]+|\1${{ steps.ver.outputs.tag }}|g" "$MANIFEST"
+          echo "----- updated image line -----"
+          grep -n "${IMAGE}:" "$MANIFEST"
+
+      - name: Commit the bumped manifest
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$MANIFEST"
+          # Nothing to commit if the tag didn't change; '|| exit 0' keeps the job green.
+          git commit -m "ci: bump ${IMAGE} image to ${{ steps.ver.outputs.tag }} [skip ci]" || exit 0
+          git push
