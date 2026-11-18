@@ -178,6 +178,8 @@ jobs:
   deploy-k8s:
     if: github.event_name == 'workflow_dispatch'       # Manual only.
     runs-on: ${{ inputs.runner }}                       # self-hosted OR ubuntu-latest (your choice).
+    env:
+      NAMESPACE: watapps                                # Target namespace on the cluster.
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -188,17 +190,21 @@ jobs:
       - name: Configure kubeconfig
         run: |
           mkdir -p "$HOME/.kube"
-          # KUBECONFIG secret holds your base64-encoded ~/.kube/config.
-          # Create it with:  base64 -i ~/.kube/config | pbcopy   (macOS)
+          # KUBECONFIG secret holds your base64-encoded kubeconfig for the
+          # https://192.168.100.12:6443 cluster (kubeadm admin.conf, flattened).
           echo "${{ secrets.KUBECONFIG }}" | base64 -d > "$HOME/.kube/config"
           chmod 600 "$HOME/.kube/config"
 
       - name: Deploy to the cluster
         run: |
-          # 1) Ensure the Deployment + Services exist (creates them first time).
-          kubectl apply -f deployment.yml -f service.yml
-          # 2) Roll out the chosen image tag onto the running Deployment.
-          kubectl set image deployment/app-wat \
-            app-wat=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
-          # 3) Wait until the new pods are healthy (fails the job if they aren't).
-          kubectl rollout status deployment/app-wat --timeout=180s
+          # 1) Make sure the target namespace exists (idempotent).
+          kubectl create namespace "$NAMESPACE" \
+            --dry-run=client -o yaml | kubectl apply -f -
+          # 2) Apply the combined Deployment + Service manifest into watapps.
+          kubectl apply -n "$NAMESPACE" -f deployment-service.yaml
+          # 3) Roll out the chosen image tag onto the running Deployment.
+          #    Resource + container are both named "watapp" in that manifest.
+          kubectl set image -n "$NAMESPACE" deployment/watapp \
+            watapp=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
+          # 4) Wait until the new pods are healthy (fails the job if they aren't).
+          kubectl rollout status -n "$NAMESPACE" deployment/watapp --timeout=180s
