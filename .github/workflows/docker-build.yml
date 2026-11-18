@@ -1,32 +1,93 @@
-# Build the app image, push it to Docker Hub with an auto-incremented vN tag,
-# then write that new tag back into deployment-service1.yaml and commit it.
+# CI/CD pipeline for app-wat.
 #
-# Versioning: the CURRENT version is read straight from the image line in
+#   test  ->  build-push  ->  scan
+#
+#   test        compile + run unit tests + coverage; upload reports & jar.
+#   build-push  (only after tests pass, not on PRs) build the image, push it
+#               to Docker Hub with an auto-incremented vN tag, then write that
+#               tag back into deployment-service1.yaml and commit it.
+#   scan        vulnerability-scan the published image with Trivy.
+#
+# Versioning: the CURRENT version is read from the image line in
 # deployment-service1.yaml. If it says ngwa23/watapp:v4, this build publishes
 # ngwa23/watapp:v5 and updates the file to v5. Next run -> v6, and so on.
 
-name: Docker Build & Push
+name: CI/CD
 
 on:
   push:
     branches: [ master ]
-    # Don't re-trigger on the bot's own "bump image" commit (which only edits
-    # the manifest). A push is skipped only if it touches NOTHING else.
+    # Don't re-trigger on the bot's own "bump image" commit (manifest only).
     paths-ignore:
       - 'deployment-service1.yaml'
+  pull_request:
+    branches: [ master ]        # Run tests on PRs too (no publish).
   workflow_dispatch:            # Allow manual runs from the Actions tab.
 
-# Needed so the workflow can commit the updated manifest back to the repo.
 permissions:
-  contents: write
+  contents: write               # build-push commits the bumped manifest back.
 
 env:
   IMAGE: ngwa23/watapp          # Docker Hub repo (already created).
   MANIFEST: deployment-service1.yaml
 
 jobs:
-  build-push:
+  # ===================================================================
+  # JOB 1 — compile, run unit tests, measure coverage
+  # ===================================================================
+  test:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin     # Eclipse Temurin — matches the Dockerfile/pom.
+          java-version: '17'         # pom.xml sets <java.version>17</java.version>.
+          cache: maven               # Cache ~/.m2 so builds don't re-download deps.
+
+      - name: Make Maven wrapper executable
+        run: chmod +x mvnw
+
+      - name: Build & test (with JaCoCo coverage)
+        # `verify` compiles, runs unit tests, and writes the coverage report.
+        run: ./mvnw -B -ntp clean verify
+
+      - name: Upload test reports
+        if: always()                 # Upload even on failure, so you can see why.
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: target/surefire-reports/**
+          if-no-files-found: ignore
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage
+          path: target/site/jacoco/**
+          if-no-files-found: ignore
+
+      - name: Upload built jar
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-wat-jar
+          path: target/app-wat.jar
+          if-no-files-found: ignore
+
+  # ===================================================================
+  # JOB 2 — build & push the image, then bump the manifest
+  # ===================================================================
+  build-push:
+    needs: test                                      # Only if tests passed.
+    if: github.event_name != 'pull_request'          # Don't publish from PRs.
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.ver.outputs.tag }}              # Expose the new tag to the scan job.
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,9 +95,9 @@ jobs:
       - name: Compute next version (vN -> vN+1)
         id: ver
         run: |
-          # Read the current tag from the manifest's image line, e.g. "...:v4" -> 4.
+          # Read the current tag from the manifest's image line, e.g. ":v4" -> 4.
           current=$(grep -oE "${IMAGE}:v[0-9]+" "$MANIFEST" | head -1 | sed 's/.*:v//')
-          current=${current:-0}                 # No tag yet -> start at 0 (first build = v1).
+          current=${current:-0}                      # No tag yet -> first build = v1.
           next=$((current + 1))
           echo "tag=v${next}" >> "$GITHUB_OUTPUT"
           echo "Current: v${current}  ->  New: v${next}"
@@ -44,16 +105,16 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}   # Repo secret: your Docker Hub login (ngwa23).
-          password: ${{ secrets.DOCKERHUB_TOKEN }}      # Repo secret: a Docker Hub access token.
+          username: ${{ secrets.DOCKERHUB_USERNAME }}   # Repo secret (ngwa23).
+          password: ${{ secrets.DOCKERHUB_TOKEN }}      # Repo secret (access token).
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3             # Enables caching + modern builds.
+        uses: docker/setup-buildx-action@v3
 
       - name: Build & push image
         uses: docker/build-push-action@v6
         with:
-          context: .                                    # Uses the repo's multi-stage Dockerfile.
+          context: .                                    # Uses the multi-stage Dockerfile.
           push: true
           tags: |
             ${{ env.IMAGE }}:${{ steps.ver.outputs.tag }}
@@ -63,7 +124,6 @@ jobs:
 
       - name: Update image tag in the manifest
         run: |
-          # Replace ".../watapp:vN" with the new version in deployment-service1.yaml.
           sed -i -E "s|(${IMAGE}:)v[0-9]+|\1${{ steps.ver.outputs.tag }}|g" "$MANIFEST"
           echo "----- updated image line -----"
           grep -n "${IMAGE}:" "$MANIFEST"
@@ -73,6 +133,118 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$MANIFEST"
-          # Nothing to commit if the tag didn't change; '|| exit 0' keeps the job green.
           git commit -m "ci: bump ${IMAGE} image to ${{ steps.ver.outputs.tag }} [skip ci]" || exit 0
           git push
+
+  # ===================================================================
+  # JOB 3 — scan the published image for known vulnerabilities
+  # ===================================================================
+  scan:
+    needs: build-push
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trivy scan of the pushed image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ env.IMAGE }}:${{ needs.build-push.outputs.tag }}
+          format: table
+          severity: CRITICAL,HIGH       # Report high-impact findings.
+          ignore-unfixed: true          # Skip issues with no available fix.
+          exit-code: '0'                # Report only. Set to '1' to FAIL on findings.
+
+  # ===================================================================
+  # JOB 4 — email the result (GREEN on success, RED on failure)
+  # Runs always (even if earlier jobs failed) and is the last job.
+  # ===================================================================
+  notify:
+    needs: [ test, build-push, scan ]
+    if: always()                                      # Send mail whatever happened.
+    runs-on: ubuntu-latest
+    env:
+      # Mapped so they can be used in `if:` conditions below.
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}     # SMTP login (e.g. your Gmail address).
+      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}     # Gmail APP PASSWORD (not your normal password).
+      MAIL_TO: ${{ secrets.MAIL_TO }}                 # Recipient address.
+    steps:
+      - name: Work out the overall result
+        id: result
+        run: |
+          # If ANY needed job failed or was cancelled, the pipeline failed.
+          # (A 'skipped' job — e.g. build-push on a PR — does NOT count as failure.)
+          if ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}; then
+            echo "status=failure" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=success" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Send SUCCESS email (green)
+        if: steps.result.outputs.status == 'success' && env.MAIL_USERNAME != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: WAT CI <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "✅ CI SUCCESS — ${{ github.repository }} (${{ github.ref_name }})"
+          html_body: |
+            <div style="font-family:Arial,sans-serif;max-width:560px">
+              <div style="background:#16a34a;color:#fff;padding:18px 20px;border-radius:10px 10px 0 0">
+                <h2 style="margin:0">✅ Build succeeded</h2>
+              </div>
+              <div style="border:1px solid #e5e7eb;border-top:0;padding:18px 20px;border-radius:0 0 10px 10px">
+                <p>The CI/CD pipeline for <b>${{ github.repository }}</b> passed.</p>
+                <ul style="line-height:1.7">
+                  <li><b>Branch:</b> ${{ github.ref_name }}</li>
+                  <li><b>Image:</b> ngwa23/watapp:${{ needs.build-push.outputs.tag }}</li>
+                  <li><b>Commit:</b> ${{ github.sha }}</li>
+                  <li><b>Triggered by:</b> ${{ github.actor }}</li>
+                </ul>
+                <p><a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                      style="background:#16a34a;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none">
+                   View run</a></p>
+              </div>
+            </div>
+
+      - name: Send FAILURE email (red)
+        if: steps.result.outputs.status == 'failure' && env.MAIL_USERNAME != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: WAT CI <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "❌ CI FAILED — ${{ github.repository }} (${{ github.ref_name }})"
+          html_body: |
+            <div style="font-family:Arial,sans-serif;max-width:560px">
+              <div style="background:#dc2626;color:#fff;padding:18px 20px;border-radius:10px 10px 0 0">
+                <h2 style="margin:0">❌ Build failed</h2>
+              </div>
+              <div style="border:1px solid #e5e7eb;border-top:0;padding:18px 20px;border-radius:0 0 10px 10px">
+                <p>The CI/CD pipeline for <b>${{ github.repository }}</b> did <b>not</b> pass.</p>
+                <ul style="line-height:1.7">
+                  <li><b>Branch:</b> ${{ github.ref_name }}</li>
+                  <li><b>Commit:</b> ${{ github.sha }}</li>
+                  <li><b>Triggered by:</b> ${{ github.actor }}</li>
+                  <li><b>test:</b> ${{ needs.test.result }} &nbsp;|&nbsp;
+                      <b>build-push:</b> ${{ needs.build-push.result }} &nbsp;|&nbsp;
+                      <b>scan:</b> ${{ needs.scan.result }}</li>
+                </ul>
+                <p><a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                      style="background:#dc2626;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none">
+                   View logs</a></p>
+              </div>
+            </div>
+
+# -----------------------------------------------------------------------------
+# NOTE: SonarQube is intentionally not a job here. Your Sonar server lives on the
+# LAN (http://192.168.100.11:9000), which GitHub's cloud runners cannot reach.
+# Run it from your LAN (local shell or a self-hosted runner) with:
+#     ./mvnw -B -ntp verify sonar:sonar -Dsonar.token=$SONAR_TOKEN
+# -----------------------------------------------------------------------------
