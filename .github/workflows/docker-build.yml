@@ -158,9 +158,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Install Trivy
-        uses: aquasecurity/setup-trivy@v0.2.6
-        with:
-          version: ${{ env.TRIVY_VERSION }}
+        run: |
+          # Official install script — more reliable than the setup action.
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
+            | sudo sh -s -- -b /usr/local/bin "${TRIVY_VERSION}"
+          trivy --version
 
       - name: Get Trivy report templates (HTML + CSV)
         run: |
