@@ -88,12 +88,12 @@
         <repository>
             <id>nexus-releases</id>
             <name>Nexus Release Repository</name>
-            <url>${nexus.host}/repository/maven-releases/</url>
+            <url>http://192.168.100.11:8081/repository/app-wat-releases/</url>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>Nexus Snapshot Repository</name>
-            <url>${nexus.host}/repository/maven-snapshots/</url>
+            <url>http://192.168.100.11:8081/repository/app-wat-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 

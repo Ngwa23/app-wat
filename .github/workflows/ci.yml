@@ -120,6 +120,44 @@ jobs:
           cache-to: type=gha,mode=max                  # Save the layer cache for next time.
 
   # ===================================================================
+  # JOB 3 — publish the Maven artifacts (jar + pom) to Nexus
+  # Runs on push to master after tests pass. A CLOUD runner can only
+  # reach Nexus through a PUBLIC address, so the host comes from the
+  # NEXUS_HOST secret (NOT the pom's private 192.168 default).
+  # The job skips itself automatically if NEXUS_HOST is not set.
+  # ===================================================================
+  deploy-nexus:
+    needs: build-and-test                              # Deploy only if tests passed.
+    if: github.event_name == 'push'                    # Skip on pull requests.
+    runs-on: ubuntu-latest
+    # Map secrets to env: secrets can't be used in `if:` directly, env can.
+    env:
+      NEXUS_HOST: ${{ secrets.NEXUS_HOST }}            # e.g. https://nexus.yourdomain.com
+      NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}    # Nexus deploy user.
+      NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}    # Nexus deploy password/token.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Make Maven wrapper executable
+        run: chmod +x mvnw
+
+      - name: Deploy artifacts to Nexus
+        if: env.NEXUS_HOST != ''                        # No NEXUS_HOST secret -> skip quietly.
+        # -s settings-ci.xml   -> use the CI settings file (reads NEXUS_* from env).
+        # -Dnexus.host=...      -> override the pom's private default with the public URL.
+        # -DskipTests           -> tests already ran in build-and-test; don't repeat them.
+        # Maven routes by version: 3.0.0 -> app-wat-releases, *-SNAPSHOT -> app-wat-snapshots.
+        run: ./mvnw -B -ntp -DskipTests clean deploy -s settings-ci.xml -Dnexus.host="${NEXUS_HOST}"
+
+  # ===================================================================
   # OPTIONAL — deploy to Kubernetes (template; uncomment & add secrets)
   # ===================================================================
   # deploy:
