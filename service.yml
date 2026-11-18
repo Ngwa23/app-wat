@@ -29,7 +29,7 @@ kind: Service
 metadata:
   name: app-wat-nodeport
   labels:
-    app: app-wat
+    app: app-watt
     service-type: nodeport
 spec:
   type: NodePort
