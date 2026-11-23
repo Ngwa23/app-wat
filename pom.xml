@@ -28,12 +28,13 @@
         <lombok.version>1.18.48</lombok.version>
 
         <!-- Keep `mvn sonar:sonar` in step with sonar-project.properties.
-             JS/TS/CSS are excluded because SonarQube analyzes them with an
-             embedded Node.js runtime, which the CI agent does not have on PATH
+             JS/TS/CSS AND HTML are excluded because SonarQube's JS/CSS sensor
+             analyzes them (incl. CSS/JS embedded in HTML) with an embedded
+             Node.js runtime, which the CI agent does not have on PATH
              ("Cannot run program 'node'"). Install Node on the agent (or set
-             sonar.nodejs.executable) and drop the *.js/*.ts/*.css/*.scss
-             patterns to analyze the static frontend instead. -->
-        <sonar.exclusions>target/**,**/generated-sources/**,**/*.js,**/*.ts,**/*.css,**/*.scss</sonar.exclusions>
+             sonar.nodejs.executable) and drop the web-asset patterns to analyze
+             the static frontend instead. -->
+        <sonar.exclusions>target/**,**/generated-sources/**,**/*.js,**/*.ts,**/*.css,**/*.scss,**/*.html,**/*.htm,**/*.vue</sonar.exclusions>
     </properties>
 
     <dependencies>
