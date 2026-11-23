@@ -1,0 +1,19 @@
+# --- macOS ---
+.DS_Store
+**/.DS_Store
+
+# --- Maven build output ---
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# --- Sonar scanner work dir ---
+.scannerwork/
+
+# --- Local runtime data (embedded H2 under WAT_DATA_DIR) ---
+data/
+
+# --- IDEs ---
+.idea/
+*.iml
+.vscode/
+*.log

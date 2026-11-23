@@ -26,6 +26,14 @@
              silently fails on JDK 23+ and every @Getter/@Setter method goes missing
              ("cannot find symbol"). -->
         <lombok.version>1.18.48</lombok.version>
+
+        <!-- Keep `mvn sonar:sonar` in step with sonar-project.properties.
+             JS/TS/CSS are excluded because SonarQube analyzes them with an
+             embedded Node.js runtime, which the CI agent does not have on PATH
+             ("Cannot run program 'node'"). Install Node on the agent (or set
+             sonar.nodejs.executable) and drop the *.js/*.ts/*.css/*.scss
+             patterns to analyze the static frontend instead. -->
+        <sonar.exclusions>target/**,**/generated-sources/**,**/*.js,**/*.ts,**/*.css,**/*.scss</sonar.exclusions>
     </properties>
 
     <dependencies>
