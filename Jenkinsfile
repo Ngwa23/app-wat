@@ -12,9 +12,10 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam(name: 'RUN_SONAR',  defaultValue: true,  description: 'Run SonarQube analysis + quality gate')
-        booleanParam(name: 'PUSH_IMAGE', defaultValue: true,  description: 'Build and push the Docker image')
-        booleanParam(name: 'DEPLOY_K8S', defaultValue: false, description: 'Apply the Kubernetes manifests')
+        booleanParam(name: 'RUN_SONAR',    defaultValue: true,  description: 'Run SonarQube analysis + quality gate')
+        booleanParam(name: 'DEPLOY_NEXUS', defaultValue: true,  description: 'Publish the artifact to Nexus (snapshots go to app-wat-snapshots)')
+        booleanParam(name: 'PUSH_IMAGE',   defaultValue: true,  description: 'Build and push the Docker image')
+        booleanParam(name: 'DEPLOY_K8S',   defaultValue: false, description: 'Apply the Kubernetes manifests')
     }
 
     environment {
@@ -22,7 +23,8 @@ pipeline {
         REGISTRY   = 'docker.io/ngwaochang'
         IMAGE_NAME = 'app-wat'
         // Immutable, traceable tag: <pom version>-<build>-<short sha>
-        APP_VERSION = '3.0.0'
+        // Keep in step with <version> in pom.xml.
+        APP_VERSION = '3.0.1-SNAPSHOT'
         IMAGE_TAG   = "${APP_VERSION}-${BUILD_NUMBER}-${GIT_COMMIT.take(7)}"
         IMAGE       = "${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
 
@@ -90,6 +92,26 @@ pipeline {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        stage('Deploy to Nexus') {
+            when { expression { return params.DEPLOY_NEXUS } }
+            steps {
+                // Publishes the built artifact to Nexus. Maven routes by version:
+                // a *-SNAPSHOT version (current: 3.0.1-SNAPSHOT) goes to the
+                // app-wat-snapshots repo; a release version goes to app-wat-releases.
+                // Tests already ran in 'Build & Test', so skip them here.
+                //
+                // 'nexus-credentials' is a username/password credential (Manage
+                // Jenkins > Credentials). settings.xml.example maps the bound
+                // NEXUS_USERNAME/NEXUS_PASSWORD env vars onto the <server> ids.
+                withCredentials([usernamePassword(
+                        credentialsId: 'nexus-credentials',
+                        usernameVariable: 'NEXUS_USERNAME',
+                        passwordVariable: 'NEXUS_PASSWORD')]) {
+                    sh '${MVN} deploy -DskipTests -s settings.xml.example'
                 }
             }
         }

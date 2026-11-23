@@ -11,15 +11,15 @@
        export NEXUS_PASSWORD='********'
        export SONAR_TOKEN='sqp_********'
   3. Deploy:
-       # release (version 3.0.0)  -> maven-releases
+       # snapshot (current version 3.0.1-SNAPSHOT) -> app-wat-snapshots
        mvn clean deploy
-       # snapshot                 -> maven-snapshots
-       mvn -Drevision=3.0.1-SNAPSHOT clean deploy   # or set <version> to *-SNAPSHOT
+       # release  (set <version> to e.g. 3.0.1)    -> app-wat-releases
+       mvn clean deploy
      Point at a different Nexus without editing the POM:
        mvn clean deploy -Dnexus.host=http://your-nexus:8081
 
   The <server> ids below MUST match <distributionManagement> in pom.xml
-  (nexus-releases / nexus-snapshots).
+  (app-wat-releases / app-wat-snapshots).
 -->
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -28,12 +28,12 @@
 
   <servers>
     <server>
-      <id>nexus-releases</id>
+      <id>app-wat-releases</id>
       <username>${env.NEXUS_USERNAME}</username>
       <password>${env.NEXUS_PASSWORD}</password>
     </server>
     <server>
-      <id>nexus-snapshots</id>
+      <id>app-wat-snapshots</id>
       <username>${env.NEXUS_USERNAME}</username>
       <password>${env.NEXUS_PASSWORD}</password>
     </server>
