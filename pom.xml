@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -15,111 +14,48 @@
     <groupId>com.worldadvancedtechnology</groupId>
     <artifactId>app-wat</artifactId>
     <version>3.0.0</version>
-    <packaging>jar</packaging>
-
     <name>WORLD ADVANCED TECHNOLOGY Website</name>
     <description>Premium company web app for World Advanced Technology — IT Consultancy, DevOps and VoIP Solutions, Yaoundé, Cameroon</description>
-    <url>https://worldadvancedtechnology.cm</url>
-
-    <organization>
-        <name>World Advanced Technology</name>
-        <url>https://worldadvancedtechnology.cm</url>
-    </organization>
-
-    <developers>
-        <developer>
-            <id>ngwaclovis</id>
-            <name>NGWA CLOVIS OCHANG</name>
-            <email>ngwaco23@gmail.com</email>
-            <roles>
-                <role>CEO</role>
-                <role>Lead Architect</role>
-            </roles>
-        </developer>
-    </developers>
 
     <properties>
         <java.version>17</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Plugin versions -->
-        <!-- SonarScanner for Maven. This default works with current servers, but
-             you can switch scanner version per server WITHOUT editing the POM:
-               mvn sonar:sonar -Dsonar-maven-plugin.version=3.9.1.2184   # SonarQube 7.9 LTS – 9.x
-               mvn sonar:sonar -Dsonar-maven-plugin.version=4.0.0.4121   # SonarQube 9.9 LTS / 2025.x
-               mvn sonar:sonar -Dsonar-maven-plugin.version=5.1.0.4751   # latest
-             NB: the property is deliberately NOT named "sonar.*", otherwise Maven
-             would ship it to the server as a bogus analysis property. -->
-        <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
         <jacoco.version>0.8.12</jacoco.version>
-
-        <!-- Nexus base URL for `mvn deploy`. Override without touching the POM:
-               mvn deploy -Dnexus.host=http://your-nexus:8081 -->
-        <nexus.host>http://192.168.100.11:8081</nexus.host>
-
-        <!-- SonarQube analysis settings.
-             Override on the command line as needed, e.g.:
-             mvn clean verify sonar:sonar \
-               -Dsonar.host.url=http://your-sonarqube:9000 \
-               -Dsonar.token=YOUR_TOKEN
-             Keep the token OUT of this file; pass it via -Dsonar.token or the
-             SONAR_TOKEN environment variable. -->
-        <sonar.host.url>http://192.168.100.11:9000</sonar.host.url>
-        <sonar.projectKey>com.worldadvancedtechnology:app-wat</sonar.projectKey>
-        <sonar.projectName>WORLD ADVANCED TECHNOLOGY Website</sonar.projectName>
-        <sonar.java.source>${java.version}</sonar.java.source>
-        <!-- Where Sonar reads the JaCoCo coverage report produced below.
-             Keep this on ONE line: a newline/indent inside the value becomes part
-             of the path and silently breaks coverage upload. -->
-        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
+        <!-- Override Spring Boot's managed Lombok (1.18.34) with a build that supports
+             newer JDKs (incl. JDK 25). Without this, Lombok's annotation processor
+             silently fails on JDK 23+ and every @Getter/@Setter method goes missing
+             ("cannot find symbol"). -->
+        <lombok.version>1.18.48</lombok.version>
     </properties>
 
-    <!--
-      Nexus Repository Manager targets for `mvn deploy`.
-      Maven picks the repository automatically by version: a version ending in
-      -SNAPSHOT (e.g. 3.0.1-SNAPSHOT) goes to <snapshotRepository>, a release
-      version (e.g. 3.0.0) goes to <repository>.
-
-      Set the host once via the ${nexus.host} property above (or -Dnexus.host=...).
-      The <id> values MUST match a <server> entry (with credentials) in your
-      settings.xml — see settings.xml.example in the repo root for a ready template.
-    -->
-   <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>${nexus.host}/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>${nexus.host}/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <dependencies>
-        <!-- Web layer: embedded Tomcat + Spring MVC + static resource serving -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- Bean validation for form submissions -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
-        <!-- Superadmin authentication (form login, BCrypt) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
-        <!-- Persistence for admin-managed content, submissions and overrides -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
         <!-- Embedded file-based database (persists under ${WAT_DATA_DIR}) -->
@@ -129,25 +65,12 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Server-side caching of the public content payload -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
-        <!-- Health / metrics endpoints -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- Email delivery for contact & job forms (optional at runtime) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
-        <!-- Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -158,6 +81,23 @@
     <build>
         <finalName>app-wat</finalName>
         <plugins>
+            <!-- Explicitly register Lombok as an annotation processor (pinned to our
+                 overridden version). Required so Lombok runs reliably on newer JDKs
+                 instead of being silently skipped. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -171,30 +111,22 @@
                 </configuration>
             </plugin>
 
-            <!-- SonarQube scanner: enables `mvn sonar:sonar` for static analysis. -->
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>${sonar-maven-plugin.version}</version>
-            </plugin>
-
-            <!-- JaCoCo: measures test coverage and writes the report that
-                 SonarQube reads (target/site/jacoco/jacoco.xml). -->
+            <!-- JaCoCo — code coverage. 0.8.12 supports Java 21 bytecode.
+                 prepare-agent instruments tests; report writes
+                 target/site/jacoco/jacoco.xml (which Sonar picks up automatically). -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <executions>
-                    <!-- Attach the coverage agent before tests run -->
                     <execution>
-                        <id>prepare-agent</id>
+                        <id>jacoco-initialize</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!-- Generate the XML/HTML report after tests, during `verify` -->
                     <execution>
-                        <id>report</id>
+                        <id>jacoco-report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
@@ -202,7 +134,27 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- SonarQube / SonarCloud analysis.  Run:  ./mvnw clean verify sonar:sonar
+                 4.x requires the analysis step to run on JDK 17+ (fine on your JDK 21). -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar-maven-plugin.version}</version>
+            </plugin>
         </plugins>
     </build>
 
+    <!-- Nexus repositories for `./mvnw deploy`. The <id>s must match <server> ids
+         in your settings.xml (credentials). -->
+    <distributionManagement>
+        <repository>
+            <id>app-wat-releases</id>
+            <url>http://192.168.100.11:8081/repository/appwat-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>app-wat-snapshots</id>
+            <url>http://192.168.100.11:8081/repository/appwat-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
