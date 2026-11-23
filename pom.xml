@@ -159,7 +159,7 @@
     <distributionManagement>
         <repository>
             <id>app-wat-releases</id>
-            <url>http://192.168.100.11:8081/repository/appwat-releases/</url>
+            <url>http://192.168.100.11:8081/repository/app-wat-releases/</url>
         </repository>
         <snapshotRepository>
             <id>app-wat-snapshots</id>
