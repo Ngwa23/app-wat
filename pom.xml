@@ -163,7 +163,7 @@
         </repository>
         <snapshotRepository>
             <id>app-wat-snapshots</id>
-            <url>http://192.168.100.11:8081/repository/appwat-snapshots/</url>
+            <url>http://192.168.100.11:8081/repository/app-wat-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
